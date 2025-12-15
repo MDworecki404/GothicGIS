@@ -19,6 +19,7 @@
                                 class="ml-5 bg-background"
                                 elevation="0"
                                 icon="mdi-open-in-app"
+                                @click="useProjectStore().setWorkingProject(project)"
                             ></v-btn>
                         </template>
                     </v-list-item>
@@ -31,12 +32,11 @@
 <script lang="ts" setup>
 import { onMounted, ref } from 'vue';
 import { useProjectStore } from '../services/stores/project';
-import type { Project } from '../services/types/project';
+import type { Project } from '../services/types/collections';
 
 const availableProjects = ref<Project[]>([]);
 
 onMounted(async () => {
-    await useProjectStore().loadProjects();
     availableProjects.value = useProjectStore().projects;
 });
 </script>

@@ -2,10 +2,11 @@ import { collection, getDocs, getFirestore } from 'firebase/firestore/lite';
 import { defineStore } from 'pinia';
 import { ref } from 'vue';
 import { firebaseApp } from '../server';
-import type { Project } from '../types/project';
+import type { Project } from '../types/collections';
 
 export const useProjectStore = defineStore('project', () => {
     const projects = ref<Project[]>([]);
+    const workingProject = ref<Project | null>(null);
 
     const loadProjects = async () => {
         const db = getFirestore(firebaseApp);
@@ -15,5 +16,9 @@ export const useProjectStore = defineStore('project', () => {
 
         projects.value = snapshot.docs.map((doc) => ({ ...(doc.data() as Project) }));
     };
-    return { projects, loadProjects };
+
+    const setWorkingProject = (project: Project) => {
+        workingProject.value = project;
+    };
+    return { projects, loadProjects, workingProject, setWorkingProject };
 });

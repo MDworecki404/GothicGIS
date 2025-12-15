@@ -1,12 +1,23 @@
 <script setup lang="ts">
-import GlobeContainer from './components/GlobeContainer.vue';
+import { onBeforeMount } from 'vue';
 import ZenSelector from './components/ZenSelector.vue';
+import { useProjectStore } from './services/stores/project';
+import ProjectView from './components/ProjectView.vue';
+
+onBeforeMount(async () => {
+    await useProjectStore().loadProjects();
+});
 </script>
 
 <template>
     <v-app>
         <v-main>
-            <ZenSelector />
+            <v-fade-transition>
+                <ZenSelector v-if="useProjectStore().projects.length > 0 && !useProjectStore().workingProject" />
+            </v-fade-transition>
+            <v-fade-transition>
+                <ProjectView v-if="useProjectStore().workingProject" />
+            </v-fade-transition>
         </v-main>
     </v-app>
 </template>
