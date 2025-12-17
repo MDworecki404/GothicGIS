@@ -31,9 +31,7 @@ export class LayersManager {
         switch (layerConfig.type) {
             case 'cesium3DTiles':
                 const cesiumLayer = await this.create3DTilesLayer(layerConfig.resource);
-                if (layerConfig.id === 'default') {
-                    this.viewer?.zoomTo(cesiumLayer!);
-                }
+                cesiumLayer!.show = layerConfig.show;
                 if (cesiumLayer && this.viewer) {
                     this.viewer.scene.primitives.add(cesiumLayer);
                     this.layers.push(cesiumLayer);

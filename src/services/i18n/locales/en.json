@@ -20,5 +20,12 @@
     "role": "Role",
     "logOut": "Log Out",
     "exitToMainMenu": "Exit to Main Menu",
-    "getCameraPosition": "Get Camera Position"
+    "getCameraPosition": "Get Camera Position",
+    "X": "X",
+    "Y": "Y",
+    "Z": "Z",
+    "Heading": "Heading",
+    "Pitch": "Pitch",
+    "cameraPosition": "Camera Position",
+    "toolsMenu": "Tools Menu"
 }

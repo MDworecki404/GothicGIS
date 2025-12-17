@@ -22,6 +22,7 @@
         "tooltip": {
             "text": "layersTree",
             "position": "bottom"
-        }
+        },
+        "action": "toggleLayersTree"
     }
 ]

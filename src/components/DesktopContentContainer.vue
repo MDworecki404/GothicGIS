@@ -2,11 +2,13 @@
     <div class="desktop-content-container">
         <TopButtonsContainer />
         <BottomButtonsContainer />
+        <ToolsContainer />
     </div>
 </template>
 
 <script lang="ts" setup>
 import BottomButtonsContainer from './ui/BottomButtonsContainer.vue';
+import ToolsContainer from './ui/ToolsContainer.vue';
 import TopButtonsContainer from './ui/TopButtonsContainer.vue';
 </script>
 

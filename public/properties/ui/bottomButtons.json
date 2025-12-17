@@ -13,7 +13,8 @@
         "tooltip": {
             "text": "homeView",
             "position": "right"
-        }
+        },
+        "action": "setHomeView"
     },
     {
         "type": "icon-button",
@@ -46,6 +47,7 @@
             "text": "getCameraPosition",
             "position": "right"
         },
+        "action": "toggleCameraPositionTool",
         "role": ["editor", "admin"]
     }
 ]

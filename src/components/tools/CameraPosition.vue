@@ -1,0 +1,50 @@
+<template>
+    <v-card-text>
+        <v-row dense no-gutters>
+            <span>{{$t("X")}}: {{ X }}</span>
+        </v-row>
+        <v-row dense no-gutters>
+            <span>{{$t("Y")}}: {{ Y }}</span>
+        </v-row>
+        <v-row dense no-gutters>
+            <span>{{$t("Z")}}: {{ Z }}</span>
+        </v-row>
+        <v-divider class="my-2"></v-divider>
+        <v-row dense no-gutters>
+            <span>{{$t("Heading")}}: {{ heading }}</span>
+        </v-row>
+        <v-row dense no-gutters>
+            <span>{{$t("Pitch")}}: {{ pitch }}</span>
+        </v-row>
+    </v-card-text>
+</template>
+<script lang="ts" setup>
+import { onMounted, ref } from 'vue';
+import { globeInstance } from '../../services/globe/globe';
+
+const X = ref(0);
+const Y = ref(0);
+const Z = ref(0);
+
+const heading = ref(0);
+const pitch = ref(0);
+const roll = ref(0);
+
+const updatePosition = () => {
+    X.value = globeInstance?.viewer?.scene.camera.position.x ?? 0;
+    Y.value = globeInstance?.viewer?.scene.camera.position.y ?? 0;
+    Z.value = globeInstance?.viewer?.scene.camera.position.z ?? 0;
+
+    heading.value = globeInstance?.viewer?.scene.camera.heading ?? 0;
+    pitch.value = globeInstance?.viewer?.scene.camera.pitch ?? 0;
+    roll.value = globeInstance?.viewer?.scene.camera.roll ?? 0;
+};
+
+onMounted(() => {
+    updatePosition();
+
+    globeInstance?.viewer?.scene.camera.changed.addEventListener(() => {
+        updatePosition();
+    });
+});
+</script>

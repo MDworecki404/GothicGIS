@@ -20,5 +20,12 @@
     "role": "Rola",
     "logOut": "Wyloguj się",
     "exitToMainMenu": "Wyjdź do głównego menu",
-    "getCameraPosition": "Pobierz pozycję kamery"
+    "getCameraPosition": "Pobierz pozycję kamery",
+    "X": "X",
+    "Y": "Y",
+    "Z": "Z",
+    "Heading": "Kierunek",
+    "Pitch": "Pochylenie",
+    "cameraPosition": "Pozycja kamery",
+    "toolsMenu": "Menu narzędzi"
 }

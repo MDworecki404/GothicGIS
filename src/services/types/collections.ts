@@ -7,6 +7,13 @@ export const ProjectSchema = z.object({
     description: z.string().optional(),
     createdAt: z.string().optional(),
     updatedAt: z.string().optional(),
+    initView: z.object({
+        x: z.number(),
+        y: z.number(),
+        z: z.number(),
+        heading: z.number(),
+        pitch: z.number(),
+    }).optional()
 })
 export type Project = z.infer<typeof ProjectSchema>
 
