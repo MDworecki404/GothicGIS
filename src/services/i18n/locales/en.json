@@ -18,5 +18,7 @@
     "loggedIn": "Logged In",
     "loggedAs": "Logged As",
     "role": "Role",
-    "logOut": "Log Out"
+    "logOut": "Log Out",
+    "exitToMainMenu": "Exit to Main Menu",
+    "getCameraPosition": "Get Camera Position"
 }
