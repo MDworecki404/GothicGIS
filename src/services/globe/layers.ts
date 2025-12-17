@@ -1,9 +1,11 @@
-import { Cesium3DTileset, type Viewer } from 'cesium';
+import { Cesium3DTileset, type Viewer } from '@cesium/engine';
 import { useLayersStore } from '../stores/layers';
 import type { LayerCollectionItem } from '../types/collections';
 
+type LayersTypes = Cesium3DTileset;
+
 export class LayersManager {
-    public layers: object[] = [];
+    public layers: LayersTypes[] = [];
     public ready: Promise<void>;
     private viewer: Viewer | null = null;
 
@@ -31,6 +33,7 @@ export class LayersManager {
         switch (layerConfig.type) {
             case 'cesium3DTiles':
                 const cesiumLayer = await this.create3DTilesLayer(layerConfig.resource);
+                cesiumLayer!.appId = layerConfig.id;
                 cesiumLayer!.show = layerConfig.show;
                 if (cesiumLayer && this.viewer) {
                     this.viewer.scene.primitives.add(cesiumLayer);

@@ -1,5 +1,5 @@
 <template>
-    <v-card-text>
+    <v-card-text class="pa-2 ma-">
         <v-row dense no-gutters>
             <span>{{$t("X")}}: {{ X }}</span>
         </v-row>

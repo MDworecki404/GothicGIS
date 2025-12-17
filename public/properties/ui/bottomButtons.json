@@ -22,15 +22,8 @@
         "tooltip": {
             "text": "zoomOut",
             "position": "right"
-        }
-    },
-    {
-        "type": "icon-button",
-        "icon": "mdi-alpha-n",
-        "tooltip": {
-            "text": "northView",
-            "position": "right"
-        }
+        },
+        "action": "zoomOut"
     },
     {
         "type": "icon-button",
@@ -38,7 +31,8 @@
         "tooltip": {
             "text": "zoomIn",
             "position": "right"
-        }
+        },
+        "action":"zoomIn"
     },
     {
         "type": "icon-button",

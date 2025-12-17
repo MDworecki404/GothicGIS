@@ -27,6 +27,7 @@ export const LayerCollectionItemBaseSchema = z.object({
     id: z.string(),
     name: z.string(),
     show: z.boolean(),
+    parentId: z.string().optional(),
 })
 
 export const Cesium3DTilesResourceSchema = z.object({

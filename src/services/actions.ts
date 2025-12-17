@@ -4,6 +4,7 @@ import { useCommonStore } from './stores/common';
 import { useProjectStore } from './stores/project';
 import { useToolsStore } from './stores/tools';
 import { markRaw } from 'vue';
+import { useLayersStore } from './stores/layers';
 
 const setHomeView = () => {
     const { workingProject } = useProjectStore();
@@ -64,19 +65,47 @@ const toggleCameraPositionTool = async () => {
     });
 };
 
+const toggleLayerVisibility = (layerId: string) => {
+    const layersStore = useLayersStore();
+    const layer = layersStore.layers.find(l => l.id === layerId);
+    if (layer) {
+        layer.show = !layer.show;
+        globeInstance!.layers.layers.find(l => l.appId === layerId)!.show = layer.show;
+    }
+}
+
+const zoomIn = () => {
+    const viewer = globeInstance?.viewer;
+    if (!viewer) return;
+    const cameraHeight = viewer.camera.positionCartographic.height;
+
+    viewer.camera.zoomIn(cameraHeight * 0.8);
+}
+
+const zoomOut = () => {
+    const viewer = globeInstance?.viewer;
+    if (!viewer) return;
+    const cameraHeight = viewer.camera.positionCartographic.height;
+
+    viewer.camera.zoomOut(cameraHeight * 1.2);
+}
+
 export const ACTIONS = {
     setHomeView,
     exitToMainMenu,
     toggleLayersTree,
     toggleCameraPositionTool,
+    toggleLayerVisibility,
+    zoomIn,
+    zoomOut,
 };
 
 export const ACTION_NAMES = Object.keys(ACTIONS) as Array<keyof typeof ACTIONS>;
 
-export const performAction = (actionName: keyof typeof ACTIONS) => {
+export const performAction = (actionName: keyof typeof ACTIONS, args?: any) => {
     const action = ACTIONS[actionName];
     if (action) {
-        action();
+        action(args);
     } else {
         console.warn(`Action "${actionName}" not found.`);
     }
