@@ -1,6 +1,7 @@
 <template>
     <v-card-text class="pa-0 ma-0">
         <v-treeview
+            class="tree"
             density="compact"
             :items="treeItems"
             item-value="id"
@@ -12,6 +13,11 @@
             :collapse-icon="'mdi-chevron-down'"
             color="accent"
         >
+        <template #toggle="{isOpen}">
+            <v-icon color="accent" size="20">
+                {{ isOpen ? 'mdi-chevron-up' : 'mdi-chevron-down' }}
+            </v-icon>
+        </template>
         </v-treeview>
     </v-card-text>
 </template>

@@ -32,5 +32,6 @@
     "shadowSettings": "Ustawienia cieni",
     "shadows": "Cienie",
     "softShadows": "Miękkie cienie",
-    "timeOfDay": "Pora dnia"
+    "timeOfDay": "Pora dnia",
+    "setDefaultTime": "Ustaw domyślną porę dnia"
 }

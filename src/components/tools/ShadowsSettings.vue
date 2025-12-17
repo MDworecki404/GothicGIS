@@ -47,12 +47,22 @@
             </v-slider>
         </v-row>
     </v-card-text>
+    <v-card-actions class="justify-end">
+        <TextButton
+            :text="$t('setDefaultTime')"
+            color="accent"
+            :prepend-icon="'mdi-refresh-circle'"
+            @click="triggerSetDefaultTimeOfDay"
+        ></TextButton>
+    </v-card-actions>
 </template>
 
 <script lang="ts" setup>
 import { JulianDate } from '@cesium/engine';
 import { onBeforeMount, ref } from 'vue';
 import { globeInstance } from '../../services/globe/globe';
+import TextButton from '../ui/TextButton.vue';
+import { setDefaultTimeOfDay } from '../../services/utils';
 
 const shadowsEnabled = ref(false);
 const timeOfDay = ref(12 * 60);
@@ -64,6 +74,15 @@ const onSoftShadowsToggle = () => {
         viewer.shadows = false;
         viewer.shadows = shadowsEnabled.value;
         viewer.shadowMap.softShadows = softShadowsEnabled.value;
+    }
+};
+
+const triggerSetDefaultTimeOfDay = () => {
+    setDefaultTimeOfDay();
+    const viewer = globeInstance?.viewer;
+    if (viewer) {
+        const currentDate = JulianDate.toDate(viewer.clock.currentTime!);
+        timeOfDay.value = currentDate.getHours() * 60 + currentDate.getMinutes();
     }
 };
 

@@ -32,5 +32,6 @@
     "shadowSettings": "Shadow Settings",
     "shadows": "Shadows",
     "softShadows": "Soft Shadows",
-    "timeOfDay": "Time of Day"
+    "timeOfDay": "Time of Day",
+    "setDefaultTime": "Set Default Time"
 }
