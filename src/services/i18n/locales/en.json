@@ -9,5 +9,14 @@
     "zoomIn": "Zoom In",
     "zoomOut": "Zoom Out",
     "northView": "North View",
-    "homeView": "Home View"
+    "homeView": "Home View",
+    "logIn": "Log In",
+    "eMail": "E-mail",
+    "password": "Password",
+    "closeDialog": "Close Dialog",
+    "invalidCredentials": "Invalid Credentials",
+    "loggedIn": "Logged In",
+    "loggedAs": "Logged As",
+    "role": "Role",
+    "logOut": "Log Out"
 }

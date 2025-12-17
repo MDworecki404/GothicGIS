@@ -1,7 +1,16 @@
 export const initStores = async () => {
-    const {useProjectStore} = await import('./project');
+    const { useProjectStore } = await import('./project');
+    const { useUserStore } = await import('./user');
 
-    await useProjectStore().loadProjects().then(() => {
-        console.log('Projects store initialized');
-    })
-}
+    await useUserStore()
+        .loadUsers()
+        .then(() => {
+            console.log('User store initialized');
+        });
+
+    await useProjectStore()
+        .loadProjects()
+        .then(() => {
+            console.log('Projects store initialized');
+        });
+};

@@ -4,6 +4,7 @@ import ZenSelector from './components/ZenSelector.vue';
 import { useProjectStore } from './services/stores/project';
 import ProjectView from './components/ProjectView.vue';
 import { initStores } from './services/stores/init';
+import DialogWrapper from './components/ui/DialogWrapper.vue';
 
 const storesInitialized = ref(false);
 
@@ -37,6 +38,7 @@ onBeforeMount(async () => {
             <v-fade-transition>
                 <ProjectView v-if="useProjectStore().workingProject" />
             </v-fade-transition>
+            <DialogWrapper />
         </v-main>
     </v-app>
 </template>

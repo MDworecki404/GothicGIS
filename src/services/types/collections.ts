@@ -10,6 +10,12 @@ export const ProjectSchema = z.object({
 })
 export type Project = z.infer<typeof ProjectSchema>
 
+export const UserCollectionSchema = z.object({
+    email: z.string(),
+    role: z.enum(["admin", "editor", "viewer"]),
+})
+export type UserCollection = z.infer<typeof UserCollectionSchema>
+
 export const LayerCollectionItemBaseSchema = z.object({
     id: z.string(),
     name: z.string(),

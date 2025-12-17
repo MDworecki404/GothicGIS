@@ -9,5 +9,14 @@
     "zoomIn": "Przybliż",
     "zoomOut": "Oddal",
     "northView": "Widok na północ",
-    "homeView": "Widok domyślny"
+    "homeView": "Widok domyślny",
+    "logIn": "Zaloguj się",
+    "eMail": "E-mail",
+    "password": "Hasło",
+    "closeDialog": "Zamknij okno",
+    "invalidCredentials": "Nieprawidłowe dane logowania",
+    "loggedIn": "Zalogowany",
+    "loggedAs": "Zalogowany jako",
+    "role": "Rola",
+    "logOut": "Wyloguj się"
 }
