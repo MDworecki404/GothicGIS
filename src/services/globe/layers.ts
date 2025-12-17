@@ -55,4 +55,9 @@ export class LayersManager {
         }
         return null;
     }
+
+    destroy() {
+        this.layers = [];
+        this.viewer = null;
+    }
 }

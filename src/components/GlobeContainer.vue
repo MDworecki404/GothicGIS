@@ -18,13 +18,13 @@
 
 <script setup lang="ts">
 import { onMounted } from 'vue';
-import { useCommonStore } from '../services/stores/common';
 import { initGlobeInstance } from '../services/globe/globe';
+import { useCommonStore } from '../services/stores/common';
 
 const commonStore = useCommonStore();
 
 onMounted(() => {
-    initGlobeInstance(document.getElementById('globeContainer')!);
+    initGlobeInstance(document.getElementById('globeContainer')!, true);
 });
 </script>
 

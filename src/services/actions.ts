@@ -1,5 +1,7 @@
 import { Cartesian3, Math } from "@cesium/engine"
 import { globeInstance } from "./globe/globe"
+import { useProjectStore } from "./stores/project"
+import { useCommonStore } from "./stores/common"
 
 const zoomToHome = () => {
     const viewer = globeInstance?.viewer
@@ -17,8 +19,20 @@ const zoomToHome = () => {
     viewer.camera.flyTo(homePosition)
 }
 
+const exitToMainMenu = () => {
+    const projectStore = useProjectStore()
+    const commonStore = useCommonStore()
+    projectStore.unsetWorkingProject()
+    commonStore.setAppLoaded(false)
+
+
+    globeInstance?.destroy()
+
+}
+
 export const ACTIONS = {
     zoomToHome,
+    exitToMainMenu,
 }
 
 export const ACTION_NAMES = Object.keys(ACTIONS) as Array<keyof typeof ACTIONS>;

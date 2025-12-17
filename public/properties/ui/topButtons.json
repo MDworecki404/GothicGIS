@@ -1,6 +1,15 @@
 [
     {
         "type": "icon-button",
+        "icon": "mdi-exit-to-app",
+        "tooltip": {
+            "text": "exitToMainMenu",
+            "position": "bottom"
+        },
+        "action": "exitToMainMenu"
+    },
+    {
+        "type": "icon-button",
         "icon": "mdi-cog-outline",
         "tooltip": {
             "text": "settings",

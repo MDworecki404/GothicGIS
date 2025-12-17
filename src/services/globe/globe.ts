@@ -22,13 +22,29 @@ export class GlobeViewer {
     initServices() {
         this.layersManager = new LayersManager(this.viewer!);
     }
+
+    destroy() {
+        if (this.viewer) {
+            this.viewer.destroy();
+            this.viewer = null;
+        }
+        if (this.layersManager) {
+            this.layersManager.destroy();
+            this.layersManager = null;
+        }
+    }
 }
 
-export const initGlobeInstance = async (target: HTMLElement) => {
+export const initGlobeInstance = async (target: HTMLElement, force = false) => {
     await import('@cesium/engine/Source/Widget/CesiumWidget.css');
 
     const token = import.meta.env.VITE_CESIUM_API_KEY;
     Ion.defaultAccessToken = token;
+
+    if (globeInstance && force) {
+        globeInstance.destroy();
+        globeInstance = null;
+    }
 
     if (!globeInstance) {
         globeInstance = new GlobeViewer(target);

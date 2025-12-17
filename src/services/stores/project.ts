@@ -20,5 +20,10 @@ export const useProjectStore = defineStore('project', () => {
     const setWorkingProject = (project: Project) => {
         workingProject.value = project;
     };
-    return { projects, loadProjects, workingProject, setWorkingProject };
+
+    const unsetWorkingProject = () => {
+        workingProject.value = null;
+    }
+
+    return { projects, loadProjects, workingProject, setWorkingProject, unsetWorkingProject };
 });

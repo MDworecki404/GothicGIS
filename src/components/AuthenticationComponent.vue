@@ -51,7 +51,7 @@
 </template>
 
 <script lang="ts" setup>
-import { signInWithEmailAndPassword } from 'firebase/auth';
+import { signInWithEmailAndPassword, getIdTokenResult, signOut } from 'firebase/auth';
 import { ref } from 'vue';
 import { firebaseAuth } from '../services/server';
 import { useUserStore } from '../services/stores/user';
@@ -70,9 +70,26 @@ const authenticateUser = async () => {
     error.value = '';
     try {
         const cred = await signInWithEmailAndPassword(firebaseAuth, email.value, password.value);
-        const user: UserCollection | undefined = userStore.getUserByEmail(cred.user.email!);
-        if (!user) throw new Error('User not found in database');
-        userStore.setLoggedUser(user);
+        const idRes = await getIdTokenResult(firebaseAuth.currentUser!);
+        const roleFromClaim = idRes.claims.role as string | undefined;
+
+        const userFromDb: UserCollection | undefined = userStore.getUserByEmail(cred.user.email!);
+        if (userFromDb) {
+            const updated: UserCollection = {
+                ...userFromDb,
+                role: (roleFromClaim as UserCollection['role']) ?? userFromDb.role,
+            };
+            userStore.setLoggedUser(updated);
+            const title = document.title
+            const titleWithRole = title + ' (' + updated.role + ')';
+            document.title = titleWithRole;
+        } else {
+            const fallback: UserCollection = {
+                email: cred.user.email!,
+                role: (roleFromClaim as UserCollection['role']) ?? 'viewer',
+            };
+            userStore.setLoggedUser(fallback);
+        }
     } catch (e: any) {
         error.value = e.message || 'Błąd logowania';
     } finally {
@@ -84,7 +101,7 @@ const logOutUser = async () => {
     loading.value = true;
     error.value = '';
     try {
-        await firebaseAuth.signOut();
+        await signOut(firebaseAuth);
         userStore.logOutUser();
     } catch (e: any) {
         error.value = e.message || 'Błąd wylogowywania';
