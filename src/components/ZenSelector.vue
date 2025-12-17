@@ -31,6 +31,9 @@
                                 class="ml-5 bg-background"
                                 elevation="0"
                                 icon="mdi-open-in-app"
+                                v-tooltip="{
+                                    text: $t('selectZen')
+                                }"
                                 @click="useProjectStore().setWorkingProject(project)"
                             ></v-btn>
                         </template>
