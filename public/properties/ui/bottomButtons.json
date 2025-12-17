@@ -1,0 +1,34 @@
+[
+    {
+        "type": "icon-button",
+        "icon": "mdi-home-outline",
+        "tooltip": {
+            "text": "homeView",
+            "position": "right"
+        }
+    },
+    {
+        "type": "icon-button",
+        "icon": "mdi-minus",
+        "tooltip": {
+            "text": "zoomOut",
+            "position": "right"
+        }
+    },
+    {
+        "type": "icon-button",
+        "icon": "mdi-alpha-n",
+        "tooltip": {
+            "text": "northView",
+            "position": "right"
+        }
+    },
+    {
+        "type": "icon-button",
+        "icon": "mdi-plus",
+        "tooltip": {
+            "text": "zoomIn",
+            "position": "right"
+        }
+    }
+]

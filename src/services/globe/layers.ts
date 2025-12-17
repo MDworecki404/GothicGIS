@@ -4,22 +4,30 @@ import type { LayerCollectionItem } from '../types/collections';
 
 export class LayersManager {
     public layers: object[] = [];
+    public ready: Promise<void>;
     private viewer: Viewer | null = null;
 
     constructor(viewer: Viewer) {
         this.viewer = viewer;
-        this.registerProjectLayers();
+        this.ready = this.registerProjectLayers();
     }
 
     async registerProjectLayers() {
         const layersStore = useLayersStore();
         await layersStore.loadLayers()
-        layersStore.layers.forEach((layer) => {
-            this.layersFactory(layer);
-        });
+        await Promise.all(
+            layersStore.layers.map(async (layer) => {
+                try {
+                    await this.layersFactory(layer);
+                } catch (e) {
+                    console.warn('Error creating layer', layer, e);
+                }
+            })
+        );
     }
 
     async layersFactory(layerConfig: LayerCollectionItem) {
+        console.log('Adding layer:', layerConfig.name);
         switch (layerConfig.type) {
             case 'cesium3DTiles':
                 const cesiumLayer = await this.create3DTilesLayer(layerConfig.resource);
@@ -41,7 +49,9 @@ export class LayersManager {
     async create3DTilesLayer(resource: { ionId?: number;}) {
         const { ionId } = resource;
         if (ionId) {
-            return await Cesium3DTileset.fromIonAssetId(ionId);
+            console.log('Creating 3D Tiles layer from Ion ID:', ionId);
+            const tileset = await Cesium3DTileset.fromIonAssetId(ionId);
+            return tileset;
         }
         return null;
     }

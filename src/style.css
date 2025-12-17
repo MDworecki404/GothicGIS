@@ -1,4 +1,5 @@
-html, body {
+html,
+body {
     overflow: hidden !important;
     height: 100vh;
     width: 100vw;
@@ -45,4 +46,10 @@ html, body {
 * {
     scrollbar-width: thin;
     scrollbar-color: rgba(var(--v-theme-primary), 0.6) rgba(var(--v-theme-surface), 0.5);
+}
+
+.cesium-viewer-bottom {
+    justify-content: end;
+    align-items: end;
+    display: flex;
 }

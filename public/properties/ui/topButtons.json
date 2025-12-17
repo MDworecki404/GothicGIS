@@ -1,0 +1,18 @@
+[
+    {
+        "type": "icon-button",
+        "icon": "mdi-cog-outline",
+        "tooltip": {
+            "text": "settings",
+            "position": "bottom"
+        }
+    },
+    {
+        "type": "icon-button",
+        "icon": "mdi-file-tree-outline",
+        "tooltip": {
+            "text": "layersTree",
+            "position": "bottom"
+        }
+    }
+]

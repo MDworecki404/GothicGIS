@@ -3,5 +3,11 @@
     "selectZen": "Select a Zen Project",
     "jarkendar": "Jarkendar",
     "khorinis": "Khorinis",
-    "mineValley": "Mine Valley"
+    "mineValley": "Mine Valley",
+    "settings": "Settings",
+    "layersTree": "Layers Tree",
+    "zoomIn": "Zoom In",
+    "zoomOut": "Zoom Out",
+    "northView": "North View",
+    "homeView": "Home View"
 }

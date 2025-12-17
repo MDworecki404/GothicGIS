@@ -3,5 +3,11 @@
     "selectZen": "Wybierz projekt Zen",
     "jarkendar": "Jarkendar",
     "khorinis": "Khorinis",
-    "mineValley": "Górnicza Dolina"
+    "mineValley": "Górnicza Dolina",
+    "settings": "Ustawienia",
+    "layersTree": "Drzewo warstw",
+    "zoomIn": "Przybliż",
+    "zoomOut": "Oddal",
+    "northView": "Widok na północ",
+    "homeView": "Widok domyślny"
 }

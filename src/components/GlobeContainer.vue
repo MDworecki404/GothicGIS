@@ -1,14 +1,17 @@
 <template>
     <div class="globe-root">
         <v-fade-transition>
-            <div class="overlay d-flex align-center justify-center bg-background" v-if="!commonStore.isAppLoaded">
+            <div
+                class="overlay d-flex align-center justify-center bg-background"
+                v-if="!commonStore.isAppLoaded"
+            >
                 <v-progress-circular indeterminate size="128" width="6" color="accent">
                     <v-icon size="86">mdi-alpha-g</v-icon>
                 </v-progress-circular>
             </div>
         </v-fade-transition>
         <v-fade-transition>
-        <div id="globeContainer"></div>
+            <div id="globeContainer"></div>
         </v-fade-transition>
     </div>
 </template>
@@ -41,7 +44,7 @@ onMounted(() => {
     left: 0;
     width: 100vw;
     height: 100vh;
-    z-index: 10;
+    z-index: 100;
 }
 
 .globe-root {

@@ -33,8 +33,13 @@ export const initGlobeInstance = async (target: HTMLElement) => {
     if (!globeInstance) {
         globeInstance = new GlobeViewer(target);
     }
+    if (globeInstance) {
+        try {
+            await globeInstance.layers.ready;
+        } catch (e) {
+            console.warn('Error while loading layers:', e);
+        }
+    }
 
-    setTimeout(() => {
-        useCommonStore().setAppLoaded(true);
-    }, 2000);
+    useCommonStore().setAppLoaded(true);
 };
