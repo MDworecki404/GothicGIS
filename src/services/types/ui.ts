@@ -9,16 +9,27 @@ export const IconButtonSchema = z.object({
         position: z.enum(['top', 'bottom', 'left', 'right'])
     }),
     role: z.array(z.enum(['viewer', 'editor', 'admin'])).optional(),
-})
-
-export type IconButton = z.infer<typeof IconButtonSchema>
-
-const ActionSchema = z.object({
     action: z.enum(ACTION_NAMES),
 })
 
+export const SpeedDialSchema = z.object({
+    type: z.literal('speed-dial'),
+    icon: z.string(),
+    tooltip: z.object({
+        text: z.string(),
+        position: z.enum(['top', 'bottom', 'left', 'right'])
+    }),
+    role: z.array(z.enum(['viewer', 'editor', 'admin'])).optional(),
+    children: z.array(IconButtonSchema)
+})
+
+export type SpeedDial = z.infer<typeof SpeedDialSchema>
+
+export type IconButton = z.infer<typeof IconButtonSchema>
+
 export const UiButtonsSchema = z.discriminatedUnion('type', [
     IconButtonSchema,
-]).and(ActionSchema)
+    SpeedDialSchema,
+])
 
 export type UiButtons = z.infer<typeof UiButtonsSchema>[]

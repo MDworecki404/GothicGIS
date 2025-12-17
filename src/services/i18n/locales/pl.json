@@ -28,5 +28,9 @@
     "Pitch": "Pochylenie",
     "cameraPosition": "Pozycja kamery",
     "toolsMenu": "Menu narzędzi",
-    "zens": "Światy gry (zeny)"
+    "zens": "Światy gry (zeny)",
+    "shadowSettings": "Ustawienia cieni",
+    "shadows": "Cienie",
+    "softShadows": "Miękkie cienie",
+    "timeOfDay": "Pora dnia"
 }

@@ -15,6 +15,8 @@ export const useToolsStore = defineStore('tools', () => {
     const registerTool = ({ id, name, icon, component, props }: ToolConfig) => {
         if (!activeTools.value.has(id)) {
             activeTools.value.set(id, { id, name, icon, component: markRaw(component), props });
+        } else {
+            unregisterTool(id);
         }
     }
 

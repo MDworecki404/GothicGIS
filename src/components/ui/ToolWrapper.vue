@@ -12,7 +12,7 @@
                         size="24"
                         style="cursor: pointer"
                         @click="minimized = !minimized"
-                        >mdi-minus</v-icon
+                        >{{ minimized ? 'mdi-window-maximize' : 'mdi-window-minimize' }}</v-icon
                     >
                     <v-icon color="accent" size="24" style="cursor: pointer" @click="closeTool(id)"
                         >mdi-close</v-icon

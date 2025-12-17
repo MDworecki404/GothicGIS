@@ -1,11 +1,22 @@
 [
     {
-        "type": "icon-button",
+        "type": "speed-dial",
         "icon": "mdi-tools",
         "tooltip": {
             "text": "toolsMenu",
             "position": "right"
-        }
+        },
+        "children": [
+            {
+                "type": "icon-button",
+                "icon": "mdi-sun-clock-outline",
+                "tooltip": {
+                    "text": "shadowSettings",
+                    "position": "top"
+                },
+                "action": "toggleShadowSettings"
+            }
+        ]
     },
     {
         "type": "icon-button",

@@ -5,11 +5,11 @@
             text: $t(tooltip.text),
             location: tooltip.position,
         }"
-        class="icon-button rounded-sm bg-surface"
+        :class="['icon-button rounded-sm bg-surface', customClass]"
         variant="outlined"
         color="accent"
         :size="size"
-        @click="$emit('click')"
+        @click="$emit('click', $event)"
     >
         <v-icon :size="iconSize" color="accent">{{ icon }}</v-icon>
     </v-btn>
@@ -23,10 +23,11 @@ const { size = 32, iconSize = 20 } = defineProps<{
     };
     size?: number;
     iconSize?: number;
+    customClass?: string;
 }>();
 
 defineEmits<{
-    (e: 'click'): void;
+    (e: 'click', event: MouseEvent): void;
 }>();
 </script>
 <style scoped></style>

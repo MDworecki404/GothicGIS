@@ -4,6 +4,7 @@ import { getDefaultViewerOptions } from '../defaults';
 import { useCommonStore } from '../stores/common';
 import { useProjectStore } from '../stores/project';
 import { LayersManager } from './layers';
+import { JulianDate } from '@cesium/engine';
 
 export let globeInstance: GlobeViewer | null = null;
 
@@ -13,6 +14,10 @@ export class GlobeViewer {
 
     constructor(target: HTMLElement) {
         this.viewer = new Viewer(target, getDefaultViewerOptions());
+        this.viewer.clock.shouldAnimate = false;
+        this.viewer.clock.multiplier = 0;
+        const year = new Date().getFullYear();
+        this.viewer.clock.currentTime = JulianDate.fromDate(new Date(year, 2, 20, 12, 0, 0));
 
         this.initServices();
     }

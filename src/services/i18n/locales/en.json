@@ -28,5 +28,9 @@
     "Pitch": "Pitch",
     "cameraPosition": "Camera Position",
     "toolsMenu": "Tools Menu",
-    "zens": "Game Worlds (zens)"
+    "zens": "Game Worlds (zens)",
+    "shadowSettings": "Shadow Settings",
+    "shadows": "Shadows",
+    "softShadows": "Soft Shadows",
+    "timeOfDay": "Time of Day"
 }

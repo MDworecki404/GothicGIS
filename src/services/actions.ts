@@ -65,6 +65,18 @@ const toggleCameraPositionTool = async () => {
     });
 };
 
+const toggleShadowSettings = async () => {
+    const toolsStore = useToolsStore();
+    const shadowSettingsComponent = markRaw(await import('../components/tools/ShadowsSettings.vue'));
+    const component = shadowSettingsComponent.default;
+    toolsStore.registerTool({
+        id: 'shadowSettings',
+        name: 'shadowSettings',
+        icon: 'mdi-sun-clock-outline',
+        component: component,
+    });
+}
+
 const toggleLayerVisibility = (layerId: string) => {
     const layersStore = useLayersStore();
     const layer = layersStore.layers.find(l => l.id === layerId);
@@ -98,6 +110,7 @@ export const ACTIONS = {
     toggleLayerVisibility,
     zoomIn,
     zoomOut,
+    toggleShadowSettings,
 };
 
 export const ACTION_NAMES = Object.keys(ACTIONS) as Array<keyof typeof ACTIONS>;

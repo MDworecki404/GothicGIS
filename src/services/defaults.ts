@@ -10,11 +10,9 @@ export const getDefaultViewerOptions = (): Viewer.ConstructorOptions => {
         navigationHelpButton: false,
         animation: false,
         timeline: false,
-        globe: false,
         fullscreenButton: false,
         vrButton: false,
         baseLayer: false,
-        skyAtmosphere: false,
-        skyBox: false,
+        globe: false
     };
 };
