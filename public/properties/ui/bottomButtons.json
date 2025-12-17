@@ -1,6 +1,14 @@
 [
     {
         "type": "icon-button",
+        "icon": "mdi-tools",
+        "tooltip": {
+            "text": "toolsMenu",
+            "position": "right"
+        }
+    },
+    {
+        "type": "icon-button",
         "icon": "mdi-home-outline",
         "tooltip": {
             "text": "homeView",

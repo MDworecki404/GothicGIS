@@ -66,9 +66,11 @@ onAuthStateChanged(firebaseAuth, async (user) => {
             : { email: user.email ?? '', role: (roleFromClaim as any) ?? 'viewer' };
 
         userStore.setLoggedUser(finalUser);
-        const title = document.title;
-        const titleWithRole = title + ' (' + finalUser.role + ')';
-        document.title = titleWithRole;
+        if (finalUser.role === 'admin') {
+            const title = document.title;
+            const titleWithRole = title + ' (' + finalUser.role + ')';
+            document.title = titleWithRole;
+        }
     } catch (err) {
         userStore.setLoggedUser(null);
     }
