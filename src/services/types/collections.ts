@@ -17,7 +17,7 @@ export const LayerCollectionItemBaseSchema = z.object({
 })
 
 export const Cesium3DTilesResourceSchema = z.object({
-    ionId: z.string()
+    ionId: z.number()
 })
 
 export const Cesium3DTilesLayerCollectionItemSchema = LayerCollectionItemBaseSchema.extend({
