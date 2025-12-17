@@ -80,9 +80,6 @@ const authenticateUser = async () => {
                 role: (roleFromClaim as UserCollection['role']) ?? userFromDb.role,
             };
             userStore.setLoggedUser(updated);
-            const title = document.title
-            const titleWithRole = title + ' (' + updated.role + ')';
-            document.title = titleWithRole;
         } else {
             const fallback: UserCollection = {
                 email: cred.user.email!,
@@ -103,6 +100,7 @@ const logOutUser = async () => {
     try {
         await signOut(firebaseAuth);
         userStore.logOutUser();
+        document.title = document.title.replace(/ \(.+\)$/, '');
     } catch (e: any) {
         error.value = e.message || 'Błąd wylogowywania';
     } finally {

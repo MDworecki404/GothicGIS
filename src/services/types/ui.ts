@@ -8,6 +8,7 @@ export const IconButtonSchema = z.object({
         text: z.string(),
         position: z.enum(['top', 'bottom', 'left', 'right'])
     }),
+    role: z.array(z.enum(['viewer', 'editor', 'admin'])).optional(),
 })
 
 export type IconButton = z.infer<typeof IconButtonSchema>
