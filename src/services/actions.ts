@@ -6,6 +6,10 @@ import { useToolsStore } from './stores/tools';
 import { markRaw } from 'vue';
 import { useLayersStore } from './stores/layers';
 
+///////////////////////////////
+//MARK: - Utils actions
+///////////////////////////////
+
 const setHomeView = () => {
     const { workingProject } = useProjectStore();
 
@@ -37,6 +41,31 @@ const exitToMainMenu = () => {
 
     globeInstance?.destroy();
 };
+
+const toggleLayerVisibility = (layerId: string) => {
+    const layersStore = useLayersStore();
+    const layer = layersStore.layers.find(l => l.id === layerId);
+    if (layer) {
+        layer.show = !layer.show;
+        globeInstance!.layers.layers.find(l => l.appId === layerId)!.show = layer.show;
+    }
+}
+
+const zoomIn = () => {
+    const viewer = globeInstance?.viewer;
+    if (!viewer) return;
+    const cameraHeight = viewer.camera.positionCartographic.height;
+
+    viewer.camera.zoomIn(cameraHeight * 0.8);
+}
+
+const zoomOut = () => {
+    const viewer = globeInstance?.viewer;
+    if (!viewer) return;
+    const cameraHeight = viewer.camera.positionCartographic.height;
+
+    viewer.camera.zoomOut(cameraHeight * 1.2);
+}
 
 ///////////////////////////////
 //MARK: - Tools toggling
@@ -74,32 +103,25 @@ const toggleShadowSettings = async () => {
         name: 'shadowSettings',
         icon: 'mdi-sun-clock-outline',
         component: component,
+        props: {
+            width: 400,
+        }
     });
 }
 
-const toggleLayerVisibility = (layerId: string) => {
-    const layersStore = useLayersStore();
-    const layer = layersStore.layers.find(l => l.id === layerId);
-    if (layer) {
-        layer.show = !layer.show;
-        globeInstance!.layers.layers.find(l => l.appId === layerId)!.show = layer.show;
-    }
-}
-
-const zoomIn = () => {
-    const viewer = globeInstance?.viewer;
-    if (!viewer) return;
-    const cameraHeight = viewer.camera.positionCartographic.height;
-
-    viewer.camera.zoomIn(cameraHeight * 0.8);
-}
-
-const zoomOut = () => {
-    const viewer = globeInstance?.viewer;
-    if (!viewer) return;
-    const cameraHeight = viewer.camera.positionCartographic.height;
-
-    viewer.camera.zoomOut(cameraHeight * 1.2);
+const toggleSettingsTool = async () => {
+    const toolsStore = useToolsStore();
+    const settingsComponent = markRaw(await import('../components/tools/SettingsTool.vue'));
+    const component = settingsComponent.default;
+    toolsStore.registerTool({
+        id: 'settingsTool',
+        name: 'settingsTool',
+        icon: 'mdi-cog-outline',
+        component: component,
+        props: {
+            width: 400,
+        }
+    });
 }
 
 export const ACTIONS = {
@@ -111,6 +133,7 @@ export const ACTIONS = {
     zoomIn,
     zoomOut,
     toggleShadowSettings,
+    toggleSettingsTool,
 };
 
 export const ACTION_NAMES = Object.keys(ACTIONS) as Array<keyof typeof ACTIONS>;

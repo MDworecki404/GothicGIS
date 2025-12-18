@@ -14,7 +14,8 @@
         "tooltip": {
             "text": "settings",
             "position": "bottom"
-        }
+        },
+        "action": "toggleSettingsTool"
     },
     {
         "type": "icon-button",

@@ -6,7 +6,7 @@ export type SupportedLocales = "en" | "pl";
 
 const i18n = createI18n({
     legacy: false,
-    locale: (localStorage.getItem('language') as SupportedLocales) || "pl",
+    locale: (localStorage.getItem('selectedLanguage') as SupportedLocales) || "pl",
     fallbackLocale: "en",
     messages: {
         pl,

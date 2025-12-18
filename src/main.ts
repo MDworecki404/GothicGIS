@@ -31,11 +31,11 @@ const gothicTheme = {
     },
 };
 
-const vuetify = createVuetify({
+export const vuetify = createVuetify({
     components,
     directives,
     theme: {
-        defaultTheme: 'gothicTheme',
+        defaultTheme: localStorage.getItem('selectedTheme') || 'gothicTheme',
         themes: {
             gothicTheme,
         },

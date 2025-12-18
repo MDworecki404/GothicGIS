@@ -31,6 +31,7 @@ const toolsList = computed(() => Array.from(toolsStore.activeTools.entries()).re
     z-index: 1000;
     display: flex;
     flex-direction: column;
+    align-items: flex-end;
     gap: 10px;
 }
 </style>
