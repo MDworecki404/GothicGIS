@@ -38,5 +38,10 @@
     "Kroniki Myrtany: Archolos": "Kroniki Myrtany: Archolos",
     "theme": "Motyw",
     "language": "Język",
-    "settingsTool": "Ustawienia"
+    "settingsTool": "Ustawienia",
+    "light": "Jasny",
+    "dark": "Ciemny",
+    "gothicTheme": "Gothic",
+    "pl": "Polski",
+    "en": "English"
 }

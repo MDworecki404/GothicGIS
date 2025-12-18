@@ -4,6 +4,8 @@
             <v-select
                 v-model="selectedTheme"
                 :items="availableThemes"
+                :item-title="(item) => $t(item)"
+                :item-value="(item) => item"
                 :label="$t('theme')"
                 variant="underlined"
                 color="accent"
@@ -12,6 +14,8 @@
             <v-select
                 v-model="selectedLanguage"
                 :items="availableLanguages"
+                :item-title="(item) => $t(item)"
+                :item-value="(item) => item"
                 :label="$t('language')"
                 variant="underlined"
                 color="accent"
@@ -25,7 +29,7 @@ import { onMounted, ref } from 'vue';
 import { vuetify } from '../../main';
 import i18n from '../../services/i18n';
 
-const selectedTheme = ref('');
+const selectedTheme = ref('pl');
 const selectedLanguage = ref<'pl' | 'en'>('pl');
 const availableThemes = ref<string[]>([]);
 const availableLanguages = ref<('pl' | 'en')[]>(['pl', 'en']);
