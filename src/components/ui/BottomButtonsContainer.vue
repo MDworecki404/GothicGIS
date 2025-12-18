@@ -14,7 +14,7 @@ import ButtonsBar from './ButtonsBar.vue';
 const list = ref<UiButtons>([]);
 
 onBeforeMount(async () => {
-    const res = await fetch('/properties/ui/bottomButtons.json');
+    const res = await fetch(`${import.meta.env.BASE_URL}properties/ui/bottomButtons.json`);
     const BottomButtonsJson: UiButtons = await res.json();
 
     list.value = BottomButtonsJson;
