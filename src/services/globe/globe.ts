@@ -1,10 +1,8 @@
-import { Cartesian3 } from '@cesium/engine';
-import { Ion, Viewer } from 'cesium';
+import { Cartesian3, Ion, Viewer, JulianDate } from 'cesium';
 import { getDefaultViewerOptions } from '../defaults';
 import { useCommonStore } from '../stores/common';
 import { useProjectStore } from '../stores/project';
 import { LayersManager } from './layers';
-import { JulianDate } from '@cesium/engine';
 
 export let globeInstance: GlobeViewer | null = null;
 
@@ -43,7 +41,6 @@ export class GlobeViewer {
 }
 
 export const initGlobeInstance = async (target: HTMLElement, force = false) => {
-    await import('@cesium/engine/Source/Widget/CesiumWidget.css');
     const { workingProject } = useProjectStore();
 
     const token = import.meta.env.VITE_CESIUM_API_KEY;

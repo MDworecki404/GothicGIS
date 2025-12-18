@@ -1,4 +1,4 @@
-import { Cartesian3, Math } from '@cesium/engine';
+import { Cartesian3, Math } from 'cesium';
 import { globeInstance } from './globe/globe';
 import { useCommonStore } from './stores/common';
 import { useProjectStore } from './stores/project';

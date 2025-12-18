@@ -58,7 +58,7 @@
 </template>
 
 <script lang="ts" setup>
-import { JulianDate } from '@cesium/engine';
+import { JulianDate } from 'cesium';
 import { onBeforeMount, ref } from 'vue';
 import { globeInstance } from '../../services/globe/globe';
 import TextButton from '../ui/TextButton.vue';

@@ -1,6 +1,6 @@
-import '@cesium/engine'
+import 'cesium'
 
-declare module '@cesium/engine' {
+declare module 'cesium' {
     interface Cesium3DTileset {
         appId?: string;
     }

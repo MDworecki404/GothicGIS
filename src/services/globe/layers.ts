@@ -1,4 +1,4 @@
-import { Cesium3DTileset, type Viewer } from '@cesium/engine';
+import { Cesium3DTileset, type Viewer } from 'cesium';
 import { useLayersStore } from '../stores/layers';
 import type { LayerCollectionItem } from '../types/collections';
 
