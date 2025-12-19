@@ -34,6 +34,7 @@
             "text": "editorPanel",
             "position": "bottom"
         },
+        "role": ["admin", "editor"],
         "children": [
             {
                 "type": "icon-button",
@@ -60,7 +61,8 @@
                     "text": "projectEditor",
                     "position": "right"
                 },
-                "role": ["admin"]
+                "role": ["admin"],
+                "action": "toggleProjectEditor"
             }
         ]
     }

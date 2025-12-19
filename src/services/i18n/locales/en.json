@@ -43,5 +43,14 @@
     "dark": "Dark",
     "gothicTheme": "Gothic",
     "pl": "Polski",
-    "en": "English"
+    "en": "English",
+    "jsonEditor": "JSON Editor",
+    "graphicEditor": "Graphic Editor",
+    "save": "Save",
+    "projectName": "Project Name",
+    "icon": "Icon",
+    "projectEditor": "Project Editor",
+    "editorPanel": "Editor Panel",
+    "questEditor": "Quest Editor",
+    "layersEditor": "Layers Editor"
 }

@@ -4,6 +4,7 @@
         variant="text"
         :text="text"
         :color="color"
+        :loading="loading"
         @click="$emit('click')"
     >
     </v-btn>
@@ -14,6 +15,7 @@ defineProps<{
     prependIcon?: string;
     text?: string;
     color?: string;
+    loading?: boolean;
 }>();
 
 defineEmits<{

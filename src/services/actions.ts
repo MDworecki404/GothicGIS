@@ -5,6 +5,7 @@ import { useProjectStore } from './stores/project';
 import { useToolsStore } from './stores/tools';
 import { markRaw } from 'vue';
 import { useLayersStore } from './stores/layers';
+import { useDialogStore } from './stores/dialog';
 
 ///////////////////////////////
 //MARK: - Utils actions
@@ -124,6 +125,18 @@ const toggleSettingsTool = async () => {
     });
 }
 
+const toggleProjectEditor = async () => {
+    const dialogStore = useDialogStore()
+    const projectEditorComponent = markRaw(await import('../components/Editors/ProjectEditor.vue'));
+    const component = projectEditorComponent.default
+    dialogStore.showDialog({
+        component: component,
+        dialogStyle: {
+            width: 600,
+        }
+    })
+}
+
 export const ACTIONS = {
     setHomeView,
     exitToMainMenu,
@@ -134,6 +147,7 @@ export const ACTIONS = {
     zoomOut,
     toggleShadowSettings,
     toggleSettingsTool,
+    toggleProjectEditor,
 };
 
 export const ACTION_NAMES = Object.keys(ACTIONS) as Array<keyof typeof ACTIONS>;

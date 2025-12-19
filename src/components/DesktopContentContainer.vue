@@ -3,6 +3,7 @@
         <TopButtonsContainer />
         <BottomButtonsContainer />
         <ToolsContainer />
+        <NotificationComponent />
     </div>
 </template>
 
@@ -10,6 +11,7 @@
 import BottomButtonsContainer from './ui/BottomButtonsContainer.vue';
 import ToolsContainer from './ui/ToolsContainer.vue';
 import TopButtonsContainer from './ui/TopButtonsContainer.vue';
+import NotificationComponent from './ui/NotificationComponent.vue';
 </script>
 
 <style scoped>
