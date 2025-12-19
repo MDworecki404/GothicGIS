@@ -9,6 +9,7 @@
         </template>
         <template v-for="button in list" :key="button.icon">
             <IconButton
+                v-if="(button.role === undefined || button.role.includes(useUserStore().loggedUser?.role!))"
                 :icon="button.icon"
                 :tooltip="{
                     text: button.tooltip.text,
@@ -25,6 +26,7 @@ import type { Anchor } from 'vuetify';
 import type { IconButton as IconButtonType } from '../../services/types/ui';
 import IconButton from './IconButton.vue';
 import { performAction } from '../../services/actions';
+import { useUserStore } from '../../services/stores/user';
 
 defineProps<{
     icon: string;

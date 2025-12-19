@@ -15,13 +15,13 @@
             />
 
             <SpeedDialButton
-                v-else-if="button.type === 'speed-dial'"
+                v-else-if="button.type === 'speed-dial' && (button.role === undefined || button.role.includes(userStore.loggedUser?.role!))"
                 :icon="button.icon"
                 :tooltip="{
                     text: button.tooltip.text,
                     position: button.tooltip.position,
                 }"
-                location="right"
+                :location="button.speedDialLocation"
                 :list="button.children"
             />
         </template>

@@ -25,5 +25,43 @@
             "position": "bottom"
         },
         "action": "toggleLayersTree"
+    },
+    {
+        "type": "speed-dial",
+        "icon": "mdi-application-edit-outline",
+        "speedDialDirection": "bottom center",
+        "tooltip": {
+            "text": "editorPanel",
+            "position": "bottom"
+        },
+        "children": [
+            {
+                "type": "icon-button",
+                "icon": "mdi-script-text",
+                "tooltip": {
+                    "text": "questEditor",
+                    "position": "right"
+                },
+                "role": ["admin", "editor"]
+            },
+            {
+                "type": "icon-button",
+                "icon": "mdi-layers-edit",
+                "tooltip": {
+                    "text": "layersEditor",
+                    "position": "right"
+                },
+                "role": ["admin", "editor"]
+            },
+            {
+                "type": "icon-button",
+                "icon": "mdi-alpha-g",
+                "tooltip": {
+                    "text": "projectEditor",
+                    "position": "right"
+                },
+                "role": ["admin"]
+            }
+        ]
     }
 ]

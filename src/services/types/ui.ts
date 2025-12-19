@@ -19,6 +19,15 @@ export const SpeedDialSchema = z.object({
         text: z.string(),
         position: z.enum(['top', 'bottom', 'left', 'right'])
     }),
+    speedDialLocation: z.enum([
+        'top', 'bottom', 'left', 'right', 'start', 'end', 'center', 'center center',
+        'top left', 'top right', 'top start', 'top end', 'top center',
+        'bottom left', 'bottom right', 'bottom start', 'bottom end', 'bottom center',
+        'left top', 'left bottom', 'left center',
+        'right top', 'right bottom', 'right center',
+        'start top', 'start bottom', 'start center',
+        'end top', 'end bottom', 'end center',
+    ]),
     role: z.array(z.enum(['viewer', 'editor', 'admin'])).optional(),
     children: z.array(IconButtonSchema)
 })

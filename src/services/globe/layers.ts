@@ -51,7 +51,10 @@ export class LayersManager {
         const { ionId } = resource;
         if (ionId) {
             console.log('Creating 3D Tiles layer from Ion ID:', ionId);
-            const tileset = await Cesium3DTileset.fromIonAssetId(ionId);
+            const tileset = await Cesium3DTileset.fromIonAssetId(ionId, {
+                cacheBytes: 1024 * 1024 * 1024,
+                maximumCacheOverflowBytes: 512 * 1024 * 1024,
+            });
             return tileset;
         }
         return null;

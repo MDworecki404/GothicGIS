@@ -6,6 +6,7 @@
             "text": "toolsMenu",
             "position": "right"
         },
+        "speedDialLocation": "right center",
         "children": [
             {
                 "type": "icon-button",
