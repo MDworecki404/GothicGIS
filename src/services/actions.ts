@@ -80,6 +80,9 @@ const toggleLayersTree = async () => {
         name: 'layersTree',
         icon: 'mdi-file-tree-outline',
         component: component,
+        props: {
+            width: 400,
+        }
     });
 };
 
