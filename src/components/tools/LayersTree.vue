@@ -13,11 +13,11 @@
             :collapse-icon="'mdi-chevron-down'"
             color="accent"
         >
-        <template #toggle="{isOpen}">
-            <v-icon color="accent" size="20">
-                {{ isOpen ? 'mdi-chevron-up' : 'mdi-chevron-down' }}
-            </v-icon>
-        </template>
+            <template #toggle="{ isOpen }">
+                <v-icon color="accent" size="20">
+                    {{ isOpen ? 'mdi-chevron-up' : 'mdi-chevron-down' }}
+                </v-icon>
+            </template>
         </v-treeview>
     </v-card-text>
 </template>
@@ -57,12 +57,13 @@ watch(
 type TreeChild = {
     id: string;
     title: string;
+    children?: TreeChild[] | TreeParent[];
 };
 
 type TreeParent = {
     id: string;
     title: string;
-    children?: TreeChild[];
+    children?: TreeChild[] | TreeParent[];
 };
 
 const treeItems = computed((): TreeParent[] => {
@@ -70,6 +71,11 @@ const treeItems = computed((): TreeParent[] => {
         {
             id: 'zens',
             title: t('zens'),
+            children: [] as TreeChild[],
+        },
+        {
+            id: 'khorinis',
+            title: t('khorinis'),
             children: [] as TreeChild[],
         },
     ];

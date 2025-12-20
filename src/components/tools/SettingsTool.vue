@@ -8,6 +8,7 @@
                 :item-value="(item) => item"
                 :label="$t('theme')"
                 variant="underlined"
+                prepend-inner-icon="mdi-palette-outline"
                 color="accent"
                 @update:model-value="onThemeChange"
             ></v-select>
@@ -18,6 +19,7 @@
                 :item-value="(item) => item"
                 :label="$t('language')"
                 variant="underlined"
+                prepend-inner-icon="mdi-translate"
                 color="accent"
                 @update:model-value="onLanguageChange"
             ></v-select>
