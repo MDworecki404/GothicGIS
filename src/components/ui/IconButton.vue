@@ -11,7 +11,7 @@
         :size="size"
         @click="$emit('click', $event)"
     >
-        <v-icon :size="iconSize" color="accent">{{ icon }}</v-icon>
+        <v-icon :size="iconSize" :color="iconColor ? iconColor : 'accent'">{{ icon }}</v-icon>
     </v-btn>
 </template>
 <script lang="ts" setup>
@@ -24,6 +24,7 @@ const { size = 32, iconSize = 20 } = defineProps<{
     size?: number;
     iconSize?: number;
     customClass?: string;
+    iconColor?: string;
 }>();
 
 defineEmits<{

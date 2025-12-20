@@ -52,5 +52,8 @@
     "projectEditor": "Edytor projektu",
     "editorPanel": "Panel edytora",
     "questEditor": "Edytor zadań",
-    "layersEditor": "Edytor warstw"
+    "layersEditor": "Edytor warstw",
+    "name": "Nazwa",
+    "type": "Typ",
+    "actions": "Akcje"
 }

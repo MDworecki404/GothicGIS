@@ -52,7 +52,8 @@
                     "text": "layersEditor",
                     "position": "right"
                 },
-                "role": ["admin", "editor"]
+                "role": ["admin", "editor"],
+                "action": "toggleLayerEditor"
             },
             {
                 "type": "icon-button",

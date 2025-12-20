@@ -52,5 +52,8 @@
     "projectEditor": "Project Editor",
     "editorPanel": "Editor Panel",
     "questEditor": "Quest Editor",
-    "layersEditor": "Layers Editor"
+    "layersEditor": "Layers Editor",
+    "name": "Name",
+    "type": "Type",
+    "actions": "Actions"
 }

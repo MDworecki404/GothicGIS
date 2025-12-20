@@ -140,6 +140,21 @@ const toggleProjectEditor = async () => {
     })
 }
 
+const toggleLayerEditor = async () => {
+    const toolsStore = useToolsStore();
+    const layerEditorComponent = markRaw(await import('../components/Editors/LayerEditor.vue'));
+    const component = layerEditorComponent.default;
+    toolsStore.registerTool({
+        id: 'layersEditor',
+        name: 'layersEditor',
+        icon: 'mdi-file-edit-outline',
+        component: component,
+        props: {
+            width: 600,
+        }
+    });
+}
+
 export const ACTIONS = {
     setHomeView,
     exitToMainMenu,
@@ -151,6 +166,7 @@ export const ACTIONS = {
     toggleShadowSettings,
     toggleSettingsTool,
     toggleProjectEditor,
+    toggleLayerEditor,
 };
 
 export const ACTION_NAMES = Object.keys(ACTIONS) as Array<keyof typeof ACTIONS>;
