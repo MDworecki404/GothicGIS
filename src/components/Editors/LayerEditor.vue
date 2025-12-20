@@ -6,7 +6,7 @@
             item-key="id"
             class="elevation-0"
         >
-            <template #item.actions="{ item }">
+            <template #item.actions>
                 <icon-button
                     icon="mdi-pencil-outline"
                     :tooltip="{
