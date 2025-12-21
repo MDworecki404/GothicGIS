@@ -39,9 +39,20 @@ export const Cesium3DTilesLayerCollectionItemSchema = LayerCollectionItemBaseSch
     resource: Cesium3DTilesResourceSchema
 })
 
+export const GeoJSONResourceSchema = z.object({
+    ionId: z.number()
+})
+
+export const GeoJSONLayerCollectionItemSchema = LayerCollectionItemBaseSchema.extend({
+    type: z.literal("geoJSON"),
+    resource: GeoJSONResourceSchema
+})
+
 export const LayerItems = z.discriminatedUnion("type", [
     Cesium3DTilesLayerCollectionItemSchema,
-    // Add other layer types here
+    GeoJSONLayerCollectionItemSchema
 ])
 
 export type LayerCollectionItem = z.infer<typeof LayerItems>
+
+export const LayerTypes = LayerItems.options.map(option => option.shape.type.value)

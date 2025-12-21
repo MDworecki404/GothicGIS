@@ -142,7 +142,7 @@ const toggleProjectEditor = async () => {
 
 const toggleLayerEditor = async () => {
     const toolsStore = useToolsStore();
-    const layerEditorComponent = markRaw(await import('../components/Editors/LayerEditor.vue'));
+    const layerEditorComponent = markRaw(await import('../components/Editors/LayersEditor.vue'));
     const component = layerEditorComponent.default;
     toolsStore.registerTool({
         id: 'layersEditor',

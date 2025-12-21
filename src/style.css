@@ -22,30 +22,30 @@ body {
 }
 
 ::-webkit-scrollbar-track {
-    background: rgba(var(--v-theme-surface), 0.5);
+    background: rgba(var(--v-theme-accent), 0);
     border-radius: 10px;
 }
 
 ::-webkit-scrollbar-thumb {
-    background: rgba(var(--v-theme-primary), 0.6);
+    background: rgba(var(--v-theme-accent), 0);
     border-radius: 10px;
     border: 2px solid transparent;
     background-clip: padding-box;
 }
 
 ::-webkit-scrollbar-thumb:hover {
-    background: rgba(var(--v-theme-primary), 0.8);
+    background: rgba(var(--v-theme-accent), 1);
     background-clip: padding-box;
 }
 
 ::-webkit-scrollbar-corner {
-    background: rgba(var(--v-theme-surface), 0.5);
+    background: rgba(var(--v-theme-accent), 0.1);
 }
 
 /* Firefox Scrollbar */
 * {
     scrollbar-width: thin;
-    scrollbar-color: rgba(var(--v-theme-primary), 0.6) rgba(var(--v-theme-surface), 0.5);
+    scrollbar-color: rgba(var(--v-theme-accent), 0.6) rgba(var(--v-theme-accent), 0);
 }
 
 .cesium-viewer-bottom {

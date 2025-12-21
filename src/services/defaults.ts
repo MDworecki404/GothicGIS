@@ -1,4 +1,5 @@
 import type { Viewer } from "cesium";
+import type { LayerCollectionItem } from "./types/collections";
 
 export const getDefaultViewerOptions = (): Viewer.ConstructorOptions => {
     return {
@@ -16,3 +17,16 @@ export const getDefaultViewerOptions = (): Viewer.ConstructorOptions => {
         globe: false
     };
 };
+
+export const getDefaultLayerConfig = (): LayerCollectionItem => {
+    return {
+        id: '',
+        name: '',
+        show: false,
+        type: 'cesium3DTiles',
+        resource: {
+            ionId: 0
+        },
+        parentId: 'others'
+    }
+}

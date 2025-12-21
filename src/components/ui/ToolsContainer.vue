@@ -33,5 +33,19 @@ const toolsList = computed(() => Array.from(toolsStore.activeTools.entries()).re
     flex-direction: column;
     align-items: flex-end;
     gap: 10px;
+    overflow-y: auto;
+    max-height: calc(100vh - 20px);
+    box-sizing: border-box;
+    padding-right: 6px;
+}
+
+.tools-container > * {
+    flex: 0 0 auto;
+}
+
+.tools-container {
+    width: max-content;
+    max-width: calc(100vw - 20px);
+    overflow-x: visible;
 }
 </style>

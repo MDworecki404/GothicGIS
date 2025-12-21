@@ -4,6 +4,7 @@ import { markRaw, ref, type Component } from 'vue';
 export const useDialogStore = defineStore('dialog', () => {
     const openedDialog = ref<Component | null>(null);
     const componentProps = ref<Record<string, unknown> | null>(null);
+    const disableDefaultClose = ref(false);
     const dialogStyles = ref<{
         width?: number;
         height?: number;
@@ -13,14 +14,17 @@ export const useDialogStore = defineStore('dialog', () => {
 
     const showDialog = ({
         component,
+        disableDefaultCloseButton,
         props,
         dialogStyle
     }: {
         component: Component;
+        disableDefaultCloseButton?: boolean;
         props?: Record<string, unknown>;
         dialogStyle?: typeof dialogStyles.value;
     }) => {
         openedDialog.value = markRaw(component);
+        disableDefaultClose.value = disableDefaultCloseButton || false;
         componentProps.value = props || null;
         if (dialogStyle) {
             dialogStyles.value = dialogStyle;
@@ -42,5 +46,6 @@ export const useDialogStore = defineStore('dialog', () => {
         dialogStyles,
         showDialog,
         closeDialog,
+        disableDefaultClose
     };
 });

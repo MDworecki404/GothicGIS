@@ -13,6 +13,7 @@
     "@mdi/font": "^7.4.47",
     "cesium": "^1.136.0",
     "firebase": "^12.6.0",
+    "lodash": "^4.17.21",
     "monaco-editor": "^0.55.1",
     "monaco-editor-vue3": "^1.0.5",
     "pinia": "^3.0.4",
@@ -23,6 +24,7 @@
     "zod-to-json-schema": "^3.25.0"
   },
   "devDependencies": {
+    "@types/lodash": "^4.17.21",
     "@types/node": "^24.10.1",
     "@vitejs/plugin-vue": "^6.0.1",
     "@vue/tsconfig": "^0.8.1",

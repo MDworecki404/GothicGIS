@@ -55,5 +55,21 @@
     "layersEditor": "Layers Editor",
     "name": "Name",
     "type": "Type",
-    "actions": "Actions"
+    "actions": "Actions",
+    "editLayer": "Edit Layer",
+    "deleteLayer": "Delete Layer",
+    "id": "ID",
+    "configuration": "Configuration",
+    "visibleAtStart": "Visible at Start",
+    "layerType": "Layer Type",
+    "parentId": "Parent Folder ID",
+    "ionId": "Cesium ION Identifier",
+    "metadata": "Metadata",
+    "addLayer": "Add Layer",
+    "areYouSureDeleteLayer": "Are you sure you want to delete the layer?",
+    "layerDeleted": "Layer deleted",
+    "layerAdded": "Layer added",
+    "confirm": "Confirm",
+    "cancel": "Cancel",
+    "layerSaved": "Layer saved"
 }

@@ -22,6 +22,8 @@ export class LayersManager {
                 try {
                     await this.layersFactory(layer);
                 } catch (e) {
+                    layer.show = false;
+                    layersStore.invalidateLayers.set(layer.id, layer);
                     console.warn('Error creating layer', layer, e);
                 }
             })

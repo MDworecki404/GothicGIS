@@ -55,5 +55,21 @@
     "layersEditor": "Edytor warstw",
     "name": "Nazwa",
     "type": "Typ",
-    "actions": "Akcje"
+    "actions": "Akcje",
+    "editLayer": "Edytuj warstwę",
+    "deleteLayer": "Usuń warstwę",
+    "id": "ID",
+    "configuration": "Konfiguracja",
+    "visibleAtStart": "Widoczna na starcie",
+    "layerType": "Typ warstwy",
+    "parentId": "ID folderu nadrzędnego",
+    "ionId": "Identyfikator Cesium ION",
+    "metadata": "Metadane",
+    "addLayer": "Dodaj warstwę",
+    "areYouSureDeleteLayer": "Czy na pewno chcesz usunąć warstwę?",
+    "layerDeleted": "Warstwa usunięta",
+    "layerAdded": "Warstwa dodana",
+    "confirm": "Potwierdź",
+    "cancel": "Anuluj",
+    "layerSaved": "Warstwa zapisana"
 }
