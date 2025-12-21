@@ -110,4 +110,14 @@ const treeItems = computed((): TreeParent[] => {
 .tree {
     user-select: none;
 }
+
+/* 1. Domyślnie UKRYJ tło (overlay) dla elementu zaznaczonego (active) */
+.tree :deep(.v-list-item--active > .v-list-item__overlay) {
+    opacity: 0;
+}
+
+/* 2. PRZYWRÓĆ delikatne tło, gdy najeżdżasz na element (nawet jeśli jest zaznaczony) */
+.tree :deep(.v-list-item--active:hover > .v-list-item__overlay) {
+    opacity: 0.04; /* Standardowa wartość hovera w Material Design to ok. 0.04 - 0.08 */
+}
 </style>
