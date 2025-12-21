@@ -6,8 +6,7 @@
             :items="treeItems"
             item-value="id"
             selectable
-            select-strategy="leaf"
-            open-all
+            select-strategy="classic"
             v-model:selected="selectedLayers"
             :expand-icon="'mdi-chevron-up'"
             :collapse-icon="'mdi-chevron-down'"
@@ -24,12 +23,9 @@
 
 <script lang="ts" setup>
 import { computed, ref, watch } from 'vue';
-import { useI18n } from 'vue-i18n';
 import { performAction } from '../../services/actions';
 import { useLayersStore } from '../../services/stores/layers';
 import type { LayerCollectionItem } from '../../services/types/collections';
-
-const { t } = useI18n();
 
 const layersStore = useLayersStore();
 
@@ -68,18 +64,7 @@ type TreeParent = {
 };
 
 const treeItems = computed((): TreeParent[] => {
-    const parents: TreeParent[] = [
-        {
-            id: 'zens',
-            title: t('zens'),
-            children: [] as TreeChild[],
-        },
-        {
-            id: 'khorinis',
-            title: t('khorinis'),
-            children: [] as TreeChild[],
-        },
-    ];
+    const parents: TreeParent[] = [];
 
     layersStore.layers.forEach((layer: LayerCollectionItem) => {
         if (layersStore.invalidateLayers.has(layer.id)) {

@@ -7,7 +7,14 @@
             class="ma-1 mt-3"
             @click="addLayerDialog"
         ></text-button>
-        <v-data-table :items="layersInTable" :headers="headers" item-key="id" class="elevation-0">
+        <v-data-table
+            :items="layersInTable"
+            :headers="headers"
+            item-key="id"
+            class="elevation-0"
+            :items-per-page-options="[5, 10, 15, 20, 25]"
+            :items-per-page="5"
+        >
             <template #item.actions="{ item }">
                 <icon-button
                     icon="mdi-pencil-outline"
