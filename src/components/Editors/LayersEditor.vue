@@ -1,13 +1,25 @@
 <template>
     <v-card-text>
-        <text-button
-            :text="$t('addLayer')"
-            prepend-icon="mdi-plus"
-            color="accent"
-            class="ma-1 mt-3"
-            @click="addLayerDialog"
-        ></text-button>
+        <v-row dense no-gutters align="center" class="d-flex justify-space-between">
+            <text-button
+                :text="$t('addLayer')"
+                prepend-icon="mdi-plus"
+                color="accent"
+                class="ma-1 mt-3"
+                @click="addLayerDialog"
+            ></text-button>
+            <v-text-field
+                v-model="search"
+                prepend-inner-icon="mdi-magnify"
+                :label="$t('searchLayers')"
+                variant="outlined"
+                density="compact"
+                hide-details
+            ></v-text-field>
+        </v-row>
+
         <v-data-table
+            :search="search"
             :items="layersInTable"
             :headers="headers"
             item-key="id"
@@ -56,6 +68,8 @@ const { t } = useI18n();
 const layersInTable = ref<LayerCollectionItem[]>([]);
 
 const layersStore = useLayersStore();
+
+const search = ref<string>('');
 
 const headers: DataTableHeader[] = [
     {
