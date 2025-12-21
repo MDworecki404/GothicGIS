@@ -95,6 +95,9 @@ const toggleCameraPositionTool = async () => {
         name: 'cameraPosition',
         icon: 'mdi-camera-outline',
         component: component,
+        props: {
+            width: 400,
+        }
     });
 };
 
@@ -155,6 +158,25 @@ const toggleLayerEditor = async () => {
     });
 }
 
+const toggleViewsEditor = async () => {
+    const toolsStore = useToolsStore();
+    const viewsEditorComponent = markRaw(await import('../components/Editors/ViewsEditor.vue'));
+    const component = viewsEditorComponent.default;
+    toolsStore.registerTool({
+        id: 'viewsEditor',
+        name: 'viewsEditor',
+        icon: 'mdi-eye-outline',
+        component: component,
+        props: {
+            width: 600,
+        }
+    });
+}
+
+///////////////////////////////
+//MARK: - Exported actions
+///////////////////////////////
+
 export const ACTIONS = {
     setHomeView,
     exitToMainMenu,
@@ -167,6 +189,7 @@ export const ACTIONS = {
     toggleSettingsTool,
     toggleProjectEditor,
     toggleLayerEditor,
+    toggleViewsEditor,
 };
 
 export const ACTION_NAMES = Object.keys(ACTIONS) as Array<keyof typeof ACTIONS>;

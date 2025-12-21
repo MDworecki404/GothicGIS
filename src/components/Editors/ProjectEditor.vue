@@ -37,6 +37,7 @@
                 :height="400"
                 :loading="loading"
                 @save="saveConfig(JSON.parse($event))"
+                @update:code="projectConfig = JSON.parse($event)"
             ></JSONEditor>
         </v-tabs-window-item>
     </v-tabs-window>

@@ -56,3 +56,17 @@ export const LayerItems = z.discriminatedUnion("type", [
 export type LayerCollectionItem = z.infer<typeof LayerItems>
 
 export const LayerTypes = LayerItems.options.map(option => option.shape.type.value)
+
+export const ViewConfigItemSchema = z.object({
+    id: z.string(),
+    name: z.string(),
+    view: z.object({
+        x: z.number(),
+        y: z.number(),
+        z: z.number(),
+        heading: z.number(),
+        pitch: z.number(),
+    })
+})
+
+export type ViewConfigItem = z.infer<typeof ViewConfigItemSchema>

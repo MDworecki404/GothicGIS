@@ -38,6 +38,16 @@
         "children": [
             {
                 "type": "icon-button",
+                "icon": "mdi-eye-outline",
+                "tooltip": {
+                    "text": "viewsEditor",
+                    "position": "right"
+                },
+                "role": ["admin", "editor"],
+                "action": "toggleViewsEditor"
+            },
+            {
+                "type": "icon-button",
                 "icon": "mdi-script-text",
                 "tooltip": {
                     "text": "questEditor",

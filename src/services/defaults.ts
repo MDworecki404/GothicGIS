@@ -1,5 +1,5 @@
-import type { Viewer } from "cesium";
-import type { LayerCollectionItem } from "./types/collections";
+import type { Viewer } from 'cesium';
+import type { LayerCollectionItem, ViewConfigItem } from './types/collections';
 
 export const getDefaultViewerOptions = (): Viewer.ConstructorOptions => {
     return {
@@ -14,7 +14,7 @@ export const getDefaultViewerOptions = (): Viewer.ConstructorOptions => {
         fullscreenButton: false,
         vrButton: false,
         baseLayer: false,
-        globe: false
+        globe: false,
     };
 };
 
@@ -25,8 +25,22 @@ export const getDefaultLayerConfig = (): LayerCollectionItem => {
         show: false,
         type: 'cesium3DTiles',
         resource: {
-            ionId: 0
+            ionId: 0,
         },
-        parentId: 'others'
-    }
-}
+        parentId: 'others',
+    };
+};
+
+export const getDefaultViewConfig = (): ViewConfigItem => {
+    return {
+        id: '',
+        name: '',
+        view: {
+            heading: 0,
+            pitch: -90,
+            x: 0,
+            y: 0,
+            z: 1000,
+        },
+    };
+};

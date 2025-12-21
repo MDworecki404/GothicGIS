@@ -72,5 +72,15 @@
     "confirm": "Confirm",
     "cancel": "Cancel",
     "layerSaved": "Layer saved",
-    "searchLayers": "Szukaj warstw"
+    "searchLayers": "Search Layers",
+    "viewsEditor": "Views Editor",
+    "searchViews": "Search Views",
+    "editView": "Edit View",
+    "activate": "Activate",
+    "deleteView": "Delete View",
+    "viewSaved": "View saved",
+    "areYouSureDeleteView": "Are you sure you want to delete the view?",
+    "viewDeleted": "View deleted",
+    "saveCurrentView": "Save Current View",
+    "viewName": "View Name"
 }
