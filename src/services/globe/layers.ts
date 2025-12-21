@@ -31,7 +31,7 @@ export class LayersManager {
     }
 
     async layersFactory(layerConfig: LayerCollectionItem) {
-        console.log('Adding layer:', layerConfig.name);
+        import.meta.env.DEV && console.log('⏱️ Adding layer:', layerConfig.name);
         switch (layerConfig.type) {
             case 'cesium3DTiles':
                 const cesiumLayer = await this.create3DTilesLayer(layerConfig.resource);
@@ -40,7 +40,7 @@ export class LayersManager {
                 if (cesiumLayer && this.viewer) {
                     this.viewer.scene.primitives.add(cesiumLayer);
                     this.layers.push(cesiumLayer);
-                    console.log('Added 3D Tiles layer:', layerConfig.name);
+                    import.meta.env.DEV && console.log('✅🌎 Added 3D Tiles layer:', layerConfig.name);
                 }
                 break;
             default:
@@ -52,7 +52,8 @@ export class LayersManager {
     async create3DTilesLayer(resource: { ionId?: number;}) {
         const { ionId } = resource;
         if (ionId) {
-            console.log('Creating 3D Tiles layer from Ion ID:', ionId);
+            import.meta.env.DEV && console.log('⏱️ Creating 3D Tiles layer from Ion ID:', ionId);
+            import.meta.env.DEV && console.log('----------------------------------');
             const tileset = await Cesium3DTileset.fromIonAssetId(ionId, {
                 cacheBytes: 1024 * 1024 * 1024,
                 maximumCacheOverflowBytes: 512 * 1024 * 1024,
