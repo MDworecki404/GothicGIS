@@ -26,10 +26,13 @@
         </v-row>
     </v-card-text>
 </template>
+
 <script lang="ts" setup>
 import { onMounted, ref } from 'vue';
-import { vuetify } from '../../main';
+import { useTheme } from 'vuetify';
 import i18n from '../../services/i18n';
+
+const theme = useTheme();
 
 const selectedTheme = ref('pl');
 const selectedLanguage = ref<'pl' | 'en'>('pl');
@@ -37,7 +40,7 @@ const availableThemes = ref<string[]>([]);
 const availableLanguages = ref<('pl' | 'en')[]>(['pl', 'en']);
 
 const onThemeChange = (newTheme: string) => {
-    vuetify.theme.change(newTheme);
+    theme.change(newTheme);
     localStorage.setItem('selectedTheme', newTheme);
 };
 
@@ -47,9 +50,9 @@ const onLanguageChange = (newLanguage: 'pl' | 'en') => {
 };
 
 onMounted(() => {
-    availableThemes.value = Object.keys(vuetify.theme.themes.value);
-    availableLanguages;
-    selectedTheme.value = vuetify.theme.name.value;
+    availableThemes.value = Object.keys(theme.themes.value);
+
+    selectedTheme.value = theme.global.name.value;
     selectedLanguage.value = i18n.global.locale.value;
 });
 </script>
