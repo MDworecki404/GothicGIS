@@ -28,35 +28,8 @@
             :items-per-page="5"
         >
             <template #item.actions="{ item }">
-                <icon-button
-                    icon="mdi-pencil-outline"
-                    :tooltip="{
-                        text: 'editView',
-                        position: 'left',
-                    }"
-                    variant="plain"
-                    @click="toggleEditViewDialog(item)"
-                ></icon-button>
-                <icon-button
-                    icon="mdi-airplane-landing"
-                    iconColor="primary"
-                    :tooltip="{
-                        text: 'activate',
-                        position: 'bottom',
-                    }"
-                    variant="plain"
-                    @click="activateView(item)"
-                ></icon-button>
-                <icon-button
-                    icon="mdi-trash-can-outline"
-                    :tooltip="{
-                        text: 'deleteView',
-                        position: 'right',
-                    }"
-                    iconColor="error"
-                    variant="plain"
-                    @click="deleteViewDialog(item)"
-                ></icon-button>
+                <context-menu :context-menu-items="contextMenuItems" :prop-item="item">
+                </context-menu>
             </template>
         </v-data-table>
     </v-card-text>
@@ -71,7 +44,8 @@ import { globeInstance } from '../../services/globe/globe';
 import { useDialogStore } from '../../services/stores/dialog';
 import { useViewsStore } from '../../services/stores/views';
 import type { ViewConfigItem } from '../../services/types/collections';
-import IconButton from '../ui/IconButton.vue';
+import type { ContextMenuItems } from '../../services/types/ui';
+import ContextMenu from '../ui/ContextMenu.vue';
 
 const { t } = useI18n();
 
@@ -142,6 +116,30 @@ const deleteViewDialog = async (item: ViewConfigItem) => {
         },
     });
 };
+
+const contextMenuItems: ContextMenuItems = [
+    {
+        title: t('editView'),
+        icon: 'mdi-pencil-outline',
+        action: (item: ViewConfigItem) => {
+            toggleEditViewDialog(item);
+        },
+    },
+    {
+        title: t('activate'),
+        icon: 'mdi-airplane-landing',
+        action: (item: ViewConfigItem) => {
+            activateView(item);
+        },
+    },
+    {
+        title: t('deleteView'),
+        icon: 'mdi-trash-can-outline',
+        action: (item: ViewConfigItem) => {
+            deleteViewDialog(item);
+        },
+    },
+];
 
 onMounted(async () => {
     await viewsStore.loadViews();

@@ -17,15 +17,28 @@
                     {{ isOpen ? 'mdi-chevron-up' : 'mdi-chevron-down' }}
                 </v-icon>
             </template>
+            <template #append="{ item }">
+                <context-menu
+                    v-if="!item.children"
+                    :context-menu-items="contextMenuItems"
+                    :prop-item="layersStore.layers.find((layer) => layer.id === item.id)"
+                ></context-menu>
+            </template>
         </v-treeview>
     </v-card-text>
 </template>
 
 <script lang="ts" setup>
 import { computed, ref, watch } from 'vue';
+import { useI18n } from 'vue-i18n';
 import { performAction } from '../../services/actions';
 import { useLayersStore } from '../../services/stores/layers';
 import type { LayerCollectionItem } from '../../services/types/collections';
+import type { ContextMenuItems } from '../../services/types/ui';
+import { zoomToLayer } from '../../services/utils';
+import ContextMenu from '../ui/ContextMenu.vue';
+
+const { t } = useI18n();
 
 const layersStore = useLayersStore();
 
@@ -54,12 +67,13 @@ watch(
 type TreeChild = {
     id: string;
     title: string;
-    children?: TreeChild[] | TreeParent[];
+    type?: 'layer';
 };
 
 type TreeParent = {
     id: string;
     title: string;
+    type?: 'parent';
     children?: TreeChild[] | TreeParent[];
 };
 
@@ -89,6 +103,16 @@ const treeItems = computed((): TreeParent[] => {
 
     return parents;
 });
+
+const contextMenuItems: ContextMenuItems = [
+    {
+        title: t('zoomTo'),
+        icon: 'mdi-magnify',
+        action: (item: LayerCollectionItem) => {
+            zoomToLayer(item.id);
+        },
+    },
+];
 </script>
 
 <style scoped>
@@ -96,13 +120,11 @@ const treeItems = computed((): TreeParent[] => {
     user-select: none;
 }
 
-/* 1. Domyślnie UKRYJ tło (overlay) dla elementu zaznaczonego (active) */
 .tree :deep(.v-list-item--active > .v-list-item__overlay) {
     opacity: 0;
 }
 
-/* 2. PRZYWRÓĆ delikatne tło, gdy najeżdżasz na element (nawet jeśli jest zaznaczony) */
 .tree :deep(.v-list-item--active:hover > .v-list-item__overlay) {
-    opacity: 0.04; /* Standardowa wartość hovera w Material Design to ok. 0.04 - 0.08 */
+    opacity: 0.04;
 }
 </style>

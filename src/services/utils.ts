@@ -21,3 +21,14 @@ export const getCameraFocus = () => {
     const cameraIntersection = scene.globe.pick(ray, scene);
     return cameraIntersection || camera.positionWC;
 };
+
+export const zoomToLayer = (layerId: string) => {
+    const viewer = globeInstance?.viewer;
+    if (!viewer) return;
+
+    const targetLayer = globeInstance?.layers.layers.find(layer => layer.appId === layerId)
+
+    if (!targetLayer) return;
+
+    viewer.flyTo(targetLayer, {duration: 1.5});
+}

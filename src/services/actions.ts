@@ -173,6 +173,21 @@ const toggleViewsEditor = async () => {
     });
 }
 
+const openJsonEditor = async (jsonData: string) => {
+    const dialogStore = useDialogStore()
+    const jsonEditorComponent = markRaw(await import('../components/ui/JSONEditor.vue'));
+    const component = jsonEditorComponent.default
+    dialogStore.showDialog({
+        component: component,
+        props: {
+            code: jsonData,
+        },
+        dialogStyle: {
+            width: 400,
+        }
+    })
+}
+
 ///////////////////////////////
 //MARK: - Exported actions
 ///////////////////////////////
@@ -190,6 +205,7 @@ export const ACTIONS = {
     toggleProjectEditor,
     toggleLayerEditor,
     toggleViewsEditor,
+    openJsonEditor,
 };
 
 export const ACTION_NAMES = Object.keys(ACTIONS) as Array<keyof typeof ACTIONS>;

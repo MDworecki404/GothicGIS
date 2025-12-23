@@ -2,8 +2,8 @@
     <v-btn
         icon
         v-tooltip="{
-            text: $t(tooltip.text),
-            location: tooltip.position,
+            text: tooltip ? $t(tooltip!.text) : '',
+            location: tooltip ? tooltip!.position : 'top',
         }"
         :class="['icon-button rounded-sm bg-surface', customClass]"
         variant="outlined"
@@ -17,7 +17,7 @@
 <script lang="ts" setup>
 const { size = 32, iconSize = 20 } = defineProps<{
     icon: string;
-    tooltip: {
+    tooltip?: {
         text: string;
         position: 'top' | 'bottom' | 'left' | 'right';
     };

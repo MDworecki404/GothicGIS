@@ -1,7 +1,8 @@
 <template>
     <div>
         <desktop-content-container v-if="useCommonStore().isAppLoaded" />
-        <globe-container :key="globeKey"/>
+        <mobile-content-container v-else />
+        <globe-container :key="globeKey" />
     </div>
 </template>
 
@@ -11,6 +12,7 @@ import { useCommonStore } from '../services/stores/common';
 import { useProjectStore } from '../services/stores/project';
 import DesktopContentContainer from './DesktopContentContainer.vue';
 import GlobeContainer from './GlobeContainer.vue';
+import MobileContentContainer from './MobileContentContainer.vue';
 
 const globeKey = ref(0);
 
@@ -19,7 +21,7 @@ watch(
     (newProject) => {
         if (!newProject) {
         } else {
-            globeKey.value += 1
+            globeKey.value += 1;
         }
     },
     { immediate: true }

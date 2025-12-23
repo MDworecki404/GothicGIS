@@ -28,25 +28,8 @@
             :items-per-page="5"
         >
             <template #item.actions="{ item }">
-                <icon-button
-                    icon="mdi-pencil-outline"
-                    :tooltip="{
-                        text: 'editLayer',
-                        position: 'left',
-                    }"
-                    variant="plain"
-                    @click="toggleEditLayerDialog(item)"
-                ></icon-button>
-                <icon-button
-                    icon="mdi-trash-can-outline"
-                    :tooltip="{
-                        text: 'deleteLayer',
-                        position: 'right',
-                    }"
-                    iconColor="error"
-                    variant="plain"
-                    @click="deleteLayerDialog(item)"
-                ></icon-button>
+                <context-menu :context-menu-items="contextMenuItems" :prop-item="item">
+                </context-menu>
             </template>
         </v-data-table>
     </v-card-text>
@@ -60,7 +43,8 @@ import { getDefaultLayerConfig } from '../../services/defaults';
 import { useDialogStore } from '../../services/stores/dialog';
 import { useLayersStore } from '../../services/stores/layers';
 import type { LayerCollectionItem } from '../../services/types/collections';
-import IconButton from '../ui/IconButton.vue';
+import type { ContextMenuItems } from '../../services/types/ui';
+import ContextMenu from '../ui/ContextMenu.vue';
 import TextButton from '../ui/TextButton.vue';
 
 const { t } = useI18n();
@@ -139,6 +123,23 @@ const deleteLayerDialog = async (item: LayerCollectionItem) => {
         },
     });
 };
+
+const contextMenuItems: ContextMenuItems = [
+    {
+        title: t('editLayer'),
+        icon: 'mdi-pencil-outline',
+        action: (item: LayerCollectionItem) => {
+            toggleEditLayerDialog(item);
+        },
+    },
+    {
+        title: t('deleteLayer'),
+        icon: 'mdi-trash-can-outline',
+        action: (item: LayerCollectionItem) => {
+            deleteLayerDialog(item);
+        },
+    },
+];
 
 onMounted(() => {
     layersInTable.value = layersStore.layers;
