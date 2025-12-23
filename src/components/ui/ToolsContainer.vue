@@ -1,5 +1,5 @@
 <template>
-    <div class="tools-container">
+    <div :class="mobile ? 'tools-container-mobile' : 'tools-container'">
         <ToolWrapper
             v-for="([id, tool]) in toolsList"
             :key="id"
@@ -16,6 +16,9 @@
 import { computed } from 'vue';
 import { useToolsStore } from '../../services/stores/tools';
 import ToolWrapper from './ToolWrapper.vue';
+import { useDisplay } from 'vuetify';
+
+const { mobile } = useDisplay();
 
 const toolsStore = useToolsStore();
 const toolsList = computed(() => Array.from(toolsStore.activeTools.entries()).reverse());
@@ -47,5 +50,16 @@ const toolsList = computed(() => Array.from(toolsStore.activeTools.entries()).re
     width: max-content;
     max-width: calc(100vw - 20px);
     overflow-x: visible;
+}
+
+.tools-container-mobile {
+    position: absolute;
+    bottom: 0;
+    width: 100dvw;
+    overflow: auto;
+    height: auto;
+    flex-direction: row;
+    align-items: center;
+    z-index: 10000;
 }
 </style>

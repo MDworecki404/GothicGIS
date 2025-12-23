@@ -3,8 +3,7 @@
         variant="elevated"
         rounded="0"
         class="pa-0 ma-0"
-        min-width="300"
-        :width="props.props?.width || 300"
+        :width="!mobile ? props.props?.width || 300 : '100dvw'"
         elevation="12"
     >
         <v-card-title class="pa-0 ma-0">
@@ -35,6 +34,9 @@
 <script lang="ts" setup>
 import { ref, type Component } from 'vue';
 import { useToolsStore } from '../../services/stores/tools';
+import { useDisplay } from 'vuetify';
+
+const { mobile } = useDisplay();
 
 const toolsStore = useToolsStore();
 const minimized = ref(false);

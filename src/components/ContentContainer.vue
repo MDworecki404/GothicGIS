@@ -1,5 +1,5 @@
 <template>
-    <div class="desktop-content-container">
+    <div class="content-container">
         <TopButtonsContainer />
         <BottomButtonsContainer />
         <ToolsContainer />
@@ -15,7 +15,7 @@ import NotificationComponent from './ui/NotificationComponent.vue';
 </script>
 
 <style scoped>
-.desktop-content-container {
+.content-container {
     position: absolute;
     top: 0;
     left: 0;
