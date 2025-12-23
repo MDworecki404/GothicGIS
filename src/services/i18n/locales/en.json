@@ -82,5 +82,6 @@
     "areYouSureDeleteView": "Are you sure you want to delete the view?",
     "viewDeleted": "View deleted",
     "saveCurrentView": "Save Current View",
-    "viewName": "View Name"
+    "viewName": "View Name",
+    "toggleFullscreen": "Toggle Fullscreen"
 }

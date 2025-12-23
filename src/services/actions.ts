@@ -21,14 +21,14 @@ const setHomeView = () => {
         destination: Cartesian3.fromArray([
             workingProject?.initView?.x ?? 0,
             workingProject?.initView?.y ?? 0,
-            workingProject?.initView?.z ?? 10000000
+            workingProject?.initView?.z ?? 10000000,
         ]),
         orientation: {
             heading: workingProject?.initView?.heading ?? 0,
             pitch: workingProject?.initView?.pitch ?? -Math.PI_OVER_TWO,
             roll: 0,
         },
-        duration: 1
+        duration: 1,
     };
 
     viewer.camera.flyTo(homePosition);
@@ -45,12 +45,12 @@ const exitToMainMenu = () => {
 
 const toggleLayerVisibility = (layerId: string) => {
     const layersStore = useLayersStore();
-    const layer = layersStore.layers.find(l => l.id === layerId);
+    const layer = layersStore.layers.find((l) => l.id === layerId);
     if (layer) {
         layer.show = !layer.show;
-        globeInstance!.layers.layers.find(l => l.appId === layerId)!.show = layer.show;
+        globeInstance!.layers.layers.find((l) => l.appId === layerId)!.show = layer.show;
     }
-}
+};
 
 const zoomIn = () => {
     const viewer = globeInstance?.viewer;
@@ -58,7 +58,7 @@ const zoomIn = () => {
     const cameraHeight = viewer.camera.positionCartographic.height;
 
     viewer.camera.zoomIn(cameraHeight * 0.8);
-}
+};
 
 const zoomOut = () => {
     const viewer = globeInstance?.viewer;
@@ -66,7 +66,20 @@ const zoomOut = () => {
     const cameraHeight = viewer.camera.positionCartographic.height;
 
     viewer.camera.zoomOut(cameraHeight * 1.2);
-}
+};
+
+const toggleFullscreen = () => {
+    const elem = document.documentElement;
+    if (!document.fullscreenElement) {
+        elem.requestFullscreen().catch((err) => {
+            console.error(
+                `Error attempting to enable full-screen mode: ${err.message} (${err.name})`
+            );
+        });
+    } else {
+        document.exitFullscreen();
+    }
+};
 
 ///////////////////////////////
 //MARK: - Tools toggling
@@ -82,7 +95,7 @@ const toggleLayersTree = async () => {
         component: component,
         props: {
             width: 400,
-        }
+        },
     });
 };
 
@@ -97,13 +110,15 @@ const toggleCameraPositionTool = async () => {
         component: component,
         props: {
             width: 400,
-        }
+        },
     });
 };
 
 const toggleShadowSettings = async () => {
     const toolsStore = useToolsStore();
-    const shadowSettingsComponent = markRaw(await import('../components/tools/ShadowsSettings.vue'));
+    const shadowSettingsComponent = markRaw(
+        await import('../components/tools/ShadowsSettings.vue')
+    );
     const component = shadowSettingsComponent.default;
     toolsStore.registerTool({
         id: 'shadowSettings',
@@ -112,9 +127,9 @@ const toggleShadowSettings = async () => {
         component: component,
         props: {
             width: 400,
-        }
+        },
     });
-}
+};
 
 const toggleSettingsTool = async () => {
     const toolsStore = useToolsStore();
@@ -127,21 +142,21 @@ const toggleSettingsTool = async () => {
         component: component,
         props: {
             width: 400,
-        }
+        },
     });
-}
+};
 
 const toggleProjectEditor = async () => {
-    const dialogStore = useDialogStore()
+    const dialogStore = useDialogStore();
     const projectEditorComponent = markRaw(await import('../components/Editors/ProjectEditor.vue'));
-    const component = projectEditorComponent.default
+    const component = projectEditorComponent.default;
     dialogStore.showDialog({
         component: component,
         dialogStyle: {
             width: 600,
-        }
-    })
-}
+        },
+    });
+};
 
 const toggleLayerEditor = async () => {
     const toolsStore = useToolsStore();
@@ -154,9 +169,9 @@ const toggleLayerEditor = async () => {
         component: component,
         props: {
             width: 600,
-        }
+        },
     });
-}
+};
 
 const toggleViewsEditor = async () => {
     const toolsStore = useToolsStore();
@@ -169,14 +184,14 @@ const toggleViewsEditor = async () => {
         component: component,
         props: {
             width: 600,
-        }
+        },
     });
-}
+};
 
 const openJsonEditor = async (jsonData: string) => {
-    const dialogStore = useDialogStore()
+    const dialogStore = useDialogStore();
     const jsonEditorComponent = markRaw(await import('../components/ui/JSONEditor.vue'));
-    const component = jsonEditorComponent.default
+    const component = jsonEditorComponent.default;
     dialogStore.showDialog({
         component: component,
         props: {
@@ -184,9 +199,9 @@ const openJsonEditor = async (jsonData: string) => {
         },
         dialogStyle: {
             width: 400,
-        }
-    })
-}
+        },
+    });
+};
 
 ///////////////////////////////
 //MARK: - Exported actions
@@ -206,6 +221,7 @@ export const ACTIONS = {
     toggleLayerEditor,
     toggleViewsEditor,
     openJsonEditor,
+    toggleFullscreen,
 };
 
 export const ACTION_NAMES = Object.keys(ACTIONS) as Array<keyof typeof ACTIONS>;

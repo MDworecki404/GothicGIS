@@ -10,6 +10,15 @@
     },
     {
         "type": "icon-button",
+        "icon": "mdi-overscan",
+        "tooltip": {
+            "text": "toggleFullscreen",
+            "position": "bottom"
+        },
+        "action": "toggleFullscreen"
+    },
+    {
+        "type": "icon-button",
         "icon": "mdi-cog-outline",
         "tooltip": {
             "text": "settings",

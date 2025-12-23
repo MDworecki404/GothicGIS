@@ -82,5 +82,6 @@
     "areYouSureDeleteView": "Czy na pewno chcesz usunąć widok?",
     "viewDeleted": "Widok usunięty",
     "saveCurrentView": "Zapisz bieżący widok",
-    "viewName": "Nazwa widoku"
+    "viewName": "Nazwa widoku",
+    "toggleFullscreen": "Przełącz pełny ekran"
 }
