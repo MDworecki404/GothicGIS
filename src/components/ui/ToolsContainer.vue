@@ -60,6 +60,6 @@ const toolsList = computed(() => Array.from(toolsStore.activeTools.entries()).re
     height: auto;
     flex-direction: row;
     align-items: center;
-    z-index: 10000;
+    z-index: 15;
 }
 </style>
