@@ -83,5 +83,6 @@
     "viewDeleted": "View deleted",
     "saveCurrentView": "Save Current View",
     "viewName": "View Name",
-    "toggleFullscreen": "Toggle Fullscreen"
+    "toggleFullscreen": "Toggle Fullscreen",
+    "zoomTo": "Zoom to"
 }
