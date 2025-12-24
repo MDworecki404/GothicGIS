@@ -83,6 +83,13 @@ const headers: DataTableHeader[] = [
 
 const contextMenuItems: ContextMenuItems = [
     {
+        title: t('viewQuest'),
+        icon: 'mdi-eye',
+        action: (item: QuestCollectionItem) => {
+            turnOnQuest(item);
+        },
+    },
+    {
         title: t('editQuest'),
         icon: 'mdi-pencil',
         action: (item: QuestCollectionItem) => {
@@ -104,7 +111,7 @@ const editQuestItem = async (item: QuestCollectionItem) => {
     const component = editQuestItemComponent.default;
     toolsStore.registerTool({
         id: 'quest-editor-' + item.id,
-        name: 'questsEditor' + ' - ' + item.name,
+        name: t('questsEditor') + ' - ' + item.name,
         icon: 'mdi-script-text-key',
         component: component,
         props: {
@@ -113,6 +120,22 @@ const editQuestItem = async (item: QuestCollectionItem) => {
         },
     });
 };
+
+const turnOnQuest = async (item: QuestCollectionItem) => {
+    const toolsStore = useToolsStore();
+    const questViewComponent = markRaw(await import('../tools/QuestView.vue'));
+    const component = questViewComponent.default;
+    toolsStore.registerTool({
+        id: 'quest-viewer-' + item.id,
+        name: item.name,
+        icon: 'mdi-script-text-key',
+        component: component,
+        props: {
+            questItemId: item.id,
+            width: item.width || 400,
+        },
+    });
+}
 
 onMounted(async () => {
     loading.value = true;

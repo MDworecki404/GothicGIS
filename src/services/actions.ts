@@ -218,6 +218,21 @@ const toggleQuestsEditor = async () => {
     });
 }
 
+const toggleQuestsTree = async () => {
+    const toolsStore = useToolsStore();
+    const questsTreeComponent = markRaw(await import('../components/tools/QuestsTree.vue'));
+    const component = questsTreeComponent.default;
+    toolsStore.registerTool({
+        id: 'questsTree',
+        name: 'questsTree',
+        icon: 'mdi-script-outline',
+        component: component,
+        props: {
+            width: 400,
+        },
+    });
+}
+
 ///////////////////////////////
 //MARK: - Exported actions
 ///////////////////////////////
@@ -238,6 +253,7 @@ export const ACTIONS = {
     openJsonEditor,
     toggleFullscreen,
     toggleQuestsEditor,
+    toggleQuestsTree,
 };
 
 export const ACTION_NAMES = Object.keys(ACTIONS) as Array<keyof typeof ACTIONS>;

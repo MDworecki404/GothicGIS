@@ -49,6 +49,7 @@ export const getDefaultQuestConfig = (): QuestCollectionItem => {
     return {
         id: crypto.randomUUID(),
         name: '',
+        category: 'sideQuests',
         createdAt: new Date().toISOString(),
         updatedAt: new Date().toISOString(),
         steps: [

@@ -77,9 +77,15 @@ export type ViewConfigItem = z.infer<typeof ViewConfigItemSchema>;
 //MARK: QUESTS SCHEMAS
 ///////////////////////
 
+export const QuestCollectionCategorySchema = z.literal('mainQuests').or(z.literal('sideQuests'));
+
+export type QuestCollectionCategory = z.infer<typeof QuestCollectionCategorySchema>;
+
 export const QuestCollectionItemBaseSchema = z.object({
     id: z.string(),
     name: z.string(),
+    category: QuestCollectionCategorySchema,
+    width: z.number().optional(),
     createdAt: z.string().optional(),
     updatedAt: z.string().optional(),
 });

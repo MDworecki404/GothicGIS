@@ -102,5 +102,14 @@
     "stepDescription": "Step Description",
     "deleteStep": "Delete Step",
     "questName": "Quest Name",
-    "selectView": "Select View"
+    "selectView": "Select View",
+    "sideQuests": "Side Quests",
+    "mainQuests": "Main Quests",
+    "runQuest": "Run Quest",
+    "search": "Search",
+    "viewQuest": "View Quest",
+    "searchItems": "Search Items",
+    "questsTree": "Quests list",
+    "questCategory": "Quest Category",
+    "questWindowWidth": "Quest Window Width"
 }

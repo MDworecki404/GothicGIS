@@ -36,6 +36,15 @@
         "action": "toggleLayersTree"
     },
     {
+        "type": "icon-button",
+        "icon": "mdi-script-outline",
+        "tooltip": {
+            "text": "questsTree",
+            "position": "bottom"
+        },
+        "action": "toggleQuestsTree"
+    },
+    {
         "type": "speed-dial",
         "icon": "mdi-application-edit-outline",
         "speedDialDirection": "bottom center",

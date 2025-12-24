@@ -102,5 +102,14 @@
     "stepDescription": "Opis kroku",
     "deleteStep": "Usuń krok",
     "questName": "Nazwa zadania",
-    "selectView": "Wybierz widok"
+    "selectView": "Wybierz widok",
+    "sideQuests": "Zadania poboczne",
+    "mainQuests": "Zadania główne",
+    "runQuest": "Uruchom zadanie",
+    "search": "Szukaj",
+    "viewQuest": "Zobacz zadanie",
+    "searchItems": "Szukaj obiektów",
+    "questsTree": "Lista zadań",
+    "questCategory": "Kategoria zadania",
+    "questWindowWidth": "Szerokość okna zadania"
 }
