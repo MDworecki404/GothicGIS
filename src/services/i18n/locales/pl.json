@@ -84,5 +84,15 @@
     "saveCurrentView": "Zapisz bieżący widok",
     "viewName": "Nazwa widoku",
     "toggleFullscreen": "Przełącz pełny ekran",
-    "zoomTo": "Dopasuj widok"
+    "zoomTo": "Dopasuj widok",
+    "questsEditor": "Edytor zadań",
+    "searchQuests": "Szukaj zadań",
+    "addQuest": "Dodaj zadanie",
+    "editQuest": "Edytuj zadanie",
+    "deleteQuest": "Usuń zadanie",
+    "questSaved": "Zadanie zapisane",
+    "areYouSureDeleteQuest": "Czy na pewno chcesz usunąć zadanie?",
+    "questDeleted": "Zadanie usunięte",
+    "createdAt": "Utworzono",
+    "updatedAt": "Zaktualizowano"
 }

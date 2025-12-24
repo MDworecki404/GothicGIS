@@ -203,6 +203,21 @@ const openJsonEditor = async (jsonData: string) => {
     });
 };
 
+const toggleQuestsEditor = async () => {
+    const toolsStore = useToolsStore();
+    const questsEditorComponent = markRaw(await import('../components/Editors/QuestsEditor.vue'));
+    const component = questsEditorComponent.default;
+    toolsStore.registerTool({
+        id: 'questsEditor',
+        name: 'questsEditor',
+        icon: 'mdi-script-text',
+        component: component,
+        props: {
+            width: 600,
+        },
+    });
+}
+
 ///////////////////////////////
 //MARK: - Exported actions
 ///////////////////////////////
@@ -222,6 +237,7 @@ export const ACTIONS = {
     toggleViewsEditor,
     openJsonEditor,
     toggleFullscreen,
+    toggleQuestsEditor,
 };
 
 export const ACTION_NAMES = Object.keys(ACTIONS) as Array<keyof typeof ACTIONS>;

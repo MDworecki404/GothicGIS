@@ -62,7 +62,8 @@
                     "text": "questEditor",
                     "position": "right"
                 },
-                "role": ["admin", "editor"]
+                "role": ["admin", "editor"],
+                "action": "toggleQuestsEditor"
             },
             {
                 "type": "icon-button",

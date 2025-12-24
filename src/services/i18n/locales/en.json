@@ -84,5 +84,15 @@
     "saveCurrentView": "Save Current View",
     "viewName": "View Name",
     "toggleFullscreen": "Toggle Fullscreen",
-    "zoomTo": "Zoom to"
+    "zoomTo": "Zoom to",
+    "questsEditor": "Quest Editor",
+    "searchQuests": "Search Quests",
+    "addQuest": "Add Quest",
+    "editQuest": "Edit Quest",
+    "deleteQuest": "Delete Quest",
+    "questSaved": "Quest saved",
+    "areYouSureDeleteQuest": "Are you sure you want to delete the quest?",
+    "questDeleted": "Quest deleted",
+    "createdAt": "Created At",
+    "updatedAt": "Updated At"
 }
