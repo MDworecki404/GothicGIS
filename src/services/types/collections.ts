@@ -88,7 +88,7 @@ export const QuestStepCollectionItemSchema = z.array(
     z.object({
         step: z.number(),
         title: z.string(),
-        cameraView: ViewConfigItemSchema.shape.view,
+        cameraView: ViewConfigItemSchema.optional(),
         description: z.string().optional(),
     })
 );

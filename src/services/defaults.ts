@@ -1,5 +1,5 @@
 import type { Viewer } from 'cesium';
-import type { LayerCollectionItem, ViewConfigItem } from './types/collections';
+import type { LayerCollectionItem, QuestCollectionItem, ViewConfigItem } from './types/collections';
 
 export const getDefaultViewerOptions = (): Viewer.ConstructorOptions => {
     return {
@@ -44,3 +44,27 @@ export const getDefaultViewConfig = (): ViewConfigItem => {
         },
     };
 };
+
+export const getDefaultQuestConfig = (): QuestCollectionItem => {
+    return {
+        id: crypto.randomUUID(),
+        name: '',
+        createdAt: new Date().toISOString(),
+        updatedAt: new Date().toISOString(),
+        steps: [
+            {
+                step: 1,
+                title: '',
+                description: ''
+            }
+        ]
+    }
+}
+
+export const getDefaultStepConfig = (step: number): QuestCollectionItem['steps'][number] => {
+    return {
+        step: step,
+        title: '',
+        description: ''
+    }
+}

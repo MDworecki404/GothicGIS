@@ -94,5 +94,13 @@
     "areYouSureDeleteQuest": "Czy na pewno chcesz usunąć zadanie?",
     "questDeleted": "Zadanie usunięte",
     "createdAt": "Utworzono",
-    "updatedAt": "Zaktualizowano"
+    "updatedAt": "Zaktualizowano",
+    "objectives": "Cele",
+    "step": "Krok",
+    "addObjective": "Dodaj cel",
+    "stepTitle": "Tytuł kroku",
+    "stepDescription": "Opis kroku",
+    "deleteStep": "Usuń krok",
+    "questName": "Nazwa zadania",
+    "selectView": "Wybierz widok"
 }

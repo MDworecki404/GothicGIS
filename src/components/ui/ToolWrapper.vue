@@ -27,12 +27,12 @@
             </v-toolbar>
             <v-divider></v-divider>
         </v-card-title>
-        <component v-if="!minimized" :is="component" v-bind="props"></component>
+        <component v-show="!minimized" :is="component" v-bind="computedProps"></component>
     </v-card>
 </template>
 
 <script lang="ts" setup>
-import { ref, type Component } from 'vue';
+import { computed, ref, type Component } from 'vue';
 import { useToolsStore } from '../../services/stores/tools';
 import { useDisplay } from 'vuetify';
 
@@ -50,6 +50,13 @@ const props = defineProps<{
         [key: string]: any;
     };
 }>();
+
+const computedProps = computed(() => {
+    return {
+        ...props,
+        minimized: minimized.value,
+    }
+})
 
 const closeTool = (id: string) => {
     toolsStore.unregisterTool(id);

@@ -37,7 +37,7 @@ export const useQuestsStore = defineStore('quests', () => {
                     if (oldIdx !== -1) quests.value.splice(oldIdx, 1);
                     quests.value.push({ ...quest });
                 } else {
-                    const projectRef = doc(db, 'projects', projectId, 'views', quest.id);
+                    const projectRef = doc(db, 'projects', projectId, 'quests', quest.id);
                     await setDoc(projectRef, quest);
 
                     const idx = quests.value.findIndex((v) => v.id === quest.id);
@@ -49,14 +49,14 @@ export const useQuestsStore = defineStore('quests', () => {
                 }
 
                 useNotifyStore().showNotification({
-                    message: 'viewSaved',
+                    message: 'questSaved',
                     type: 'success',
                     icon: 'mdi-content-save',
                     timeout: 3000,
                 });
             } catch (err: any) {
                 useNotifyStore().showNotification({
-                    message: `Error saving view: ${err?.message ?? err}`,
+                    message: `Error saving quest: ${err?.message ?? err}`,
                     type: 'error',
                     icon: 'mdi-alert-circle',
                     timeout: 5000,
@@ -70,8 +70,8 @@ export const useQuestsStore = defineStore('quests', () => {
             if (!projectId) return;
 
             try {
-                const viewRef = doc(db, 'projects', projectId, 'views', questId);
-                await deleteDoc(viewRef);
+                const questRef = doc(db, 'projects', projectId, 'quests', questId);
+                await deleteDoc(questRef);
 
                 const idx = quests.value.findIndex((v) => v.id === questId);
                 if (idx !== -1) {
@@ -79,14 +79,14 @@ export const useQuestsStore = defineStore('quests', () => {
                 }
 
                 useNotifyStore().showNotification({
-                    message: 'viewDeleted',
+                    message: 'questDeleted',
                     type: 'success',
                     icon: 'mdi-delete',
                     timeout: 3000,
                 });
             } catch (err: any) {
                 useNotifyStore().showNotification({
-                    message: `Error deleting view: ${err?.message ?? err}`,
+                    message: `Error deleting quest: ${err?.message ?? err}`,
                     type: 'error',
                     icon: 'mdi-alert-circle',
                     timeout: 5000,

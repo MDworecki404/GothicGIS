@@ -40,10 +40,12 @@ const toolsList = computed(() => Array.from(toolsStore.activeTools.entries()).re
     max-height: calc(100vh - 20px);
     box-sizing: border-box;
     padding-right: 6px;
+    pointer-events: none;
 }
 
 .tools-container > * {
     flex: 0 0 auto;
+    pointer-events: all;
 }
 
 .tools-container {

@@ -37,10 +37,11 @@
 </template>
 
 <script lang="ts" setup>
-import { onMounted, ref } from 'vue';
+import { markRaw, onMounted, ref } from 'vue';
 import { useI18n } from 'vue-i18n';
 import type { DataTableHeader } from 'vuetify';
 import { useQuestsStore } from '../../services/stores/quests';
+import { useToolsStore } from '../../services/stores/tools';
 import type { QuestCollectionItem } from '../../services/types/collections';
 import type { ContextMenuItems } from '../../services/types/ui';
 import ContextMenu from '../ui/ContextMenu.vue';
@@ -85,7 +86,7 @@ const contextMenuItems: ContextMenuItems = [
         title: t('editQuest'),
         icon: 'mdi-pencil',
         action: (item: QuestCollectionItem) => {
-            console.log('Edit quest', item);
+            editQuestItem(item);
         },
     },
     {
@@ -96,6 +97,22 @@ const contextMenuItems: ContextMenuItems = [
         },
     },
 ];
+
+const editQuestItem = async (item: QuestCollectionItem) => {
+    const toolsStore = useToolsStore();
+    const editQuestItemComponent = markRaw(await import('./EditQuestItemTools.vue'));
+    const component = editQuestItemComponent.default;
+    toolsStore.registerTool({
+        id: 'quest-editor-' + item.id,
+        name: 'questsEditor' + ' - ' + item.name,
+        icon: 'mdi-script-text-key',
+        component: component,
+        props: {
+            width: 1000,
+            questItem: item,
+        },
+    });
+};
 
 onMounted(async () => {
     loading.value = true;

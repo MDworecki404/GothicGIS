@@ -94,5 +94,13 @@
     "areYouSureDeleteQuest": "Are you sure you want to delete the quest?",
     "questDeleted": "Quest deleted",
     "createdAt": "Created At",
-    "updatedAt": "Updated At"
+    "updatedAt": "Updated At",
+    "objectives": "Objectives",
+    "step": "Step",
+    "addObjective": "Add Objective",
+    "stepTitle": "Step Title",
+    "stepDescription": "Step Description",
+    "deleteStep": "Delete Step",
+    "questName": "Quest Name",
+    "selectView": "Select View"
 }
