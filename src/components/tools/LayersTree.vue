@@ -103,17 +103,17 @@ const treeItems = computed((): TreeParent[] => {
 onMounted(() => {
     const listener = questsEvent.addEventListener(() => {
         selectedLayers.value = [];
-        globeInstance?.layers.layersMap.forEach((layer, layerId) => {
+        globeInstance?.layers.layers.forEach((layer) => {
             if (layer.show) {
-                selectedLayers.value.push(layerId);
+                selectedLayers.value.push(layer.appId!);
             }
         });
     });
     listenersRemovers.push(listener);
 
-    globeInstance?.layers.layersMap.forEach((layer, layerId) => {
+    globeInstance?.layers.layers.forEach((layer) => {
         if (layer.show) {
-            selectedLayers.value.push(layerId);
+            selectedLayers.value.push(layer.appId!);
         }
     });
 });

@@ -13,13 +13,13 @@
                 <v-tabs-window-item value="metadata">
                     <QuestMetadataEditor
                         :quest-item="questConfig"
-                        @update:quest-item="(item) => (questConfig = { ...item })"
+                        @update:quest-item="(item) => (questConfig = item)"
                     />
                 </v-tabs-window-item>
                 <v-tabs-window-item value="objectives">
                     <QuestsObjectivesEditor
                         :quest-item="questConfig"
-                        @update:quest-item="(item) => (questConfig = { ...item })"
+                        @update:quest-item="(item) => (questConfig = item)"
                     />
                 </v-tabs-window-item>
                 <v-tabs-window-item value="jsonEditor">

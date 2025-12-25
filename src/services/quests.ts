@@ -8,13 +8,13 @@ export const questsEvent = new GEvent();
 export const layersShowChange = (questItemStep: QuestCollectionItem['steps'][number]) => {
     if (!questItemStep.layersIds) return;
 
-    globeInstance?.layers.layersMap.forEach((layer, layerId) => {
-        if (questItemStep.layersIds!.includes(layerId)) {
+    globeInstance?.layers.layers.forEach((layer) => {
+        if (questItemStep.layersIds?.includes(layer.appId!)) {
             layer.show = true;
         } else {
             layer.show = false;
         }
-    });
+    })
 };
 
 export const stepChanges = (questItemStep: QuestCollectionItem['steps'][number]) => {

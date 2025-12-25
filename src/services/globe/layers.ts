@@ -60,6 +60,7 @@ export class LayersManager {
                 cacheBytes: 1024 * 1024 * 1024,
                 maximumCacheOverflowBytes: 512 * 1024 * 1024,
             });
+            tileset.maximumScreenSpaceError = 32
             return tileset;
         }
         return null;
