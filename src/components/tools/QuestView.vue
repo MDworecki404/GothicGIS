@@ -20,7 +20,7 @@
 import { onMounted, ref } from 'vue';
 import { useQuestsStore } from '../../services/stores/quests';
 import { type QuestCollectionItem } from '../../services/types/collections';
-import { zoomToViewConfig } from '../../services/utils';
+import { stepChanges } from '../../services/quests';
 
 const { props } = defineProps<{
     props: { questItemId: string };
@@ -31,8 +31,8 @@ const actualStep = ref(1);
 
 const onStepChange = () => {
     const currentStep = questConfig.value?.steps[actualStep.value - 1];
-    if (currentStep && currentStep.cameraView) {
-        zoomToViewConfig(currentStep.cameraView, 1.5);
+    if (currentStep) {
+        stepChanges(currentStep);
     }
 };
 

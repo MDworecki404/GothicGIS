@@ -45,7 +45,7 @@
                                 density="compact"
                             ></v-textarea>
                         </v-row>
-                        <v-row dense no-gutters class="mb-5">
+                        <v-row dense no-gutters class="mb-5 ga-3">
                             <TextButton
                                 :prepend-icon="'mdi-eye'"
                                 :text="st.cameraView?.name ? st.cameraView.name : $t('selectView')"
@@ -53,6 +53,18 @@
                                 variant="outlined"
                                 rounded="0"
                                 @click="!st.cameraView ? openViewSelection(st) : removeView(st)"
+                            ></TextButton>
+                            <TextButton
+                                :prepend-icon="'mdi-layers-plus'"
+                                :text="
+                                    st.layersIds?.length
+                                        ? st.layersIds.length + ' ' + $t('layersSelected')
+                                        : $t('selectLayersToShow')
+                                "
+                                :color="'primary'"
+                                variant="outlined"
+                                rounded="0"
+                                @click="openLayersSelection(st)"
                             ></TextButton>
                         </v-row>
                     </div>
@@ -63,7 +75,7 @@
                             color="error"
                             :tooltip="{
                                 position: 'right',
-                                text: $t('deleteStep'),
+                                text: 'deleteStep'
                             }"
                             @click="deleteStep(st.step)"
                         ></IconButton>
@@ -83,6 +95,7 @@ import TextButton from '../ui/TextButton.vue';
 import { getDefaultStepConfig } from '../../services/defaults';
 import IconButton from '../ui/IconButton.vue';
 import { useDialogStore } from '../../services/stores/dialog';
+import { useLayersStore } from '../../services/stores/layers';
 
 const questCopy = ref<QuestCollectionItem>();
 
@@ -137,17 +150,40 @@ const openViewSelection = async (questItemStep: QuestCollectionItem['steps'][num
         props: {
             collectionId: 'views',
             selectItemCallback: (item: ViewConfigItem) => {
-                dialogStore.closeDialog()
+                dialogStore.closeDialog();
                 questItemStep.cameraView = item;
             },
         },
         dialogStyle: {
-            width: 600
+            width: 600,
+        },
+    });
+};
+
+const openLayersSelection = async (questItemStep: QuestCollectionItem['steps'][number]) => {
+    const layers = useLayersStore().layers;
+
+    const dialogStore = useDialogStore();
+    const itemsSelectComponent = markRaw(await import('../tools/ItemsSelector.vue'));
+    const component = itemsSelectComponent.default;
+    dialogStore.showDialog({
+        component: component,
+        props: {
+            items: layers,
+            title: 'selectLayersToShowInStep',
+            selectedCallback: (selectedItems: string[]) => {
+                dialogStore.closeDialog();
+                questItemStep.layersIds = selectedItems;
+            },
+            alreadySelectedItems: questItemStep.layersIds || []
+        },
+        dialogStyle: {
+            width: 600,
         },
     });
 };
 
 const removeView = (questItemStep: QuestCollectionItem['steps'][number]) => {
-    delete questItemStep.cameraView
+    delete questItemStep.cameraView;
 };
 </script>

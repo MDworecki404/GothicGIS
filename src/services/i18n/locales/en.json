@@ -111,5 +111,10 @@
     "searchItems": "Search Items",
     "questsTree": "Quests list",
     "questCategory": "Quest Category",
-    "questWindowWidth": "Quest Window Width"
+    "questWindowWidth": "Quest Window Width",
+    "selectLayersToShow": "Select Layers to Show",
+    "layersSelected": "Layer(s) Selected",
+    "selectLayersToShowInStep": "Select Layers to Show in Step",
+    "confirmSelection": "Confirm Selection",
+    "selectItem": "Select Item"
 }

@@ -111,5 +111,10 @@
     "searchItems": "Szukaj obiektów",
     "questsTree": "Lista zadań",
     "questCategory": "Kategoria zadania",
-    "questWindowWidth": "Szerokość okna zadania"
+    "questWindowWidth": "Szerokość okna zadania",
+    "selectLayersToShow": "Wybierz warstwy do włączenia",
+    "layersSelected": "Warstwa(y) wybrana(y)",
+    "selectLayersToShowInStep": "Wybierz warstwy do wyświetlenia w kroku",
+    "confirmSelection": "Potwierdź wybór",
+    "selectItem": "Wybierz obiekt"
 }

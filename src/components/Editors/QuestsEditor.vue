@@ -6,6 +6,7 @@
                 prepend-icon="mdi-plus"
                 color="accent"
                 :text="$t('addQuest')"
+                @click="addQuestItem"
             ></text-button>
             <v-text-field
                 v-model="search"
@@ -46,6 +47,7 @@ import type { QuestCollectionItem } from '../../services/types/collections';
 import type { ContextMenuItems } from '../../services/types/ui';
 import ContextMenu from '../ui/ContextMenu.vue';
 import TextButton from '../ui/TextButton.vue';
+import { getDefaultQuestConfig } from '../../services/defaults';
 
 const { t } = useI18n();
 
@@ -104,6 +106,22 @@ const contextMenuItems: ContextMenuItems = [
         },
     },
 ];
+
+const addQuestItem = async () => {
+    const toolsStore = useToolsStore();
+    const editQuestItemComponent = markRaw(await import('./EditQuestItemTools.vue'));
+    const component = editQuestItemComponent.default;
+    toolsStore.registerTool({
+        id: 'quest-editor-new-' + Date.now(),
+        name: t('addQuest'),
+        icon: 'mdi-script-text-key',
+        component: component,
+        props: {
+            width: 1000,
+            questItem: getDefaultQuestConfig(),
+        },
+    });
+};
 
 const editQuestItem = async (item: QuestCollectionItem) => {
     const toolsStore = useToolsStore();

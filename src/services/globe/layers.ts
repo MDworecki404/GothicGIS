@@ -6,6 +6,7 @@ type LayersTypes = Cesium3DTileset;
 
 export class LayersManager {
     public layers: LayersTypes[] = [];
+    public layersMap: Map<string, LayersTypes> = new Map();
     public ready: Promise<void>;
     private viewer: Viewer | null = null;
 
@@ -40,6 +41,7 @@ export class LayersManager {
                 if (cesiumLayer && this.viewer) {
                     this.viewer.scene.primitives.add(cesiumLayer);
                     this.layers.push(cesiumLayer);
+                    this.layersMap.set(layerConfig.id, cesiumLayer);
                     import.meta.env.DEV && console.log('✅🌎 Added 3D Tiles layer:', layerConfig.name);
                 }
                 break;

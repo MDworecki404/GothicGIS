@@ -95,6 +95,7 @@ export const QuestStepCollectionItemSchema = z.array(
         step: z.number(),
         title: z.string(),
         cameraView: ViewConfigItemSchema.optional(),
+        layersIds: z.array(z.string()).optional(),
         description: z.string().optional(),
     })
 );

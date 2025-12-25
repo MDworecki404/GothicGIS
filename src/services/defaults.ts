@@ -52,20 +52,14 @@ export const getDefaultQuestConfig = (): QuestCollectionItem => {
         category: 'sideQuests',
         createdAt: new Date().toISOString(),
         updatedAt: new Date().toISOString(),
-        steps: [
-            {
-                step: 1,
-                title: '',
-                description: ''
-            }
-        ]
-    }
-}
+        steps: [],
+    };
+};
 
 export const getDefaultStepConfig = (step: number): QuestCollectionItem['steps'][number] => {
     return {
         step: step,
         title: '',
-        description: ''
-    }
-}
+        description: '',
+    };
+};

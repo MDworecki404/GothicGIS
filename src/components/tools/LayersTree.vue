@@ -29,7 +29,7 @@
 </template>
 
 <script lang="ts" setup>
-import { computed, ref, watch } from 'vue';
+import { computed, onMounted, onUnmounted, ref, watch } from 'vue';
 import { useI18n } from 'vue-i18n';
 import { performAction } from '../../services/actions';
 import { useLayersStore } from '../../services/stores/layers';
@@ -37,32 +37,28 @@ import type { LayerCollectionItem } from '../../services/types/collections';
 import type { ContextMenuItems } from '../../services/types/ui';
 import { zoomToLayer } from '../../services/utils';
 import ContextMenu from '../ui/ContextMenu.vue';
+import { globeInstance } from '../../services/globe/globe';
+import { questsEvent } from '../../services/quests';
 
 const { t } = useI18n();
+const listenersRemovers: (() => void)[] = [];
 
 const layersStore = useLayersStore();
 
 const selectedLayers = ref<string[]>([]);
 
-const initialSelected = layersStore.layers.filter((l: any) => l.show).map((l: any) => l.id);
-selectedLayers.value = Array.from(new Set(initialSelected));
+watch(selectedLayers, (newSelected, oldSelected) => {
+    const addedLayers = newSelected.filter((id) => !oldSelected.includes(id));
+    const removedLayers = oldSelected.filter((id) => !newSelected.includes(id));
 
-watch(
-    selectedLayers,
-    (newSelected, oldSelected) => {
-        const addedLayers = newSelected.filter((id) => !oldSelected.includes(id));
-        const removedLayers = oldSelected.filter((id) => !newSelected.includes(id));
+    addedLayers.forEach((layerId) => {
+        performAction('toggleLayerVisibility', layerId);
+    });
 
-        addedLayers.forEach((layerId) => {
-            performAction('toggleLayerVisibility', layerId);
-        });
-
-        removedLayers.forEach((layerId) => {
-            performAction('toggleLayerVisibility', layerId);
-        });
-    },
-    { deep: true }
-);
+    removedLayers.forEach((layerId) => {
+        performAction('toggleLayerVisibility', layerId);
+    });
+});
 
 type TreeChild = {
     id: string;
@@ -102,6 +98,28 @@ const treeItems = computed((): TreeParent[] => {
     });
 
     return parents;
+});
+
+onMounted(() => {
+    const listener = questsEvent.addEventListener(() => {
+        selectedLayers.value = [];
+        globeInstance?.layers.layersMap.forEach((layer, layerId) => {
+            if (layer.show) {
+                selectedLayers.value.push(layerId);
+            }
+        });
+    });
+    listenersRemovers.push(listener);
+
+    globeInstance?.layers.layersMap.forEach((layer, layerId) => {
+        if (layer.show) {
+            selectedLayers.value.push(layerId);
+        }
+    });
+});
+
+onUnmounted(() => {
+    listenersRemovers.forEach((remove) => remove());
 });
 
 const contextMenuItems: ContextMenuItems = [
