@@ -3,12 +3,14 @@ import { getDefaultViewerOptions } from '../defaults';
 import { useCommonStore } from '../stores/common';
 import { useProjectStore } from '../stores/project';
 import { LayersManager } from './layers';
+import { CameraControl } from './cameraControl';
 
 export let globeInstance: GlobeViewer | null = null;
 
 export class GlobeViewer {
     public viewer: Viewer | null = null;
     private layersManager: LayersManager | null = null;
+    private cameraControl: CameraControl | null = null;
 
     constructor(target: HTMLElement) {
         this.viewer = new Viewer(target, getDefaultViewerOptions());
@@ -24,8 +26,13 @@ export class GlobeViewer {
         return this.layersManager!;
     }
 
+    get camera(): CameraControl {
+        return this.cameraControl!;
+    }
+
     initServices() {
         this.layersManager = new LayersManager(this.viewer!);
+        this.cameraControl = new CameraControl(this.viewer!);
     }
 
     destroy() {

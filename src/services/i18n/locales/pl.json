@@ -116,5 +116,10 @@
     "layersSelected": "Warstwa(y) wybrana(y)",
     "selectLayersToShowInStep": "Wybierz warstwy do wyświetlenia w kroku",
     "confirmSelection": "Potwierdź wybór",
-    "selectItem": "Wybierz obiekt"
+    "selectItem": "Wybierz obiekt",
+    "controllerTool": "Narzędzie kontrolera",
+    "controlByKeyboard": "Sterowanie za pomocą klawiatury",
+    "movement": "Ruch",
+    "cameraRotating": "Obrót kamery",
+    "moveAmountFactor": "Odległość ruchu (m)"
 }

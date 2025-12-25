@@ -116,5 +116,10 @@
     "layersSelected": "Layer(s) Selected",
     "selectLayersToShowInStep": "Select Layers to Show in Step",
     "confirmSelection": "Confirm Selection",
-    "selectItem": "Select Item"
+    "selectItem": "Select Item",
+    "controllerTool": "Controller Tool",
+    "controlByKeyboard": "Control by Keyboard",
+    "movement": "Movement",
+    "cameraRotating": "Camera Rotating",
+    "moveAmountFactor": "Move Amount (meters)"
 }

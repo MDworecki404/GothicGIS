@@ -1,6 +1,9 @@
 <template>
     <v-card-text>
+        <v-skeleton-loader v-if="!questsStore.quests.length" type="article"></v-skeleton-loader>
+
         <v-text-field
+            v-else
             v-model="search"
             :label="$t('search')"
             clearable
@@ -23,14 +26,14 @@
             color="accent"
             :activatable="false"
         >
-            <template #append="{item}">
+            <template #append="{ item }">
                 <IconButton
                     v-if="!item.children"
                     :icon="'mdi-script-text-play'"
                     variant="text"
                     :tooltip="{
                         position: 'left',
-                        text: 'runQuest'
+                        text: 'runQuest',
                     }"
                     @click.stop="turnOnQuest(questsStore.quests.find((q) => q.id === item.id)!)"
                 ></IconButton>
@@ -102,7 +105,7 @@ const turnOnQuest = async (item: QuestCollectionItem) => {
             width: item.width || 400,
         },
     });
-}
+};
 
 onBeforeMount(async () => {
     await questsStore.loadQuests();

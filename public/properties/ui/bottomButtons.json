@@ -55,5 +55,15 @@
         },
         "action": "toggleCameraPositionTool",
         "role": ["editor", "admin"]
+    },
+    {
+        "type": "icon-button",
+        "icon": "mdi-gamepad-variant-outline",
+        "tooltip": {
+            "text": "controllerTool",
+            "position": "right"
+        },
+        "action": "toggleControllerTool",
+        "role": ["editor", "admin"]
     }
 ]

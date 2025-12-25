@@ -233,6 +233,23 @@ const toggleQuestsTree = async () => {
     });
 }
 
+const toggleControllerTool = async () => {
+    const toolsStore = useToolsStore();
+    const controllerToolComponent = markRaw(
+        await import('../components/tools/ControllerTool.vue')
+    );
+    const component = controllerToolComponent.default;
+    toolsStore.registerTool({
+        id: 'controllerTool',
+        name: 'controllerTool',
+        icon: 'mdi-gamepad-variant-outline',
+        component: component,
+        props: {
+            width: 500,
+        },
+    });
+}
+
 ///////////////////////////////
 //MARK: - Exported actions
 ///////////////////////////////
@@ -254,6 +271,7 @@ export const ACTIONS = {
     toggleFullscreen,
     toggleQuestsEditor,
     toggleQuestsTree,
+    toggleControllerTool,
 };
 
 export const ACTION_NAMES = Object.keys(ACTIONS) as Array<keyof typeof ACTIONS>;

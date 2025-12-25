@@ -117,7 +117,7 @@ const addQuestItem = async () => {
         icon: 'mdi-script-text-key',
         component: component,
         props: {
-            width: 1000,
+            width: 700,
             questItem: getDefaultQuestConfig(),
         },
     });
@@ -133,7 +133,7 @@ const editQuestItem = async (item: QuestCollectionItem) => {
         icon: 'mdi-script-text-key',
         component: component,
         props: {
-            width: 1000,
+            width: 700,
             questItem: item,
         },
     });
