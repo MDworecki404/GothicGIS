@@ -68,6 +68,7 @@ export const ContextMenuItemsSchema = z.object({
     icon: z.string().optional(),
     iconColor: z.string().optional(),
     disabled: z.boolean().optional(),
+    hide: z.boolean().optional(),
 });
 
 export type ContextMenuItems = (z.infer<typeof ContextMenuItemsSchema> & { action: (...args: any[]) => void })[];

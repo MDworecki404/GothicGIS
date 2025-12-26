@@ -31,6 +31,22 @@ export const getDefaultLayerConfig = (): LayerCollectionItem => {
     };
 };
 
+export const getDefaultLayerTransformation = (): LayerCollectionItem['transformation'] => {
+    return {
+        translate: {
+            x: 0,
+            y: 0,
+            z: 0,
+        },
+        rotate: {
+            heading: 0,
+            pitch: 0,
+            roll: 0,
+        },
+        scale: 1,
+    };
+};
+
 export const getDefaultViewConfig = (): ViewConfigItem => {
     return {
         id: '',

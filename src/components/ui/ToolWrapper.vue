@@ -20,8 +20,8 @@
                         @click="minimized = !minimized"
                         >{{ minimized ? 'mdi-window-maximize' : 'mdi-window-minimize' }}</v-icon
                     >
-                    <v-icon color="accent" size="24" style="cursor: pointer" @click="closeTool(id)"
-                        >mdi-close</v-icon
+                    <v-icon color="accent" size="24" class="ml-3" style="cursor: pointer" @click="closeTool(id)"
+                        >mdi-close-thick</v-icon
                     >
                 </template>
             </v-toolbar>

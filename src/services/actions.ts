@@ -6,6 +6,7 @@ import { useToolsStore } from './stores/tools';
 import { markRaw } from 'vue';
 import { useLayersStore } from './stores/layers';
 import { useDialogStore } from './stores/dialog';
+import type { LayerCollectionItem } from './types/collections';
 
 ///////////////////////////////
 //MARK: - Utils actions
@@ -250,6 +251,22 @@ const toggleControllerTool = async () => {
     });
 }
 
+const toggleLayerTransformerTool = async (layerItem: LayerCollectionItem) => {
+    const toolsStore = useToolsStore();
+    const layerTransformerComponent = markRaw(await import('../components/tools/TransformModel.vue'));
+    const component = layerTransformerComponent.default;
+    toolsStore.registerTool({
+        id: 'layerTransformerTool',
+        name: 'layerTransformerTool',
+        icon: 'mdi-axis-arrow',
+        component: component,
+        props: {
+            width: 500,
+            layerItem: layerItem,
+        },
+    });
+}
+
 ///////////////////////////////
 //MARK: - Exported actions
 ///////////////////////////////
@@ -272,6 +289,7 @@ export const ACTIONS = {
     toggleQuestsEditor,
     toggleQuestsTree,
     toggleControllerTool,
+    toggleLayerTransformerTool,
 };
 
 export const ACTION_NAMES = Object.keys(ACTIONS) as Array<keyof typeof ACTIONS>;

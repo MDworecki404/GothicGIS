@@ -30,6 +30,23 @@ export const LayerCollectionItemBaseSchema = z.object({
     name: z.string(),
     show: z.boolean(),
     parentId: z.string().optional(),
+    transformation: z.object({
+        translate: z
+            .object({
+                x: z.number(),
+                y: z.number(),
+                z: z.number(),
+            })
+            .optional(),
+        rotate: z
+            .object({
+                heading: z.number(),
+                pitch: z.number(),
+                roll: z.number(),
+            })
+            .optional(),
+        scale: z.number().optional(),
+    }).optional(),
 });
 
 export const Cesium3DTilesResourceSchema = z.object({

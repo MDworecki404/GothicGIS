@@ -121,5 +121,14 @@
     "controlByKeyboard": "Control by Keyboard",
     "movement": "Movement",
     "cameraRotating": "Camera Rotating",
-    "moveAmountFactor": "Move Amount (meters)"
+    "moveAmountFactor": "Move Amount (meters)",
+    "xyzTranslation": "XYZ Translation",
+    "layerTransformerTool": "Layer Transformation Tool",
+    "rotation": "Rotation",
+    "headingDegrees": "Heading (degrees)",
+    "pitchDegrees": "Pitch (degrees)",
+    "rollDegrees": "Roll (degrees)",
+    "scale": "Scale",
+    "saveToLayer": "Save to Layer",
+    "transform": "Transform"
 }

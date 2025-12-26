@@ -121,5 +121,14 @@
     "controlByKeyboard": "Sterowanie za pomocą klawiatury",
     "movement": "Ruch",
     "cameraRotating": "Obrót kamery",
-    "moveAmountFactor": "Odległość ruchu (m)"
+    "moveAmountFactor": "Odległość ruchu (m)",
+    "xyzTranslation": "Translacja XYZ",
+    "layerTransformerTool": "Narzędzie transformacji warstw",
+    "rotation": "Rotacja",
+    "headingDegrees": "Kierunek (stopnie)",
+    "pitchDegrees": "Pochylenie (stopnie)",
+    "rollDegrees": "Roll (stopnie)",
+    "scale": "Skala",
+    "saveToLayer": "Zapisz do warstwy",
+    "transform": "Transformuj"
 }
