@@ -31,5 +31,15 @@ GothicGIS/
 │   │   ├── i18n/               # internacjonalizacja (ts + locales .json)
 │   │   ├── stores/             # Pinia stores (.ts)
 │   │   └── types/              # definicje typów i deklaracje (.d.ts / .ts)
+....
 ```
 
+## Zdjęcia poglądowe
+
+<img width="1921" height="1080" alt="image" src="https://github.com/user-attachments/assets/333c12ea-333f-40ca-9fba-33b90c2bff15" />
+
+<img width="1920" height="1080" alt="image" src="https://github.com/user-attachments/assets/30fc2386-7303-461b-a071-4391ee9d6c32" />
+
+<img width="1918" height="1080" alt="image" src="https://github.com/user-attachments/assets/2bd0ce3f-5283-41e7-8589-50358a1527d2" />
+
+<img width="382" height="829" alt="image" src="https://github.com/user-attachments/assets/9a6a18ea-e120-4cdf-87e8-eba509d78e11" />
