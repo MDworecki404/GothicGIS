@@ -28,6 +28,12 @@ export class CameraControl {
             case "right":
                 camera.moveRight(moveAmount);
                 break;
+            case "heightUp":
+                camera.moveUp(moveAmount);
+                break;
+            case "heightDown":
+                camera.moveDown(moveAmount);
+                break;
         }
     }
 
@@ -96,6 +102,12 @@ export class CameraControl {
                     break;
                 case "d":
                     this.moveCameraByKeyboard("right", moveAmount);
+                    break;
+                case "r":
+                    this.moveCameraByKeyboard("heightUp", moveAmount);
+                    break;
+                case "f":
+                    this.moveCameraByKeyboard("heightDown", moveAmount);
                     break;
                 case "ArrowLeft":
                     this.rotateCameraByKeyboard("yawLeft", rotationAmount);

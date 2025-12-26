@@ -10,6 +10,7 @@ export const IconButtonSchema = z.object({
     }),
     role: z.array(z.enum(['viewer', 'editor', 'admin'])).optional(),
     action: z.enum(ACTION_NAMES),
+    dontHide: z.boolean().optional(),
 });
 
 export const SpeedDialSchema = z.object({
@@ -19,6 +20,7 @@ export const SpeedDialSchema = z.object({
         text: z.string(),
         position: z.enum(['top', 'bottom', 'left', 'right']),
     }),
+    dontHide: z.boolean().optional(),
     speedDialLocation: z.enum([
         'top',
         'bottom',
@@ -71,4 +73,6 @@ export const ContextMenuItemsSchema = z.object({
     hide: z.boolean().optional(),
 });
 
-export type ContextMenuItems = (z.infer<typeof ContextMenuItemsSchema> & { action: (...args: any[]) => void })[];
+export type ContextMenuItems = (z.infer<typeof ContextMenuItemsSchema> & {
+    action: (...args: any[]) => void;
+})[];

@@ -6,6 +6,7 @@
         <template v-for="button in list">
             <IconButton
                 v-if="button.type === 'icon-button' && (button.role === undefined || button.role.includes(userStore.loggedUser?.role!))"
+                v-show="button.dontHide === true || useCommonStore().uiVisible"
                 :tooltip="{
                     text: button.tooltip.text,
                     position: button.tooltip.position,
@@ -15,7 +16,12 @@
             />
 
             <SpeedDialButton
-                v-else-if="button.type === 'speed-dial' && (button.role === undefined || button.role.includes(userStore.loggedUser?.role!))"
+                v-else-if="
+                    button.type === 'speed-dial' &&
+                    (button.role === undefined ||
+                        button.role.includes(userStore.loggedUser?.role!)) &&
+                    useCommonStore().uiVisible
+                "
                 :icon="button.icon"
                 :tooltip="{
                     text: button.tooltip.text,
@@ -30,6 +36,7 @@
 
 <script lang="ts" setup>
 import { performAction } from '../../services/actions';
+import { useCommonStore } from '../../services/stores/common';
 import { useUserStore } from '../../services/stores/user';
 import type { UiButtons } from '../../services/types/ui';
 import IconButton from './IconButton.vue';

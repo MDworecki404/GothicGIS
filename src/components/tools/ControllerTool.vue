@@ -15,12 +15,14 @@
                 </v-row>
                 <v-row dense no-gutters class="mt-2" justify="center" align="center">
                     <span>
-                        <v-hotkey keys="w a s d" variant="elevated" platform="auto"></v-hotkey
+                        <v-hotkey keys="w a s d r f" variant="elevated" platform="auto"></v-hotkey
                     ></span>
                     <v-number-input
                         v-model="commonStore.moveAmount"
                         :label="$t('moveAmountFactor')"
                         :min="0"
+                        :precision="3"
+                        :step="1"
                         variant="outlined"
                         hide-details
                         density="compact"
@@ -42,6 +44,8 @@
                         v-model="commonStore.rotationAmount"
                         :label="$t('rotationAmountFactor(degrees)')"
                         :min="0"
+                        :precision="3"
+                        :step="1"
                         variant="outlined"
                         hide-details
                         density="compact"

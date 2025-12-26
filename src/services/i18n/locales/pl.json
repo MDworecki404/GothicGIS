@@ -133,5 +133,6 @@
     "transform": "Transformuj",
     "rotationAmountFactor(degrees)": "Kąt obrotu (stopnie)",
     "layers": "Warstwy",
-    "getActualView": "Pobierz aktualny widok"
+    "getActualView": "Pobierz aktualny widok",
+    "hideUi": "Ukryj interfejs użytkownika"
 }

@@ -82,6 +82,11 @@ const toggleFullscreen = () => {
     }
 };
 
+const hideUi = () => {
+    const commonStore = useCommonStore();
+    commonStore.toggleUiVisibility();
+}
+
 ///////////////////////////////
 //MARK: - Tools toggling
 ///////////////////////////////
@@ -290,6 +295,7 @@ export const ACTIONS = {
     toggleQuestsTree,
     toggleControllerTool,
     toggleLayerTransformerTool,
+    hideUi,
 };
 
 export const ACTION_NAMES = Object.keys(ACTIONS) as Array<keyof typeof ACTIONS>;

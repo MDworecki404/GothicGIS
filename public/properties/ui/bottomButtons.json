@@ -21,6 +21,16 @@
     },
     {
         "type": "icon-button",
+        "icon": "mdi-file-presentation-box",
+        "tooltip": {
+            "text": "hideUi",
+            "position": "right"
+        },
+        "action": "hideUi",
+        "dontHide": true
+    },
+    {
+        "type": "icon-button",
         "icon": "mdi-home-outline",
         "tooltip": {
             "text": "homeView",

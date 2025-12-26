@@ -17,16 +17,36 @@ export const useCommonStore = defineStore('common', () => {
         controlByKeyboard.value = enabled;
     };
 
-    watch([controlByKeyboard, moveAmount, rotationAmount], ([newControlByKeyboard, newMoveAmount, newRotationAmount]) => {
-        const cameraControl = globeInstance?.camera;
-        if (!cameraControl) return;
+    watch(
+        [controlByKeyboard, moveAmount, rotationAmount],
+        ([newControlByKeyboard, newMoveAmount, newRotationAmount]) => {
+            const cameraControl = globeInstance?.camera;
+            if (!cameraControl) return;
 
-        cameraControl.removeKeyboardControls();
+            cameraControl.removeKeyboardControls();
 
-        if (newControlByKeyboard) {
-            cameraControl.setupKeyboardControls(Number(newMoveAmount) || 0, Number(newRotationAmount) || 0);
+            if (newControlByKeyboard) {
+                cameraControl.setupKeyboardControls(
+                    Number(newMoveAmount) || 0,
+                    Number(newRotationAmount) || 0
+                );
+            }
         }
-    });
+    );
 
-    return { isAppLoaded, setAppLoaded, controlByKeyboard, setControlByKeyboard, moveAmount, rotationAmount };
+    const uiVisible = ref(true);
+    const toggleUiVisibility = () => {
+        uiVisible.value = !uiVisible.value;
+    };
+
+    return {
+        isAppLoaded,
+        setAppLoaded,
+        controlByKeyboard,
+        setControlByKeyboard,
+        moveAmount,
+        rotationAmount,
+        uiVisible,
+        toggleUiVisibility,
+    };
 });

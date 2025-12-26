@@ -2,8 +2,12 @@
     <div class="content-container">
         <TopButtonsContainer />
         <BottomButtonsContainer />
-        <ToolsContainer />
-        <NotificationComponent />
+        <div v-show="useCommonStore().uiVisible">
+            <ToolsContainer />
+        </div>
+        <div v-show="useCommonStore().uiVisible">
+            <NotificationComponent />
+        </div>
     </div>
 </template>
 
@@ -12,6 +16,7 @@ import BottomButtonsContainer from './ui/BottomButtonsContainer.vue';
 import ToolsContainer from './ui/ToolsContainer.vue';
 import TopButtonsContainer from './ui/TopButtonsContainer.vue';
 import NotificationComponent from './ui/NotificationComponent.vue';
+import { useCommonStore } from '../services/stores/common';
 </script>
 
 <style scoped>
