@@ -48,6 +48,7 @@ import type { ContextMenuItems } from '../../services/types/ui';
 import ContextMenu from '../ui/ContextMenu.vue';
 import TextButton from '../ui/TextButton.vue';
 import { getDefaultQuestConfig } from '../../services/defaults';
+import { useDialogStore } from '../../services/stores/dialog';
 
 const { t } = useI18n();
 
@@ -102,10 +103,33 @@ const contextMenuItems: ContextMenuItems = [
         title: t('deleteQuest'),
         icon: 'mdi-delete',
         action: (item: QuestCollectionItem) => {
-            console.log('Delete quest', item);
+            deleteQuestItem(item);
         },
     },
 ];
+
+const deleteQuestItem = async (item: QuestCollectionItem) => {
+    const AreYouSure = (await import('./AreYouSure.vue')).default;
+
+    useDialogStore().showDialog({
+        component: AreYouSure,
+        disableDefaultCloseButton: true,
+        dialogStyle: {
+            width: 400,
+        },
+        props: {
+            text: t('areYouSureDeleteQuest'),
+            onConfirm: async () => {
+                await questsStore.deleteQuestConfig(item.id);
+                useDialogStore().closeDialog();
+            },
+            onCancel: () => {
+                useDialogStore().closeDialog();
+            },
+        },
+    });
+};
+
 
 const addQuestItem = async () => {
     const toolsStore = useToolsStore();

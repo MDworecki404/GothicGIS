@@ -106,13 +106,13 @@
 
 <script lang="ts" setup>
 import { cloneDeep } from 'lodash';
-import { ref } from 'vue';
+import { onUnmounted, ref } from 'vue';
 import { getDefaultLayerTransformation } from '../../services/defaults';
-import type { LayerCollectionItem } from '../../services/types/collections';
-import TextButton from '../ui/TextButton.vue';
 import { globeInstance } from '../../services/globe/globe';
 import { useLayersStore } from '../../services/stores/layers';
 import { useUserStore } from '../../services/stores/user';
+import type { LayerCollectionItem } from '../../services/types/collections';
+import TextButton from '../ui/TextButton.vue';
 
 const { props } = defineProps<{
     props: { layerItem: LayerCollectionItem };
@@ -133,13 +133,17 @@ const onValuesChange = () => {
     globeInstance?.layers.transformLayerCoordinates({
         layerId: layerCopy.value.id,
         parameters: layerCopy.value.transformation,
-    })
-}
+    });
+};
+
+onUnmounted(() => {
+    useLayersStore().layersMap.get(props.layerItem.id)!.transformation = layerCopy.value?.transformation;
+})
 
 const triggerLayerUpdate = async () => {
     if (!layerCopy.value) return;
     loading.value = true;
-    await useLayersStore().updateLayer(layerCopy.value)
+    await useLayersStore().updateLayer(layerCopy.value);
     loading.value = false;
-}
+};
 </script>

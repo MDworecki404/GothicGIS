@@ -31,12 +31,12 @@ export class CameraControl {
         }
     }
 
-    private rotateCameraByKeyboard(axis: string) {
+    private rotateCameraByKeyboard(axis: string, rotationAmount: number) {
         const commonStore = useCommonStore();
         if (!commonStore.controlByKeyboard) return;
 
         const camera = this.viewer.camera;
-        const rotateAmount = 0.1;
+        const rotateAmount = rotationAmount * (Math.PI / 180);
 
         switch (axis) {
             case "yawLeft":
@@ -82,7 +82,7 @@ export class CameraControl {
         }
     }
 
-    public setupKeyboardControls(moveAmount: number) {
+    public setupKeyboardControls(moveAmount: number, rotationAmount: number) {
         this.listener = (event: KeyboardEvent) => {
             switch (event.key) {
                 case "w":
@@ -98,16 +98,16 @@ export class CameraControl {
                     this.moveCameraByKeyboard("right", moveAmount);
                     break;
                 case "ArrowLeft":
-                    this.rotateCameraByKeyboard("yawLeft");
+                    this.rotateCameraByKeyboard("yawLeft", rotationAmount);
                     break;
                 case "ArrowRight":
-                    this.rotateCameraByKeyboard("yawRight");
+                    this.rotateCameraByKeyboard("yawRight", rotationAmount);
                     break;
                 case "ArrowUp":
-                    this.rotateCameraByKeyboard("pitchUp");
+                    this.rotateCameraByKeyboard("pitchUp", rotationAmount);
                     break;
                 case "ArrowDown":
-                    this.rotateCameraByKeyboard("pitchDown");
+                    this.rotateCameraByKeyboard("pitchDown", rotationAmount);
                     break;
             }
         };

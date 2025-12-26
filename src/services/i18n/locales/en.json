@@ -130,5 +130,6 @@
     "rollDegrees": "Roll (degrees)",
     "scale": "Scale",
     "saveToLayer": "Save to Layer",
-    "transform": "Transform"
+    "transform": "Transform",
+    "rotationAmountFactor(degrees)": "Rotation Amount (degrees)"
 }

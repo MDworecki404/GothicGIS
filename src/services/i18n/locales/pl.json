@@ -130,5 +130,6 @@
     "rollDegrees": "Roll (stopnie)",
     "scale": "Skala",
     "saveToLayer": "Zapisz do warstwy",
-    "transform": "Transformuj"
+    "transform": "Transformuj",
+    "rotationAmountFactor(degrees)": "Kąt obrotu (stopnie)"
 }

@@ -32,13 +32,13 @@
 import { computed, onMounted, onUnmounted, ref, watch } from 'vue';
 import { useI18n } from 'vue-i18n';
 import { performAction } from '../../services/actions';
+import { globeInstance } from '../../services/globe/globe';
+import { questsEvent } from '../../services/quests';
 import { useLayersStore } from '../../services/stores/layers';
 import type { LayerCollectionItem } from '../../services/types/collections';
 import type { ContextMenuItems } from '../../services/types/ui';
 import { zoomToLayer } from '../../services/utils';
 import ContextMenu from '../ui/ContextMenu.vue';
-import { globeInstance } from '../../services/globe/globe';
-import { questsEvent } from '../../services/quests';
 
 const { t } = useI18n();
 const listenersRemovers: (() => void)[] = [];
@@ -47,17 +47,16 @@ const layersStore = useLayersStore();
 
 const selectedLayers = ref<string[]>([]);
 
+const suppressSelectedWatch = ref(false);
+
 watch(selectedLayers, (newSelected, oldSelected) => {
+    if (suppressSelectedWatch.value) return;
+
     const addedLayers = newSelected.filter((id) => !oldSelected.includes(id));
     const removedLayers = oldSelected.filter((id) => !newSelected.includes(id));
 
-    addedLayers.forEach((layerId) => {
-        performAction('toggleLayerVisibility', layerId);
-    });
-
-    removedLayers.forEach((layerId) => {
-        performAction('toggleLayerVisibility', layerId);
-    });
+    addedLayers.forEach((layerId) => performAction('toggleLayerVisibility', layerId));
+    removedLayers.forEach((layerId) => performAction('toggleLayerVisibility', layerId));
 });
 
 type TreeChild = {
@@ -102,20 +101,24 @@ const treeItems = computed((): TreeParent[] => {
 
 onMounted(() => {
     const listener = questsEvent.addEventListener(() => {
+        suppressSelectedWatch.value = true;
         selectedLayers.value = [];
         globeInstance?.layers.layers.forEach((layer) => {
             if (layer.show) {
                 selectedLayers.value.push(layer.appId!);
             }
         });
+        suppressSelectedWatch.value = false;
     });
     listenersRemovers.push(listener);
 
+    suppressSelectedWatch.value = true;
     globeInstance?.layers.layers.forEach((layer) => {
         if (layer.show) {
             selectedLayers.value.push(layer.appId!);
         }
     });
+    suppressSelectedWatch.value = false;
 });
 
 onUnmounted(() => {

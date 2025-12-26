@@ -38,6 +38,15 @@
                             platform="auto"
                         ></v-hotkey
                     ></span>
+                    <v-number-input
+                        v-model="commonStore.rotationAmount"
+                        :label="$t('rotationAmountFactor(degrees)')"
+                        :min="0"
+                        variant="outlined"
+                        hide-details
+                        density="compact"
+                        class="ml-4"
+                    ></v-number-input>
                 </v-row>
             </div>
         </v-slide-y-transition>

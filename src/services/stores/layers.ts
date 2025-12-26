@@ -16,6 +16,7 @@ import { useProjectStore } from './project';
 
 export const useLayersStore = defineStore('layers', () => {
     const layers = ref<LayerCollectionItem[]>([]);
+    const layersMap = ref(new Map<string, LayerCollectionItem>());
     const invalidateLayers = ref(new Map<string, LayerCollectionItem>());
 
     const loadLayers = async () => {
@@ -27,6 +28,10 @@ export const useLayersStore = defineStore('layers', () => {
         const snapshot = await getDocs(subCol);
 
         layers.value = snapshot.docs.map((doc) => ({ ...(doc.data() as LayerCollectionItem) }));
+        layersMap.value.clear();
+        layers.value.forEach((layer) => {
+            layersMap.value.set(layer.id, layer);
+        });
     };
 
     const saveLayerConfig = async (layer: LayerCollectionItem, previousId?: string) => {
@@ -125,5 +130,5 @@ export const useLayersStore = defineStore('layers', () => {
         }
     };
 
-    return { layers, loadLayers, saveLayerConfig, updateLayer, deleteLayer, invalidateLayers };
+    return { layers, layersMap, loadLayers, saveLayerConfig, updateLayer, deleteLayer, invalidateLayers };
 });
