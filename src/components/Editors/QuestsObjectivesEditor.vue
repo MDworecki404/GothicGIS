@@ -50,7 +50,9 @@
                         <v-row dense no-gutters class="mb-5 ga-3">
                             <TextButton
                                 :prepend-icon="'mdi-eye'"
-                                :text="st.cameraView?.name ? st.cameraView.name : $t('selectView')"
+                                :text="truncate(st.cameraView?.name ? st.cameraView.name : $t('selectView'), {
+                                    length: 25,
+                                })"
                                 :color="st.cameraView ? 'success' : 'accent'"
                                 variant="outlined"
                                 rounded="0"
@@ -106,7 +108,7 @@
 </template>
 
 <script lang="ts" setup>
-import { cloneDeep } from 'lodash';
+import { cloneDeep, truncate } from 'lodash';
 import { markRaw, onMounted, ref, watch } from 'vue';
 import { VStepperVertical, VStepperVerticalItem } from 'vuetify/labs/VStepperVertical';
 import type { QuestCollectionItem, ViewConfigItem } from '../../services/types/collections';
