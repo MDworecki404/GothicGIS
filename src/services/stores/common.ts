@@ -10,7 +10,7 @@ export const useCommonStore = defineStore('common', () => {
     };
 
     const controlByKeyboard = ref(false);
-    const moveAmount = ref(1000);
+    const moveAmount = ref(5);
 
     const setControlByKeyboard = (enabled: boolean) => {
         controlByKeyboard.value = enabled;

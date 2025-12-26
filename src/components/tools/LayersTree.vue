@@ -39,7 +39,6 @@ import { zoomToLayer } from '../../services/utils';
 import ContextMenu from '../ui/ContextMenu.vue';
 import { globeInstance } from '../../services/globe/globe';
 import { questsEvent } from '../../services/quests';
-import { useUserStore } from '../../services/stores/user';
 
 const { t } = useI18n();
 const listenersRemovers: (() => void)[] = [];
@@ -135,9 +134,8 @@ const contextMenuItems: ContextMenuItems = [
         title: t('transform'),
         icon: 'mdi-axis-arrow',
         action: (item: LayerCollectionItem) => {
-            performAction('toggleLayerTransformerTool', item)
+            performAction('toggleLayerTransformerTool', item);
         },
-        hide: useUserStore().hasRole('admin') ? false : true,
     },
 ];
 </script>

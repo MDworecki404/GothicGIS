@@ -1,4 +1,12 @@
-import { collection, deleteDoc, doc, getDocs, getFirestore, setDoc } from 'firebase/firestore/lite';
+import {
+    collection,
+    deleteDoc,
+    doc,
+    getDocs,
+    getFirestore,
+    setDoc,
+    updateDoc,
+} from 'firebase/firestore/lite';
 import { defineStore } from 'pinia';
 import { ref } from 'vue';
 import { firebaseApp } from '../server';
@@ -65,6 +73,31 @@ export const useLayersStore = defineStore('layers', () => {
         }
     };
 
+    const updateLayer = async (layer: LayerCollectionItem) => {
+        const db = getFirestore(firebaseApp);
+        const projectId = useProjectStore().workingProject?.id;
+        if (!projectId) return;
+        const layerRef = doc(db, 'projects', projectId, 'layers', layer.id);
+        await updateDoc(layerRef, layer)
+            .then(async () => {
+                await loadLayers();
+                useNotifyStore().showNotification({
+                    message: 'layerSaved',
+                    type: 'success',
+                    icon: 'mdi-content-save',
+                    timeout: 3000,
+                });
+            })
+            .catch((err: any) => {
+                useNotifyStore().showNotification({
+                    message: `Error saving layer: ${err?.message ?? err}`,
+                    type: 'error',
+                    icon: 'mdi-alert-circle',
+                    timeout: 5000,
+                });
+            });
+    };
+
     const deleteLayer = async (layerId: string) => {
         const db = getFirestore(firebaseApp);
         const projectId = useProjectStore().workingProject?.id;
@@ -92,5 +125,5 @@ export const useLayersStore = defineStore('layers', () => {
         }
     };
 
-    return { layers, loadLayers, saveLayerConfig, deleteLayer, invalidateLayers };
+    return { layers, loadLayers, saveLayerConfig, updateLayer, deleteLayer, invalidateLayers };
 });

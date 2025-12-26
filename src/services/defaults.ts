@@ -39,8 +39,8 @@ export const getDefaultLayerTransformation = (): LayerCollectionItem['transforma
             z: 0,
         },
         rotate: {
-            heading: 0,
-            pitch: 0,
+            heading: 90,
+            pitch: 90,
             roll: 0,
         },
         scale: 1,
