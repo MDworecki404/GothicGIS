@@ -56,15 +56,32 @@
                                 rounded="0"
                                 @click="!st.cameraView ? openViewSelection(st) : removeView(st)"
                             ></TextButton>
+                            <IconButton
+                                :icon="'mdi-eye-plus'"
+                                color="success"
+                                icon-color="success"
+                                :tooltip="{
+                                    position: 'bottom',
+                                    text: $t('getActualView'),
+                                }"
+                                variant="outlined"
+                                rounded="0"
+                                :size="36"
+                                @click="getActualView(st)"
+                            ></IconButton>
                             <TextButton
                                 :prepend-icon="'mdi-layers-plus'"
                                 :text="
                                     st.layersIds?.length
                                         ? st.layersIds.length + ' ' + $t('layersSelected')
-                                        : $t('selectLayersToShow')
+                                        : $t('layers')
                                 "
                                 :color="'primary'"
                                 variant="outlined"
+                                :tooltip="{
+                                    text: $t('selectLayersToShow'),
+                                    location: 'bottom',
+                                }"
                                 rounded="0"
                                 @click="openLayersSelection(st)"
                             ></TextButton>
@@ -77,7 +94,7 @@
                             color="error"
                             :tooltip="{
                                 position: 'right',
-                                text: 'deleteStep'
+                                text: 'deleteStep',
                             }"
                             @click="deleteStep(st.step)"
                         ></IconButton>
@@ -98,6 +115,7 @@ import { getDefaultStepConfig } from '../../services/defaults';
 import IconButton from '../ui/IconButton.vue';
 import { useDialogStore } from '../../services/stores/dialog';
 import { useLayersStore } from '../../services/stores/layers';
+import { globeInstance } from '../../services/globe/globe';
 
 const questCopy = ref<QuestCollectionItem>();
 
@@ -183,12 +201,36 @@ const openLayersSelection = async (questItemStep: QuestCollectionItem['steps'][n
                 questItemStep.layersIds = selectedItems;
                 emit('update:quest-item', questCopy.value!);
             },
-            alreadySelectedItems: questItemStep.layersIds || []
+            alreadySelectedItems: questItemStep.layersIds || [],
         },
         dialogStyle: {
             width: 600,
         },
     });
+};
+
+const getActualView = (questItemStep: QuestCollectionItem['steps'][number]) => {
+    const X = globeInstance?.viewer?.scene.camera.position.x ?? 0;
+    const Y = globeInstance?.viewer?.scene.camera.position.y ?? 0;
+    const Z = globeInstance?.viewer?.scene.camera.position.z ?? 0;
+
+    const heading = globeInstance?.viewer?.scene.camera.heading ?? 0;
+    const pitch = globeInstance?.viewer?.scene.camera.pitch ?? 0;
+
+    const config: ViewConfigItem = {
+        id: crypto.randomUUID(),
+        name: questItemStep.title || 'Unnamed View',
+        view: {
+            x: X,
+            y: Y,
+            z: Z,
+            heading: heading,
+            pitch: pitch,
+        },
+    };
+
+    questItemStep.cameraView = config;
+    emit('update:quest-item', questCopy.value!);
 };
 
 const removeView = (questItemStep: QuestCollectionItem['steps'][number]) => {

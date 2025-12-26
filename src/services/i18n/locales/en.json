@@ -131,5 +131,7 @@
     "scale": "Scale",
     "saveToLayer": "Save to Layer",
     "transform": "Transform",
-    "rotationAmountFactor(degrees)": "Rotation Amount (degrees)"
+    "rotationAmountFactor(degrees)": "Rotation Amount (degrees)",
+    "layers": "Layers",
+    "getActualView": "Get Actual View"
 }

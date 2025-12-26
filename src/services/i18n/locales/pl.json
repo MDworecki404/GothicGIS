@@ -113,7 +113,7 @@
     "questCategory": "Kategoria zadania",
     "questWindowWidth": "Szerokość okna zadania",
     "selectLayersToShow": "Wybierz warstwy do włączenia",
-    "layersSelected": "Warstwa(y) wybrana(y)",
+    "layersSelected": "Warstwa(y) wybrana(e)",
     "selectLayersToShowInStep": "Wybierz warstwy do wyświetlenia w kroku",
     "confirmSelection": "Potwierdź wybór",
     "selectItem": "Wybierz obiekt",
@@ -131,5 +131,7 @@
     "scale": "Skala",
     "saveToLayer": "Zapisz do warstwy",
     "transform": "Transformuj",
-    "rotationAmountFactor(degrees)": "Kąt obrotu (stopnie)"
+    "rotationAmountFactor(degrees)": "Kąt obrotu (stopnie)",
+    "layers": "Warstwy",
+    "getActualView": "Pobierz aktualny widok"
 }
