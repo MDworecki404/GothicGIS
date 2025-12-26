@@ -8,7 +8,7 @@
             rounded
             density="compact"
         ></v-pagination>
-        <div class="text-subtitle-1">
+        <div class="text-subtitle-1"  style="max-height: 30dvh; overflow: auto;">
             <v-row dense no-gutters class="font-weight-bold text-button">{{ questConfig?.steps[actualStep - 1]?.title }}</v-row>
             <v-divider class="my-2"></v-divider>
             {{ questConfig?.steps[actualStep - 1]?.description }}
