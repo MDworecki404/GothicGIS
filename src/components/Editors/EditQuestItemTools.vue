@@ -13,13 +13,29 @@
                 <v-tabs-window-item value="metadata">
                     <QuestMetadataEditor
                         :quest-item="questConfig"
-                        @update:quest-item="(item) => (questConfig = item)"
+                        @update:quest-item="
+                            (item) => {
+                                questConfig = {
+                                    ...questConfig!,
+                                    name: item.name,
+                                    category: item.category,
+                                    width: item.width
+                                };
+                            }
+                        "
                     />
                 </v-tabs-window-item>
                 <v-tabs-window-item value="objectives">
                     <QuestsObjectivesEditor
                         :quest-item="questConfig"
-                        @update:quest-item="(item) => (questConfig = item)"
+                        @update:quest-item="
+                            (item) => {
+                                questConfig = {
+                                    ...questConfig!,
+                                    steps: item.steps
+                                };
+                            }
+                        "
                     />
                 </v-tabs-window-item>
                 <v-tabs-window-item value="jsonEditor">
@@ -27,7 +43,11 @@
                         :code="JSON.stringify(questConfig, null, 2)"
                         :width="1000"
                         :disable-save-btn="true"
-                        @update:code="(code) => (questConfig = JSON.parse(code))"
+                        @update:code="
+                            (code) => {
+                                questConfig = JSON.parse(code);
+                            }
+                        "
                     ></JSONEditor>
                 </v-tabs-window-item>
             </v-tabs-window>
@@ -47,11 +67,11 @@
 
 <script lang="ts" setup>
 import { onBeforeMount, ref } from 'vue';
+import { useQuestsStore } from '../../services/stores/quests';
 import type { QuestCollectionItem } from '../../services/types/collections';
-import QuestMetadataEditor from './QuestMetadataEditor.vue';
 import JSONEditor from '../ui/JSONEditor.vue';
 import TextButton from '../ui/TextButton.vue';
-import { useQuestsStore } from '../../services/stores/quests';
+import QuestMetadataEditor from './QuestMetadataEditor.vue';
 import QuestsObjectivesEditor from './QuestsObjectivesEditor.vue';
 
 const questConfig = ref<QuestCollectionItem | null>(null);

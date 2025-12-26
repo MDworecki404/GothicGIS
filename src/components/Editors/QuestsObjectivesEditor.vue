@@ -35,6 +35,7 @@
                                 :label="$t('stepTitle')"
                                 variant="outlined"
                                 density="compact"
+                                @update:model-value="emit('update:quest-item', questCopy!)"
                             ></v-text-field>
                         </v-row>
                         <v-row dense no-gutters>
@@ -43,6 +44,7 @@
                                 :label="$t('stepDescription')"
                                 variant="outlined"
                                 density="compact"
+                                @update:model-value="emit('update:quest-item', questCopy!)"
                             ></v-textarea>
                         </v-row>
                         <v-row dense no-gutters class="mb-5 ga-3">
@@ -107,6 +109,8 @@ const addNextStep = () => {
     questCopy.value.steps.forEach((s, index) => {
         s.step = index + 1;
     });
+
+    emit('update:quest-item', questCopy.value!);
 };
 
 const deleteStep = (stepNumber: number) => {
@@ -116,6 +120,8 @@ const deleteStep = (stepNumber: number) => {
     questCopy.value.steps.forEach((s, index) => {
         s.step = index + 1;
     });
+
+    emit('update:quest-item', questCopy.value!);
 };
 
 const step = ref<number>(1);
@@ -152,6 +158,7 @@ const openViewSelection = async (questItemStep: QuestCollectionItem['steps'][num
             selectItemCallback: (item: ViewConfigItem) => {
                 dialogStore.closeDialog();
                 questItemStep.cameraView = item;
+                emit('update:quest-item', questCopy.value!);
             },
         },
         dialogStyle: {
@@ -174,6 +181,7 @@ const openLayersSelection = async (questItemStep: QuestCollectionItem['steps'][n
             selectedCallback: (selectedItems: string[]) => {
                 dialogStore.closeDialog();
                 questItemStep.layersIds = selectedItems;
+                emit('update:quest-item', questCopy.value!);
             },
             alreadySelectedItems: questItemStep.layersIds || []
         },
@@ -185,5 +193,6 @@ const openLayersSelection = async (questItemStep: QuestCollectionItem['steps'][n
 
 const removeView = (questItemStep: QuestCollectionItem['steps'][number]) => {
     delete questItemStep.cameraView;
+    emit('update:quest-item', questCopy.value!);
 };
 </script>

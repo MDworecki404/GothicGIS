@@ -21,7 +21,9 @@
                 density="compact"
                 :label="$t('questCategory')"
                 class="pa-3"
-                @update:model-value="emit('update:questItem', questCopy)"
+                @update:model-value="
+                    emit('update:questItem', { ...questCopy, category: questCopy.category })
+                "
             ></v-select>
             <v-number-input
                 v-model="questCopy.width"
@@ -43,7 +45,7 @@
 
 <script lang="ts" setup>
 import { cloneDeep } from 'lodash';
-import { onMounted, ref } from 'vue';
+import { onMounted, ref, watch } from 'vue';
 import {
     type QuestCollectionCategory,
     type QuestCollectionItem,
@@ -60,6 +62,15 @@ const questsCategories = ref<QuestCollectionCategory[]>(['mainQuests', 'sideQues
 const { questItem } = defineProps<{
     questItem: QuestCollectionItem;
 }>();
+
+watch(
+    () => questCopy.value,
+    (newVal) => {
+        if (newVal) {
+            emit('update:questItem', newVal);
+        }
+    }
+);
 
 onMounted(() => {
     questCopy.value = cloneDeep(questItem);
