@@ -147,5 +147,13 @@
     "area": "Powierzchnia",
     "height": "Wysokość",
     "clearMeasurements": "Wyczyść pomiary",
-    "finishMeasurement": "Zakończ pomiar"
+    "finishMeasurement": "Zakończ pomiar",
+    "description": "Opis",
+    "createProject": "Utwórz projekt",
+    "addNewProject": "Dodaj nowy projekt",
+    "projectCreated": "Projekt utworzony",
+    "areYouSureDeleteProject": "Czy na pewno chcesz usunąć ten projekt?",
+    "projectDeleted": "Projekt usunięty",
+    "deleteProject": "Usuń projekt",
+    "projectSaved": "Projekt zapisany"
 }

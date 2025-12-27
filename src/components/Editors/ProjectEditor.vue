@@ -20,6 +20,14 @@
                     :append-inner-icon="projectConfig!.icon"
                 ></v-text-field>
             </v-row>
+            <v-row dense no-gutters>
+                <v-textarea
+                    v-model="projectConfig!.description"
+                    :label="$t('description')"
+                    class="ma-4"
+                    variant="outlined"
+                ></v-textarea>
+            </v-row>
             <v-row dense no-gutters justify="end">
                 <TextButton
                     color="success"
@@ -58,6 +66,7 @@ const projectConfig = ref<Project>();
 const saveConfig = async (config: Project) => {
     loading.value = true;
     const projectId = config.id
+    config.updatedAt = new Date().toLocaleString();
     const projectStore = useProjectStore();
     await projectStore.saveProjectConfig(projectId, config).finally(() => {
         projectStore.loadProjects();

@@ -5,6 +5,7 @@
                 v-bind="activatorProps"
                 :icon="icon"
                 :tooltip="tooltip"
+                custom-class="bg-surface"
                 style="pointer-events: all;"
             ></IconButton>
         </template>
@@ -17,6 +18,7 @@
                     position: button.tooltip.position,
                 }"
                 style="pointer-events: all;"
+                custom-class="bg-surface"
                 @click="performAction(button.action)"
             />
         </template>

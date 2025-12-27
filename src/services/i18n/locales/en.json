@@ -146,5 +146,13 @@
     "area": "Area",
     "height": "Height",
     "clearMeasurements": "Clear Measurements",
-    "finishMeasurement": "Finish Measurement"
+    "finishMeasurement": "Finish Measurement",
+    "description": "Description",
+    "createProject": "Create Project",
+    "addNewProject": "Add New Project",
+    "projectCreated": "Project created",
+    "areYouSureDeleteProject": "Are you sure you want to delete this project?",
+    "projectDeleted": "Project deleted",
+    "deleteProject": "Delete project",
+    "projectSaved": "Project saved"
 }

@@ -1,5 +1,5 @@
 import type { Viewer } from 'cesium';
-import type { LayerCollectionItem, QuestCollectionItem, ViewConfigItem } from './types/collections';
+import type { LayerCollectionItem, Project, QuestCollectionItem, ViewConfigItem } from './types/collections';
 
 export const getDefaultViewerOptions = (): Viewer.ConstructorOptions => {
     return {
@@ -79,3 +79,19 @@ export const getDefaultStepConfig = (step: number): QuestCollectionItem['steps']
         description: '',
     };
 };
+
+export const getDefaultProjectConfig = (): Project => {
+    return {
+        id: crypto.randomUUID(),
+        name: '',
+        icon: 'mdi-folder',
+        description: '',
+        initView: {
+            heading: 1,
+            pitch: 1,
+            x: 1,
+            y: 1,
+            z: 1,
+        }
+    }
+}

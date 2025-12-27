@@ -12,6 +12,7 @@
                     position: button.tooltip.position,
                 }"
                 :icon="button.icon"
+                custom-class="bg-surface"
                 @click="performAction(button.action)"
                 style="pointer-events: all;"
             />
