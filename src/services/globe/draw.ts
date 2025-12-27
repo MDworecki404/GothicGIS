@@ -179,14 +179,18 @@ export class DrawService {
         if (pickedObject) {
             const cartesian = this._viewer.scene.pickPosition(event.position);
             if (cartesian) {
+                if (this._temporaryLayer?.entities.getById('temporary-line')) {
+                    this._temporaryLayer.entities.removeById('temporary-line');
+                }
+
                 this._linePositions.push(cartesian);
 
                 if (this._linePositions.length > 1) {
                      this._temporaryLayer?.entities.add({
+                        id: 'temporary-line',
                         polyline: {
                             positions: [
-                                this._linePositions[this._linePositions.length - 2]!,
-                                this._linePositions[this._linePositions.length - 1]!
+                                ...this._linePositions
                             ],
                             ...getDefaultLineStyle(),
                         },

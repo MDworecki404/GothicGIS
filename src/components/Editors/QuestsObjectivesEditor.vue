@@ -47,47 +47,71 @@
                                 @update:model-value="emit('update:quest-item', questCopy!)"
                             ></v-textarea>
                         </v-row>
-                        <v-row dense no-gutters class="mb-5 ga-3">
-                            <TextButton
-                                :prepend-icon="'mdi-eye'"
-                                :text="truncate(st.cameraView?.name ? st.cameraView.name : $t('selectView'), {
-                                    length: 25,
-                                })"
-                                :color="st.cameraView ? 'success' : 'accent'"
-                                variant="outlined"
-                                rounded="0"
-                                @click="!st.cameraView ? openViewSelection(st) : removeView(st)"
-                            ></TextButton>
-                            <IconButton
-                                :icon="'mdi-eye-plus'"
-                                color="success"
-                                icon-color="success"
-                                :tooltip="{
-                                    position: 'bottom',
-                                    text: $t('getActualView'),
-                                }"
-                                variant="outlined"
-                                rounded="0"
-                                :size="36"
-                                @click="getActualView(st)"
-                            ></IconButton>
-                            <TextButton
-                                :prepend-icon="'mdi-layers-plus'"
-                                :text="
-                                    st.layersIds?.length
-                                        ? st.layersIds.length + ' ' + $t('layersSelected')
-                                        : $t('layers')
-                                "
-                                :color="'primary'"
-                                variant="outlined"
-                                :tooltip="{
-                                    text: $t('selectLayersToShow'),
-                                    location: 'bottom',
-                                }"
-                                rounded="0"
-                                @click="openLayersSelection(st)"
-                            ></TextButton>
-                        </v-row>
+                        <v-tabs v-model="objectivesTab" color="accent">
+                            <v-tab value="viewsAndLayers">{{ $t('viewsAndLayers') }}</v-tab>
+                            <v-tab value="drawings">{{ $t('drawings') }}</v-tab>
+                        </v-tabs>
+                        <v-tabs-window v-model="objectivesTab" class="pt-5">
+                            <v-tabs-window-item value="viewsAndLayers">
+                                <v-row dense no-gutters class="mb-5 ga-3">
+                                    <TextButton
+                                        :prepend-icon="'mdi-eye'"
+                                        :text="
+                                            truncate(
+                                                st.cameraView?.name
+                                                    ? st.cameraView.name
+                                                    : $t('selectView'),
+                                                {
+                                                    length: 25,
+                                                }
+                                            )
+                                        "
+                                        :color="st.cameraView ? 'success' : 'accent'"
+                                        variant="outlined"
+                                        rounded="0"
+                                        @click="
+                                            !st.cameraView ? openViewSelection(st) : removeView(st)
+                                        "
+                                    ></TextButton>
+                                    <IconButton
+                                        :icon="'mdi-eye-plus'"
+                                        color="success"
+                                        icon-color="success"
+                                        :tooltip="{
+                                            position: 'bottom',
+                                            text: $t('getActualView'),
+                                        }"
+                                        variant="outlined"
+                                        rounded="0"
+                                        :size="36"
+                                        @click="getActualView(st)"
+                                    ></IconButton>
+                                    <TextButton
+                                        :prepend-icon="'mdi-layers-plus'"
+                                        :text="
+                                            st.layersIds?.length
+                                                ? st.layersIds.length + ' ' + $t('layersSelected')
+                                                : $t('layers')
+                                        "
+                                        :color="'primary'"
+                                        variant="outlined"
+                                        :tooltip="{
+                                            text: $t('selectLayersToShow'),
+                                            location: 'bottom',
+                                        }"
+                                        rounded="0"
+                                        @click="openLayersSelection(st)"
+                                    ></TextButton>
+                                </v-row>
+                            </v-tabs-window-item>
+
+                            <v-tabs-window-item value="drawings">
+                                <DrawingTools
+                                    @drawing-erased="onDrawingErased(st)"
+                                    @drawing-finished="onDrawingFinished(st)"
+                                />
+                            </v-tabs-window-item>
+                        </v-tabs-window>
                     </div>
                     <v-row dense no-gutters>
                         <IconButton
@@ -108,18 +132,24 @@
 </template>
 
 <script lang="ts" setup>
+import type { Cartesian3 } from 'cesium';
+import { CustomDataSource, Entity } from 'cesium';
 import { cloneDeep, truncate } from 'lodash';
-import { markRaw, onMounted, ref, watch } from 'vue';
+import { markRaw, onMounted, onUnmounted, ref, watch } from 'vue';
 import { VStepperVertical, VStepperVerticalItem } from 'vuetify/labs/VStepperVertical';
-import type { QuestCollectionItem, ViewConfigItem } from '../../services/types/collections';
-import TextButton from '../ui/TextButton.vue';
 import { getDefaultStepConfig } from '../../services/defaults';
-import IconButton from '../ui/IconButton.vue';
+import { globeInstance } from '../../services/globe/globe';
 import { useDialogStore } from '../../services/stores/dialog';
 import { useLayersStore } from '../../services/stores/layers';
-import { globeInstance } from '../../services/globe/globe';
+import type { QuestCollectionItem, ViewConfigItem } from '../../services/types/collections';
+import DrawingTools from '../tools/DrawingTools.vue';
+import IconButton from '../ui/IconButton.vue';
+import TextButton from '../ui/TextButton.vue';
+
+//TODO: FIX DRAWINGS IDS ISSUE WHEN DELETING AND ADDING STEPS
 
 const questCopy = ref<QuestCollectionItem>();
+const objectivesTab = ref<string>('viewsAndLayers');
 
 const addNextStep = () => {
     if (!questCopy.value) return;
@@ -136,6 +166,13 @@ const addNextStep = () => {
 const deleteStep = (stepNumber: number) => {
     if (!questCopy.value) return;
     questCopy.value.steps = questCopy.value.steps.filter((s) => s.step !== stepNumber);
+
+    const idsToRemove = questDataSource.entities.values
+        .filter(
+            (entity) => typeof entity.id === 'string' && entity.id.startsWith(`step-${stepNumber}-`)
+        )
+        .map((entity) => entity.id as string);
+    idsToRemove.forEach((id) => questDataSource.entities.removeById(id));
 
     questCopy.value.steps.forEach((s, index) => {
         s.step = index + 1;
@@ -154,8 +191,96 @@ const emit = defineEmits<{
     (e: 'update:quest-item', value: QuestCollectionItem): void;
 }>();
 
+const questDataSource = new CustomDataSource('questObjectivesDataSource');
+globeInstance?.viewer?.dataSources.add(questDataSource);
+
+const onDrawingFinished = (questItemStep: QuestCollectionItem['steps'][number]) => {
+    const entities = globeInstance?.draw.drawLayer?.entities;
+    if (!entities) return;
+    entities.values.forEach((entity) => {
+        const entityToCopy = new Entity({
+            id: `step-${questItemStep.step}-${entity.id}`,
+            position: entity.position,
+            point: entity.point,
+            polyline: entity.polyline,
+            polygon: entity.polygon,
+            properties: entity.properties,
+            name: entity.name,
+        });
+        questDataSource.entities.add(entityToCopy);
+    });
+    globeInstance?.draw.clearDrawLayer();
+
+    const stepPrefix = `step-${questItemStep.step}-`;
+    const existingIds = new Set((questItemStep.drawings || []).map((d) => d.id));
+    questDataSource.entities.values
+        .filter((entity) => typeof entity.id === 'string' && entity.id.startsWith(stepPrefix))
+        .forEach((entity) => {
+            if (existingIds.has(entity.id as string)) return;
+            if (!questItemStep.drawings) {
+                questItemStep.drawings = [];
+            }
+
+            if (entity.point) {
+                questItemStep.drawings!.push({
+                    type: 'point',
+                    id: entity.id,
+                    positions: [
+                        {
+                            x: entity.position!.getValue()!.x,
+                            y: entity.position!.getValue()!.y,
+                            z: entity.position!.getValue()!.z,
+                        },
+                    ],
+                });
+                return;
+            }
+
+            if (entity.polyline) {
+                questItemStep.drawings!.push({
+                    type: 'polyline',
+                    id: entity.id,
+                    positions: entity.polyline.positions!.getValue().map((pos: Cartesian3) => ({
+                        x: pos.x,
+                        y: pos.y,
+                        z: pos.z,
+                    })),
+                });
+                return;
+            }
+
+            if (entity.polygon) {
+                questItemStep.drawings!.push({
+                    type: 'polygon',
+                    id: entity.id,
+                    positions: entity.polygon
+                        .hierarchy!.getValue()
+                        .positions.map((pos: Cartesian3) => ({
+                            x: pos.x,
+                            y: pos.y,
+                            z: pos.z,
+                        })),
+                });
+                return;
+            }
+        });
+
+    emit('update:quest-item', questCopy.value!);
+};
+
+const onDrawingErased = (questItemStep: QuestCollectionItem['steps'][number]) => {
+    questDataSource.entities.removeAll();
+
+    questItemStep.drawings = [];
+    emit('update:quest-item', questCopy.value!);
+};
+
 onMounted(() => {
     questCopy.value = cloneDeep(questItem);
+});
+
+onUnmounted(() => {
+    globeInstance?.viewer?.dataSources.remove(questDataSource);
 });
 
 watch(

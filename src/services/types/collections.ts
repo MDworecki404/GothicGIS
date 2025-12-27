@@ -30,23 +30,25 @@ export const LayerCollectionItemBaseSchema = z.object({
     name: z.string(),
     show: z.boolean(),
     parentId: z.string().optional(),
-    transformation: z.object({
-        translate: z
-            .object({
-                x: z.number(),
-                y: z.number(),
-                z: z.number(),
-            })
-            .optional(),
-        rotate: z
-            .object({
-                heading: z.number(),
-                pitch: z.number(),
-                roll: z.number(),
-            })
-            .optional(),
-        scale: z.number().optional(),
-    }).optional(),
+    transformation: z
+        .object({
+            translate: z
+                .object({
+                    x: z.number(),
+                    y: z.number(),
+                    z: z.number(),
+                })
+                .optional(),
+            rotate: z
+                .object({
+                    heading: z.number(),
+                    pitch: z.number(),
+                    roll: z.number(),
+                })
+                .optional(),
+            scale: z.number().optional(),
+        })
+        .optional(),
 });
 
 export const Cesium3DTilesResourceSchema = z.object({
@@ -107,6 +109,21 @@ export const QuestCollectionItemBaseSchema = z.object({
     updatedAt: z.string().optional(),
 });
 
+export const QuestStepDrawingCollectionItemSchema = z.object({
+    type: z
+        .literal('point')
+        .or(z.literal('polyline').or(z.literal('polygon')))
+        .or(z.literal('label')),
+    id: z.string(),
+    positions: z.array(
+        z.object({
+            x: z.number(),
+            y: z.number(),
+            z: z.number(),
+        })
+    ),
+});
+
 export const QuestStepCollectionItemSchema = z.array(
     z.object({
         step: z.number(),
@@ -114,6 +131,7 @@ export const QuestStepCollectionItemSchema = z.array(
         cameraView: ViewConfigItemSchema.optional(),
         layersIds: z.array(z.string()).optional(),
         description: z.string().optional(),
+        drawings: z.array(QuestStepDrawingCollectionItemSchema).optional(),
     })
 );
 

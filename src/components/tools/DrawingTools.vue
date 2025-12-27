@@ -86,6 +86,11 @@ const selectDrawMode = (mode: 'point' | 'line' | 'polygon' | null) => {
     globeInstance?.draw.selectDrawMode(mode)
 };
 
+const emit = defineEmits<{
+    (e: 'drawingFinished'): void;
+    (e: 'drawingErased'): void;
+}>()
+
 const resetDrawing = () => {
     globeInstance?.draw.clearTemporaryLayer();
 };
@@ -93,6 +98,7 @@ const resetDrawing = () => {
 const finishDrawing = () => {
     selectedDrawMode.value = null;
     globeInstance?.draw.finishDrawing();
+    emit('drawingFinished');
 }
 
 const eraseDrawing = () => {
@@ -100,6 +106,7 @@ const eraseDrawing = () => {
     globeInstance?.draw.clearDrawLayer();
     globeInstance?.draw.clearTemporaryLayer();
     globeInstance?.draw.finishDrawing();
+    emit('drawingErased');
 }
 
 onUnmounted(() => {

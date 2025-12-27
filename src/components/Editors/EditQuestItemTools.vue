@@ -32,7 +32,7 @@
                             (item) => {
                                 questConfig = {
                                     ...questConfig!,
-                                    steps: item.steps
+                                    steps: item.steps,
                                 };
                             }
                         "

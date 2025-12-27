@@ -155,5 +155,7 @@
     "areYouSureDeleteProject": "Czy na pewno chcesz usunąć ten projekt?",
     "projectDeleted": "Projekt usunięty",
     "deleteProject": "Usuń projekt",
-    "projectSaved": "Projekt zapisany"
+    "projectSaved": "Projekt zapisany",
+    "viewsAndLayers": "Widoki i warstwy",
+    "drawings": "Rysunki"
 }

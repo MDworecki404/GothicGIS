@@ -154,5 +154,7 @@
     "areYouSureDeleteProject": "Are you sure you want to delete this project?",
     "projectDeleted": "Project deleted",
     "deleteProject": "Delete project",
-    "projectSaved": "Project saved"
+    "projectSaved": "Project saved",
+    "viewsAndLayers": "Views and Layers",
+    "drawings": "Drawings"
 }
