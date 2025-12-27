@@ -1,11 +1,11 @@
 import { Cartesian3, Math } from 'cesium';
+import { markRaw } from 'vue';
 import { globeInstance } from './globe/globe';
 import { useCommonStore } from './stores/common';
+import { useDialogStore } from './stores/dialog';
+import { useLayersStore } from './stores/layers';
 import { useProjectStore } from './stores/project';
 import { useToolsStore } from './stores/tools';
-import { markRaw } from 'vue';
-import { useLayersStore } from './stores/layers';
-import { useDialogStore } from './stores/dialog';
 import type { LayerCollectionItem } from './types/collections';
 
 ///////////////////////////////
@@ -85,7 +85,7 @@ const toggleFullscreen = () => {
 const hideUi = () => {
     const commonStore = useCommonStore();
     commonStore.toggleUiVisibility();
-}
+};
 
 ///////////////////////////////
 //MARK: - Tools toggling
@@ -222,7 +222,7 @@ const toggleQuestsEditor = async () => {
             width: 600,
         },
     });
-}
+};
 
 const toggleQuestsTree = async () => {
     const toolsStore = useToolsStore();
@@ -237,13 +237,11 @@ const toggleQuestsTree = async () => {
             width: 400,
         },
     });
-}
+};
 
 const toggleControllerTool = async () => {
     const toolsStore = useToolsStore();
-    const controllerToolComponent = markRaw(
-        await import('../components/tools/ControllerTool.vue')
-    );
+    const controllerToolComponent = markRaw(await import('../components/tools/ControllerTool.vue'));
     const component = controllerToolComponent.default;
     toolsStore.registerTool({
         id: 'controllerTool',
@@ -254,11 +252,13 @@ const toggleControllerTool = async () => {
             width: 500,
         },
     });
-}
+};
 
 const toggleLayerTransformerTool = async (layerItem: LayerCollectionItem) => {
     const toolsStore = useToolsStore();
-    const layerTransformerComponent = markRaw(await import('../components/tools/TransformModel.vue'));
+    const layerTransformerComponent = markRaw(
+        await import('../components/tools/TransformModel.vue')
+    );
     const component = layerTransformerComponent.default;
     toolsStore.registerTool({
         id: 'layerTransformerTool',
@@ -270,7 +270,7 @@ const toggleLayerTransformerTool = async (layerItem: LayerCollectionItem) => {
             layerItem: layerItem,
         },
     });
-}
+};
 
 const toggleDrawingTools = async () => {
     const toolsStore = useToolsStore();
@@ -285,7 +285,24 @@ const toggleDrawingTools = async () => {
             width: 450,
         },
     });
-}
+};
+
+const toggleMeasurementTools = async () => {
+    const toolsStore = useToolsStore();
+    const measurementToolsComponent = markRaw(
+        await import('../components/tools/MeasurementTools.vue')
+    );
+    const component = measurementToolsComponent.default;
+    toolsStore.registerTool({
+        id: 'measurementTools',
+        name: 'measurementTools',
+        icon: 'mdi-ruler-square-compass',
+        component: component,
+        props: {
+            width: 450,
+        },
+    });
+};
 
 ///////////////////////////////
 //MARK: - Exported actions
@@ -312,6 +329,7 @@ export const ACTIONS = {
     toggleLayerTransformerTool,
     hideUi,
     toggleDrawingTools,
+    toggleMeasurementTools,
 };
 
 export const ACTION_NAMES = Object.keys(ACTIONS) as Array<keyof typeof ACTIONS>;

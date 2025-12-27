@@ -140,5 +140,11 @@
     "drawPolygon": "Draw Polygon",
     "reset": "Reset",
     "finishDrawing": "Finish Drawing",
-    "eraseDrawing": "Erase Drawing"
+    "eraseDrawing": "Erase Drawing",
+    "measurementTools": "Measurement Tools",
+    "distance": "Distance",
+    "area": "Area",
+    "height": "Height",
+    "clearMeasurements": "Clear Measurements",
+    "finishMeasurement": "Finish Measurement"
 }

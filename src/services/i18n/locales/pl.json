@@ -141,5 +141,11 @@
     "drawPolygon": "Rysuj wielokąt",
     "reset": "Resetuj",
     "finishDrawing": "Zakończ rysowanie",
-    "eraseDrawing": "Usuń rysunek"
+    "eraseDrawing": "Usuń rysunek",
+    "measurementTools": "Narzędzia pomiarowe",
+    "distance": "Odległość",
+    "area": "Powierzchnia",
+    "height": "Wysokość",
+    "clearMeasurements": "Wyczyść pomiary",
+    "finishMeasurement": "Zakończ pomiar"
 }

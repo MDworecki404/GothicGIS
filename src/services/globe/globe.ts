@@ -6,6 +6,7 @@ import { CameraControl } from './cameraControl';
 import { DrawService } from './draw';
 import { GlobeEvents } from './globeEvents';
 import { LayersManager } from './layers';
+import { MeasurementService } from './measure';
 
 export let globeInstance: GlobeViewer | null = null;
 
@@ -15,6 +16,7 @@ export class GlobeViewer {
     private cameraControl: CameraControl | null = null;
     private drawService: DrawService | null = null;
     private eventsService: GlobeEvents | null = null;
+    private measurementService: MeasurementService | null = null; // Placeholder for future measurement service
 
     constructor(target: HTMLElement) {
         this.viewer = new Viewer(target, getDefaultViewerOptions());
@@ -42,11 +44,16 @@ export class GlobeViewer {
         return this.eventsService!;
     }
 
+    get measurement(): MeasurementService {
+        return this.measurementService!;
+    }
+
     initServices() {
         this.eventsService = new GlobeEvents(this.viewer!);
         this.layersManager = new LayersManager(this.viewer!);
         this.cameraControl = new CameraControl(this.viewer!);
         this.drawService = new DrawService(this.viewer!, this.eventsService!);
+        this.measurementService = new MeasurementService(this.viewer!, this.eventsService!);
     }
 
     destroy() {

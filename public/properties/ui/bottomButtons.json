@@ -25,6 +25,15 @@
                     "position": "top"
                 },
                 "action": "toggleDrawingTools"
+            },
+            {
+                "type": "icon-button",
+                "icon": "mdi-ruler-square-compass",
+                "tooltip": {
+                    "text": "measurementTools",
+                    "position": "top"
+                },
+                "action": "toggleMeasurementTools"
             }
         ]
     },
