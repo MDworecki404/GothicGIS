@@ -91,14 +91,39 @@ export class DrawService {
     }
 
     moveTemporaryToDrawLayer() {
-        if (!this._temporaryLayer || !this._drawLayer) return;
+    if (!this._temporaryLayer || !this._drawLayer) return;
 
-        const entities = this._temporaryLayer.entities.values;
-        entities.forEach((entity) => {
-            this._drawLayer!.entities.add(entity);
-        });
-        this.clearTemporaryLayer();
-    }
+    const entities = this._temporaryLayer.entities.values;
+
+    entities.forEach((entity) => {
+        if (entity.id === 'preview') return;
+
+        const newEntityOptions: any = {};
+
+        if (entity.position) {
+            newEntityOptions.position = entity.position;
+        }
+
+        if (entity.point) {
+            newEntityOptions.point = entity.point;
+        }
+        if (entity.polyline) {
+            newEntityOptions.polyline = entity.polyline;
+        }
+        if (entity.polygon) {
+            const currentHierarchy = entity.polygon.hierarchy?.getValue(this._viewer.clock.currentTime);
+
+            newEntityOptions.polygon = entity.polygon;
+            if (currentHierarchy) {
+                newEntityOptions.polygon.hierarchy = currentHierarchy;
+            }
+        }
+
+        this._drawLayer!.entities.add(newEntityOptions);
+    });
+
+    this.clearTemporaryLayer();
+}
 
     selectDrawMode(mode: 'point' | 'line' | 'polygon' | null) {
         switch (mode) {
@@ -221,7 +246,12 @@ export class DrawService {
 
                     if (this._linePositions.length < 3) return;
 
+                    if (this._temporaryLayer?.entities.getById('temporary-polygon')) {
+                        this._temporaryLayer.entities.removeById('temporary-polygon');
+                    }
+
                     this._temporaryLayer?.entities.add({
+                        id: 'temporary-polygon',
                         polygon: {
                             hierarchy: this._linePositions,
                             ...getDefaultPolygonStyle(),
