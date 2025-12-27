@@ -13,6 +13,7 @@
                 }"
                 :icon="button.icon"
                 @click="performAction(button.action)"
+                style="pointer-events: all;"
             />
 
             <SpeedDialButton
@@ -29,6 +30,7 @@
                 }"
                 :location="button.speedDialLocation"
                 :list="button.children"
+                style="pointer-events: all;"
             />
         </template>
     </div>
@@ -49,3 +51,6 @@ defineProps<{
     direction?: 'horizontal' | 'vertical';
 }>();
 </script>
+
+<style scoped>
+</style>

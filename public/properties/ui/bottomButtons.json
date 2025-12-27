@@ -16,6 +16,15 @@
                     "position": "top"
                 },
                 "action": "toggleShadowSettings"
+            },
+            {
+                "type": "icon-button",
+                "icon": "mdi-draw-pen",
+                "tooltip": {
+                    "text": "drawingTools",
+                    "position": "top"
+                },
+                "action": "toggleDrawingTools"
             }
         ]
     },

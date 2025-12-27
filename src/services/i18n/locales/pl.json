@@ -134,5 +134,12 @@
     "rotationAmountFactor(degrees)": "Kąt obrotu (stopnie)",
     "layers": "Warstwy",
     "getActualView": "Pobierz aktualny widok",
-    "hideUi": "Ukryj interfejs użytkownika"
+    "hideUi": "Ukryj interfejs użytkownika",
+    "drawingTools": "Narzędzia rysowania",
+    "drawPoint": "Rysuj punkt",
+    "drawLine": "Rysuj linię",
+    "drawPolygon": "Rysuj wielokąt",
+    "reset": "Resetuj",
+    "finishDrawing": "Zakończ rysowanie",
+    "eraseDrawing": "Usuń rysunek"
 }

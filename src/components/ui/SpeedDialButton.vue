@@ -1,10 +1,11 @@
 <template>
-    <v-speed-dial :location="location">
+    <v-speed-dial :location="location" style="pointer-events: all;">
         <template #activator="{ props: activatorProps }">
             <IconButton
                 v-bind="activatorProps"
                 :icon="icon"
                 :tooltip="tooltip"
+                style="pointer-events: all;"
             ></IconButton>
         </template>
         <template v-for="button in list" :key="button.icon">
@@ -15,6 +16,7 @@
                     text: button.tooltip.text,
                     position: button.tooltip.position,
                 }"
+                style="pointer-events: all;"
                 @click="performAction(button.action)"
             />
         </template>

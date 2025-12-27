@@ -272,6 +272,21 @@ const toggleLayerTransformerTool = async (layerItem: LayerCollectionItem) => {
     });
 }
 
+const toggleDrawingTools = async () => {
+    const toolsStore = useToolsStore();
+    const drawingToolsComponent = markRaw(await import('../components/tools/DrawingTools.vue'));
+    const component = drawingToolsComponent.default;
+    toolsStore.registerTool({
+        id: 'drawingTools',
+        name: 'drawingTools',
+        icon: 'mdi-draw-pen',
+        component: component,
+        props: {
+            width: 450,
+        },
+    });
+}
+
 ///////////////////////////////
 //MARK: - Exported actions
 ///////////////////////////////
@@ -296,6 +311,7 @@ export const ACTIONS = {
     toggleControllerTool,
     toggleLayerTransformerTool,
     hideUi,
+    toggleDrawingTools,
 };
 
 export const ACTION_NAMES = Object.keys(ACTIONS) as Array<keyof typeof ACTIONS>;

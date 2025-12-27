@@ -1,9 +1,11 @@
-import { Cartesian3, Ion, Viewer, JulianDate } from 'cesium';
+import { Cartesian3, Ion, JulianDate, Viewer } from 'cesium';
 import { getDefaultViewerOptions } from '../defaults';
 import { useCommonStore } from '../stores/common';
 import { useProjectStore } from '../stores/project';
-import { LayersManager } from './layers';
 import { CameraControl } from './cameraControl';
+import { DrawService } from './draw';
+import { GlobeEvents } from './globeEvents';
+import { LayersManager } from './layers';
 
 export let globeInstance: GlobeViewer | null = null;
 
@@ -11,6 +13,8 @@ export class GlobeViewer {
     public viewer: Viewer | null = null;
     private layersManager: LayersManager | null = null;
     private cameraControl: CameraControl | null = null;
+    private drawService: DrawService | null = null;
+    private eventsService: GlobeEvents | null = null;
 
     constructor(target: HTMLElement) {
         this.viewer = new Viewer(target, getDefaultViewerOptions());
@@ -30,9 +34,19 @@ export class GlobeViewer {
         return this.cameraControl!;
     }
 
+    get draw(): DrawService {
+        return this.drawService!;
+    }
+
+    get events(): GlobeEvents {
+        return this.eventsService!;
+    }
+
     initServices() {
+        this.eventsService = new GlobeEvents(this.viewer!);
         this.layersManager = new LayersManager(this.viewer!);
         this.cameraControl = new CameraControl(this.viewer!);
+        this.drawService = new DrawService(this.viewer!, this.eventsService!);
     }
 
     destroy() {

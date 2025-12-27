@@ -133,5 +133,12 @@
     "transform": "Transform",
     "rotationAmountFactor(degrees)": "Rotation Amount (degrees)",
     "layers": "Layers",
-    "getActualView": "Get Actual View"
+    "getActualView": "Get Actual View",
+    "drawingTools": "Drawing Tools",
+    "drawPoint": "Draw Point",
+    "drawLine": "Draw Line",
+    "drawPolygon": "Draw Polygon",
+    "reset": "Reset",
+    "finishDrawing": "Finish Drawing",
+    "eraseDrawing": "Erase Drawing"
 }

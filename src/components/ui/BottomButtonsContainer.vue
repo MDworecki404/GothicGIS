@@ -1,6 +1,6 @@
 <template>
     <div
-        :class="mobile ? 'bottom-buttons-container-mobile' : 'bottom-buttons-container'"
+        :class="[mobile ? 'bottom-buttons-container-mobile' : 'bottom-buttons-container', 'bottom-buttons']"
         :style="mobile && useToolsStore().activeTools.size > 0 ? { paddingBottom: '50px' } : {}"
     >
         <ButtonsBar :list="list" :direction="'vertical'" />
@@ -26,6 +26,10 @@ onBeforeMount(async () => {
 </script>
 
 <style scoped>
+.bottom-buttons {
+    pointer-events: none;
+}
+
 .bottom-buttons-container {
     position: absolute;
     bottom: 0;
@@ -37,9 +41,6 @@ onBeforeMount(async () => {
     box-sizing: border-box;
     z-index: 11;
     pointer-events: none;
-}
-.bottom-buttons-container > * {
-    pointer-events: auto;
 }
 
 .bottom-buttons-container-mobile {
@@ -55,7 +56,4 @@ onBeforeMount(async () => {
     pointer-events: none;
 }
 
-.bottom-buttons-container-mobile > * {
-    pointer-events: auto;
-}
 </style>
