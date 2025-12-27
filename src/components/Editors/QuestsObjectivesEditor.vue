@@ -145,6 +145,7 @@ import type { QuestCollectionItem, ViewConfigItem } from '../../services/types/c
 import DrawingTools from '../tools/DrawingTools.vue';
 import IconButton from '../ui/IconButton.vue';
 import TextButton from '../ui/TextButton.vue';
+import { createQuestStepDrawings } from '../../services/quests';
 
 //TODO: FIX DRAWINGS IDS ISSUE WHEN DELETING AND ADDING STEPS
 
@@ -181,7 +182,15 @@ const deleteStep = (stepNumber: number) => {
     emit('update:quest-item', questCopy.value!);
 };
 
-const step = ref<number>(1);
+const step = ref<number>(0);
+
+watch(step, (newVal) => {
+    const step = questCopy.value?.steps[newVal];
+
+    if (step) {
+        createQuestStepDrawings(step, questDataSource);
+    }
+});
 
 const { questItem } = defineProps<{
     questItem: QuestCollectionItem;
@@ -277,6 +286,12 @@ const onDrawingErased = (questItemStep: QuestCollectionItem['steps'][number]) =>
 
 onMounted(() => {
     questCopy.value = cloneDeep(questItem);
+
+    const startStep = questCopy.value?.steps[step.value];
+
+    if (startStep) {
+        createQuestStepDrawings(startStep, questDataSource);
+    }
 });
 
 onUnmounted(() => {

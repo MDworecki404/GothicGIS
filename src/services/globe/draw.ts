@@ -13,7 +13,7 @@ import type { PointGraphics } from 'cesium';
 import type { PolylineGraphics } from 'cesium';
 import type { PolygonGraphics } from 'cesium';
 
-const getDefaultPointStyle = (): PointGraphics.ConstructorOptions => {
+export const getDefaultPointStyle = (): PointGraphics.ConstructorOptions => {
     return {
         pixelSize: 10,
         color: Color.fromBytes(176, 106, 9, 255),
@@ -23,7 +23,7 @@ const getDefaultPointStyle = (): PointGraphics.ConstructorOptions => {
     };
 }
 
-const getDefaultLineStyle = (): PolylineGraphics.ConstructorOptions => {
+export const getDefaultLineStyle = (): PolylineGraphics.ConstructorOptions => {
     return {
         width: 4,
         material: Color.fromBytes(176, 106, 9, 255),
@@ -31,7 +31,7 @@ const getDefaultLineStyle = (): PolylineGraphics.ConstructorOptions => {
     }
 }
 
-const getDefaultPolygonStyle = (): PolygonGraphics.ConstructorOptions => {
+export const getDefaultPolygonStyle = (): PolygonGraphics.ConstructorOptions => {
     return {
         material: Color.fromBytes(176, 106, 9, 128),
         heightReference: HeightReference.CLAMP_TO_GROUND,

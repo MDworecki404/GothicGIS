@@ -8,8 +8,10 @@
             rounded
             density="compact"
         ></v-pagination>
-        <div class="text-subtitle-1"  style="max-height: 30dvh; overflow: auto;">
-            <v-row dense no-gutters class="font-weight-bold text-button">{{ questConfig?.steps[actualStep - 1]?.title }}</v-row>
+        <div class="text-subtitle-1" style="max-height: 30dvh; overflow: auto">
+            <v-row dense no-gutters class="font-weight-bold text-button">{{
+                questConfig?.steps[actualStep - 1]?.title
+            }}</v-row>
             <v-divider class="my-2"></v-divider>
             {{ questConfig?.steps[actualStep - 1]?.description }}
         </div>
@@ -17,10 +19,10 @@
 </template>
 
 <script lang="ts" setup>
-import { onMounted, ref } from 'vue';
+import { onMounted, onUnmounted, ref } from 'vue';
 import { useQuestsStore } from '../../services/stores/quests';
 import { type QuestCollectionItem } from '../../services/types/collections';
-import { stepChanges } from '../../services/quests';
+import { questDataSource, stepChanges } from '../../services/quests';
 
 const { props } = defineProps<{
     props: { questItemId: string };
@@ -42,5 +44,9 @@ onMounted(async () => {
     questConfig.value = questsStore.quests.find((q) => q.id === props.questItemId) || null;
 
     onStepChange();
+});
+
+onUnmounted(() => {
+    questDataSource?.entities.removeAll();
 });
 </script>
